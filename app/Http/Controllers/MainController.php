@@ -66,7 +66,7 @@ class MainController extends Controller
             'telp' => 'required|numeric|min:3',
             'ketua' => 'required|min:3',
             'telp_ketua' => 'required|numeric|min:3',
-            //'g-recaptcha-response' => ['required', new ReCaptcha],
+            'g-recaptcha-response' => ['required', new ReCaptcha],
         ],[
             'id_lomba.required' => 'Kategori Lomba tidak boleh kosong',
             'id_peserta.required' => 'Kategori Peserta tidak boleh kosong',
@@ -93,7 +93,7 @@ class MainController extends Controller
             'telp_ketua.required' => 'Nomor Telp/WA Ketua Regu tidak boleh kosong',
             'telp_ketua.numeric' => 'Nomor Telp/WA Ketua Regu tidak valid',
             'telp_ketua.min' => 'Nomor Telp/WA Ketua Regu minimal 3 Karakter',
-            //'g-recaptcha-response.required' => 'Google ReCaptcha tidak boleh kosong',
+            'g-recaptcha-response.required' => 'Google ReCaptcha tidak boleh kosong',
         ]);
 
         if($validator->fails())

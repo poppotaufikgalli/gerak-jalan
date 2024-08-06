@@ -94,7 +94,7 @@
 			
 			const $recaptcha = document.querySelector('#g-recaptcha-response');
 		  	if ($recaptcha) {
-		    	//$recaptcha.setAttribute('required', 'required');
+		    	$recaptcha.setAttribute('required', 'required');
 		  	}
 
 			document.getElementById("id_lomba").addEventListener('change', function(){
