@@ -124,9 +124,9 @@
         // https://github.com/fiduswriter/Simple-DataTables/wiki
         
 
-        document.getElementById("id_lomba").addEventListener('change', function(){
-          alert(this.value)
-        })
+        //document.getElementById("id_lomba").addEventListener('change', function(){
+        //  alert(this.value)
+        //})
     });
   </script>
 @endsection
