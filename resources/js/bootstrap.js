@@ -41,7 +41,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import jszip from 'jszip';
 //import pdfmake from 'pdfmake';
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import DataTable from 'datatables.net-bs5';
 import 'datatables.net-buttons-bs5';
@@ -49,7 +51,7 @@ import 'datatables.net-buttons/js/buttons.html5.mjs';
 import 'datatables.net-buttons/js/buttons.print.mjs';
 import 'datatables.net-responsive-bs5';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 window.pdfMake = pdfMake;
 window.JSZip = jszip;
 window.DataTable = DataTable
