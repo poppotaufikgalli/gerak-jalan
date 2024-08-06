@@ -1,0 +1,98 @@
+@extends('layouts.master1')
+@section('title',"Data Pendaftar")
+@section('subtitle',$subtitle->judul ?? 'Semua')
+@section('content')
+	<div class="container-fluid px-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row gap-2">
+                    <label class="col-md-2">Jenis Lomba</label>
+                    <div class="col">
+                        <select class="form-control form-control-sm" id="selKategoriLomba">
+                            <option value="0" {{$id == 0 ? 'selected': ''}}>Semua</option>
+                            @if($katLomba)
+                                @foreach($katLomba as $key => $value)
+                                    <option value="{{$value->id}}" {{$id == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="btn btn-sm btn-primary {{$id == 0 ? 'disabled' : ''}}" href="{{route('pendaftar.create', ['id'=> $id])}}" >Tambah</a>
+                    </div>
+                </div>
+                <hr>
+                <table class="table table-sm small table-stiped table-sm" id="datatablesSimple">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th width="5%">No</th>
+                            <th width="10%">No Peserta</th>
+                            <th width="30%">Nama Regu/Instansi</th>
+                            <th>PIC/No.WA</th>
+                            <th width="30%">Kategori</th>
+                            <th width="5%">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	@if(isset($data))
+							@foreach($data as $key => $value)
+		                        <tr>
+		                            <td>{{ ($key+1) }}</td>
+                                    <td class="text-center">{{$value->no_peserta}}</td>
+		                            <td>{{$value->nama}}</td>
+		                            <td>{{$value->pic}}/ {{$value->telp}}</td>
+                                    <td>{{$value->lomba?->judul}} - {{$value->kategori_peserta?->judul}}</td>
+		                            <td>
+                                        <div class="d-flex justify-content-center">
+                                            @if($value->aktif == -1)
+                                                <div class="bg-danger px-2 py-1 text-white bg-opacity-75">
+                                                    <i class="bx bx-x"></i>
+                                                </div>
+                                            @elseif($value->aktif == 1)
+                                                <div class="bg-success px-2 py-1 text-white bg-opacity-75">
+                                                    <i class="bx bx-check"></i>
+                                                </div>
+                                            @else
+                                                <a href="{{route('pendaftar.edit', ['id' => $value->id])}}" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bx bx-detail"></i>
+                                                </a>
+                                            @endif      
+                                        </div>
+                                    </td>
+		                        </tr>
+		                    @endforeach
+		                @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('js-content')
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', event => {
+            // Simple-DataTables
+            // https://github.com/fiduswriter/Simple-DataTables/wiki
+
+            const datatablesSimple = document.getElementById('datatablesSimple');
+            if (datatablesSimple) {
+                new DataTable(datatablesSimple, {
+                    layout: {
+                        topStart: {
+                            buttons: ['excelHtml5', 'pdfHtml5']
+                        },
+                        topEnd: 'search',
+                        bottomStart: 'info',
+                        bottomEnd: 'paging',
+                    },
+                });
+            }
+
+            document.getElementById("selKategoriLomba").addEventListener('change', function() {
+                //var value = this.value
+                window.location.href = "/pendaftar/"+this.value
+            })
+
+        });
+    </script>
+@endsection
