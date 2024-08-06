@@ -59,7 +59,7 @@
 							<input type="text" name="pic" class="form-control" id="pic" placeholder="Nama Kontak PIC" value="{{old('pic')}}" required>
 						</div>
 						<div class="col-md-6 form-group mt-md-0">
-							<input type="text" class="form-control" name="telp" id="telp" placeholder="Nomor Telepon/Wa PIC" value="{{old('telp')}}" onkeypress="return /[0-9]/i.test(event.key)" required>
+							<input type="text" class="form-control" name="telp" id="telp" placeholder="Nomor Telepon/Wa PIC" value="{{old('telp')}}" required>
 						</div>
 					</div>
 					<div class="row">
@@ -67,7 +67,7 @@
 							<input type="text" name="ketua" class="form-control" id="ketua" placeholder="Nama Ketua Regu" value="{{old('ketua')}}" required>
 						</div>
 						<div class="col-md-6 form-group mt-md-0">
-							<input type="text" class="form-control" name="telp_ketua" id="telp_ketua" placeholder="Nomor Telepon/Wa Ketua Regu" value="{{old('telp_ketua')}}" onkeypress="return /[0-9]/i.test(event.key)" required>
+							<input type="text" class="form-control" name="telp_ketua" id="telp_ketua" placeholder="Nomor Telepon/Wa Ketua Regu" value="{{old('telp_ketua')}}" required>
 
 						</div>
 					</div>
@@ -96,6 +96,14 @@
 		  	if ($recaptcha) {
 		    	$recaptcha.setAttribute('required', 'required');
 		  	}
+
+		  	document.getElementById('telp').addEventListener('input', function (evt) {
+			    this.value = this.value.replace(/\D+/g, '');
+			});
+
+			document.getElementById('telp_ketua').addEventListener('input', function (evt) {
+			    this.value = this.value.replace(/\D+/g, '');
+			});
 
 			document.getElementById("id_lomba").addEventListener('change', function(){
 				var id = this.value
