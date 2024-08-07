@@ -45,6 +45,8 @@ class PenilaianController extends Controller
             DB::raw('count(nilai) as count_nilai'),
         )->groupBy(['id_pendaftar', 'id_nilai'])->get();
 
+        $dataPenilaian = [];
+
         foreach ($a as $key => $value) {
             if($value->id_nilai == 1){
                 $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai;
