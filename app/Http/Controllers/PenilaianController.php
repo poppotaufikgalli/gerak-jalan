@@ -6,6 +6,7 @@ use App\Models\Penilaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -14,6 +15,10 @@ use App\Models\Pendaftar;
 use App\Models\JuriKategori;
 use App\Models\User;
 use App\Models\KatPeserta;
+use App\Models\Diskualifikasi;
+
+use Auth;
+use DB;
 
 class PenilaianController extends Controller
 {
@@ -31,11 +36,39 @@ class PenilaianController extends Controller
             }
         })->get();
 
+        $lomba = Lomba::find($id);
+
+        $a = Penilaian::select(
+            'id_pendaftar',
+            'id_nilai',
+            DB::raw('sum(nilai) as sum_nilai'),
+            DB::raw('count(nilai) as count_nilai'),
+        )->groupBy(['id_pendaftar', 'id_nilai'])->get();
+
+        foreach ($a as $key => $value) {
+            if($value->id_nilai == 1){
+                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai;
+            }else{
+                if($value->count_nilai == $lomba->jml_pos){
+                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos;
+                }else{
+                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = "Penilaian Belum Sesuai [".$value->count_nilai."/".$lomba->jml_pos."]";
+                }
+            }
+        }
+
+        $diskualifikasi = Diskualifikasi::selectRaw(
+            'distinct(id_pendaftar) as d_id_pendaftar',
+        )->get()->pluck('d_id_pendaftar');
+        //dd($diskualifikasi);
+
         return view("admin.penilaian.index", [
             'id' => $id,
             'data' => $data,
-            'subtitle' => Lomba::find($id),
-            'penilaian' => JuriKategori::where('id_lomba', $id)->get(),
+            'subtitle' => $lomba,
+            'posJuri' => JuriKategori::where('id_lomba', $id)->get(),
+            'penilaian' => $dataPenilaian,
+            'diskualifikasi' => $diskualifikasi->toArray(),
         ]);
     }
 
@@ -44,9 +77,27 @@ class PenilaianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        return view('admin.penilaian.formulir', [
+            'id_lomba' => $id,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $reqData = $request->only('no_peserta', 'id_lomba');
+        //dd($request->all());
+        $pendaftar = Pendaftar::where('id_lomba', $reqData['id_lomba'])->where('no_peserta', $reqData['no_peserta'])->first();
+        //dd($data);
+
+        if($pendaftar){
+            $id = $pendaftar->id;
+            return redirect()->route('penilaian.show', ['id'=> $id]);
+        }else{
+            return redirect()->back()->with('errors', "Data Tidak ditemukan");
+        }
     }
 
     /**
@@ -79,14 +130,21 @@ class PenilaianController extends Controller
         }else{
             $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
         }
-        
-        //dd($katPeserta->ref_kecepatan);
+
+        $a = $penilaian->where('id_pendaftar', $id)->get();
+
+        foreach ($a as $key => $value) {
+            $dataPenilaian[$value->id_nilai][$value->id_juri] = $value->nilai;
+        }
+
+        //dd($dataPenilaian);
 
         return view('admin.penilaian.formulir', [
             'data' => $data,
-            //'waktu_referensi' => gmdate("H:i:s", $waktu_referensi),
+            'waktu_referensi_1' => gmdate("H:i:s", $waktu_referensi),
             'waktu_referensi' => $waktu_referensi,
-            'penilaian' => JuriKategori::where('id_lomba', $data->id_lomba)->get(),
+            'posJuri' => JuriKategori::where('id_lomba', $data->id_lomba)->get(),
+            'penilaian' => $dataPenilaian,
             'next' => 'update',
         ]);
     }
@@ -113,7 +171,7 @@ class PenilaianController extends Controller
     {
         //
         //dd($request->all());
-        $id = $request->id;
+        /*$id = $request->id;
         $id_lomba = $request->id_lomba;
         $reqData = $request->only('waktu_start', 'waktu_finish');
 
@@ -133,7 +191,133 @@ class PenilaianController extends Controller
             
             Pendaftar::find($id)->update($reqData);
             return redirect('penilaian/'.$id_lomba)->withSuccess('Pencatatan Waktu berhasil ditambahkan');
+        }*/
+    }
+
+    public function update_diskualifikasi(Request $request)
+    {
+        //
+        //dd($request->all());
+
+    }
+
+    public function update_waktu(Request $request)
+    {
+        //
+        //dd($request->all());
+        $id = $request->id;
+        $id_nilai = $request->id_nilai;
+        $id_juri = $request->id_juri;
+        $waktu_referensi = $request->waktu_referensi;
+
+        $reqData = $request->only('waktu_start', 'waktu_finish');
+
+        $validator = Validator::make($reqData, [
+            'waktu_start' => 'required',
+            'waktu_finish' => 'sometimes|nullable|after:waktu_start',
+        ],[
+            'waktu_start.required' => 'Waktu start tidak boleh kosong',
+            'waktu_finish.after' => 'Waktu finish tidak boleh sebelum waktu start',
+        ]);
+
+        if($validator->fails())
+        {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
+        
+        Pendaftar::find($id)->update($reqData);
+
+        //hitung waktu
+        if($reqData['waktu_start'] != null && $reqData['waktu_finish'] != null){
+            $pendaftar = Pendaftar::find($id);
+            $selisih = $pendaftar->waktu_tempuh - $waktu_referensi;
+
+            $nilai = 100;
+            $menit = intVal($selisih / 60);
+            $detik = $selisih % 60;
+            $menit = $detik > 5 ? $menit+1 : $menit;
+            //dd($selisih, $menit, $detik);
+            if($selisih > 0){
+                $nilai = $nilai - ($menit *2);
+            }else{
+                $nilai = $nilai + $menit ;
+            }
+
+            $nilai = $nilai < 0 ? 0 : $nilai;
+
+            Penilaian::upsert([
+                [
+                    'id_pendaftar' => $id, 
+                    'id_juri' => $id_juri,
+                    'id_nilai' => $id_nilai,
+                    'nilai' => $nilai,
+                    'uid' => Auth::id(),
+                ]
+            ], uniqueBy: ['id_pendaftar', 'id_nilai'], update: ['nilai', 'uid']);
+        }
+
+        return redirect()->back()->withSuccess('Pencatatan Waktu berhasil ditambahkan');
+    }
+
+    public function update_pos(Request $request)
+    {
+        //
+        //dd($request->all());
+        $id = $request->id;
+        //$id_nilai = $request->id_nilai;
+        $id_juri = $request->id_juri;
+        $waktu_referensi = $request->waktu_referensi;
+
+        $reqData = $request->only('nilai_2', 'nilai_3', 'nilai_4');
+
+        $validator = Validator::make($reqData, [
+            'nilai_2' => 'required|numeric',
+            'nilai_3' => 'required|numeric',
+            'nilai_4' => 'required|numeric',
+        ],[
+            'nilai_2.required' => 'Nilai Keutuhan Barisan tidak boleh kosong',
+            'nilai_2.numeric' => 'Nilai Keutuhan Barisan tidak valid',
+
+            'nilai_3.required' => 'Nilai Keutuhan Barisan tidak boleh kosong',
+            'nilai_3.numeric' => 'Nilai Keutuhan Barisan tidak valid',
+
+            'nilai_4.required' => 'Nilai Keutuhan Barisan tidak boleh kosong',
+            'nilai_4.numeric' => 'Nilai Keutuhan Barisan tidak valid',
+        ]);
+
+        if($validator->fails())
+        {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+        
+        //Pendaftar::find($id)->update($reqData);
+
+        //hitung nilai
+        Penilaian::upsert([
+                [
+                    'id_pendaftar' => $id, 
+                    'id_juri' => $id_juri,
+                    'id_nilai' => 2,
+                    'nilai' => $reqData['nilai_2'],
+                    'uid' => Auth::id(),
+                ],
+                [
+                    'id_pendaftar' => $id, 
+                    'id_juri' => $id_juri,
+                    'id_nilai' => 3,
+                    'nilai' => $reqData['nilai_3'],
+                    'uid' => Auth::id(),
+                ],
+                [
+                    'id_pendaftar' => $id, 
+                    'id_juri' => $id_juri,
+                    'id_nilai' => 4,
+                    'nilai' => $reqData['nilai_4'],
+                    'uid' => Auth::id(),
+                ],
+            ], uniqueBy: ['id_pendaftar', 'id_nilai'], update: ['nilai', 'uid']);
+
+        return redirect()->back()->withSuccess('Pencatatan Nilai Pos berhasil ditambahkan');
     }
 
     /**

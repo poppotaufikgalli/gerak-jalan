@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('penilaians', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_peserta');
-            $table->integer('id_pos');
-            $table->datetime('waktu')->nullable();
-            $table->double('nilai')->nullable();
-            $table->integer('id_juri');
+            $table->integer('id_pendaftar')->unsigned();
+            $table->integer('id_juri')->unsigned();
+            $table->integer('id_nilai')->unsigned(); //1. waktu_tempuh, 2. nilai_waktu, 3. Keutuhan Barisan 4. Kerapian, 5. Semangat
+            $table->integer('nilai')->default(0);
+            $table->integer('uid');
             $table->timestamps();
+
+            $table->primary(['id_pendaftar', 'id_juri', 'id_nilai']);
         });
     }
 

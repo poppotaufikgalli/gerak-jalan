@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\KatPesertaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DiskualifikasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,12 +130,28 @@ Route::middleware('auth')->group(function () {
     //Penilaian
     Route::prefix('penilaian')->group(function () {
         Route::get('/{id?}', [PenilaianController::class, 'index'])->name('penilaian');
-        //Route::get('/create', [PenilaianController::class, 'create'])->name('penilaian.create');
-        Route::post('/store', [PenilaianController::class, 'store'])->name('penilaian.store');
+        Route::get('/create/{id}', [PenilaianController::class, 'create'])->name('penilaian.create');
+        Route::post('/search', [PenilaianController::class, 'search'])->name('penilaian.search');
+        //Route::post('/store', [PenilaianController::class, 'store'])->name('penilaian.store');
         Route::get('/show/{id}', [PenilaianController::class, 'show'])->name('penilaian.show');
         //Route::get('/edit/{id}', [PenilaianController::class, 'edit'])->name('penilaian.edit');
         Route::post('/update', [PenilaianController::class, 'update'])->name('penilaian.update');
+        Route::post('/update-waktu', [PenilaianController::class, 'update_waktu'])->name('penilaian.update.waktu');
+        Route::post('/update-pos', [PenilaianController::class, 'update_pos'])->name('penilaian.update.pos');
+        Route::post('/update-diskualifikasi', [PenilaianController::class, 'update_diskualifikasi'])->name('penilaian.update.diskualifikasi');
         Route::delete('/destroy/{id}', [PenilaianController::class, 'destroy'])->name('penilaian.destroy');
+    });
+
+    //Diskulaifikasi
+    Route::prefix('diskualifikasi')->group(function () {
+        Route::get('/{id?}', [DiskualifikasiController::class, 'index'])->name('diskualifikasi');
+        Route::get('/create/{id}', [DiskualifikasiController::class, 'create'])->name('diskualifikasi.create');
+        Route::post('/search', [DiskualifikasiController::class, 'search'])->name('diskualifikasi.search');
+        //Route::post('/store', [DiskualifikasiController::class, 'store'])->name('diskualifikasi.store');
+        Route::get('/show/{id}', [DiskualifikasiController::class, 'show'])->name('diskualifikasi.show');
+        //Route::get('/edit/{id}', [DiskualifikasiController::class, 'edit'])->name('diskualifikasi.edit');
+        Route::post('/update', [DiskualifikasiController::class, 'update'])->name('diskualifikasi.update');
+        Route::delete('/destroy/{id}', [DiskualifikasiController::class, 'destroy'])->name('diskualifikasi.destroy');
     });
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

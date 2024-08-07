@@ -34,7 +34,9 @@
                             <select class="form-control form-control-sm" name="gid">
                                 <option value="" selected disabled>Pilih Group</option>
                                 <option value="1" {{isset($data) && $data->gid == 1 ? "selected" : ""}}>Administrator</option>
-                                <option value="2" {{isset($data) && $data->gid == 2 ? "selected" : ""}}>Juri</option>
+                                <option value="2" {{isset($data) && $data->gid == 2 ? "selected" : ""}}>Juri Pos</option>
+                                <option value="3" {{isset($data) && $data->gid == 3 ? "selected" : ""}}>Juri Waktu</option>
+                                <option value="4" {{isset($data) && $data->gid == 4 ? "selected" : ""}}>Juri Diskualifikasi</option>
                             </select>
                         </div>
                     </div>

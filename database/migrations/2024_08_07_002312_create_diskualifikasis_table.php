@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nilais', function (Blueprint $table) {
+        Schema::create('diskualifikasis', function (Blueprint $table) {
             $table->id();
             $table->integer('id_pendaftar');
-            $table->integer('id_juri');
-            $table->integer('kat_nilai');
-            $table->integer('nilai')->default(0);
+            $table->string('alasan');
+            $table->string('doc');
+            $table->integer('uid');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilais');
+        Schema::dropIfExists('diskualifikasis');
     }
 };

@@ -40,6 +40,15 @@
                         </a>
                     @endforeach
                 @endif
+                <div class="sb-sidenav-menu-heading">Diskualifikasi</div>
+                @if($katLomba)
+                    @foreach($katLomba as $key => $value)
+                        <a class="nav-link" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                            <div class="sb-nav-link-icon"><i class="bx bx-tachometer"></i></div>
+                            {{$value->judul}}
+                        </a>
+                    @endforeach
+                @endif
                 <!--<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="bx bx-columns"></i></div>
                     Pendaftar

@@ -11,27 +11,27 @@
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Tahun</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-sm" id="inputEmail3" name="tahun" value="{{$konfig->tahun}}" readonly>
+                            <input type="text" class="form-control form-control-sm" id="tahun" name="tahun" value="{{$konfig->tahun}}" readonly>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Judul</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-sm" id="inputEmail3" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}">
+                            <input type="text" class="form-control form-control-sm" id="judul" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Keterangan</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control form-control-sm" id="inputPassword3" name="ket">{{isset($data) ? $data->ket : old('ket')}}</textarea>
+                            <textarea class="form-control form-control-sm" id="ket" name="ket">{{isset($data) ? $data->ket : old('ket')}}</textarea>
                         </div>
                     </div>
-                    <!--<div class="row mb-3">
+                    <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Jumlah Pos Penilaian</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control form-control-sm" id="inputEmail3" name="jml_pos" value="{{isset($data) ? $data->jml_pos : old('jml_pos')}}">
+                            <input type="number" class="form-control form-control-sm" id="jml_pos" name="jml_pos" value="{{isset($data) ? $data->jml_pos : old('jml_pos')}}">
                         </div>
-                    </div>-->
+                    </div>
                     <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
                             <div class="form-check">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">{{$next ?? "Simpan"}}</button>
+                    <button type="submit" class="btn btn-sm btn-primary">{{$next ?? "Simpan"}}</button>
                 </form>
             </div>
         </div>

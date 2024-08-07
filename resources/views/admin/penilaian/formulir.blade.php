@@ -3,90 +3,114 @@
 @section('subtitle',"")
 @section('content')
     <div class="container-fluid px-4">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="row">
-                    <div class="mb-3">
-                        <label for="ex1" class="form-label">Nomor Peserta</label>
-                        <input type="text" class="form-control" id="ex1" value="{{isset($data) ? $data->no_peserta : ''}}" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="ex2" class="form-label">Nama Regu/Instansi</label>
-                        <input type="text" class="form-control" id="ex2" value="{{isset($data) ? $data->nama : ''}}" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="ex2" class="form-label">Kategori</label>
-                        <input type="text" class="form-control" id="ex2" value="{{isset($data) ? $data->lomba?->judul .' - '. $data->kategori_peserta?->judul : ''}}" readonly>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4">
-            <h5 class="card-header">
-                Pencatatan Waktu
-            </h5>
-            <div class="card-body">
-                <form method="POST" action="{{route('penilaian.'.$next)}}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$data->id}}">
-                    <input type="hidden" name="jns" value="1">
-                    <input type="hidden" name="id_lomba" value="{{$data->id_lomba}}">
-                    <div class="row">
-                        <div class="mb-3 col-md-6 col-sm-12">
-                            <label for="waktu_start" class="form-label">Waktu Start</label>
-                            <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1">
-                        </div>
-                        <div class="mb-3 col-md-6 col-sm-12">
-                            <label for="waktu_finish" class="form-label">Waktu Finish</label>
-                            <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1">
-                        </div>
-                        <div class="mb-3 col-md-2 col-sm-12">
-                            <label for="waktu_tempuh" class="form-label">Waktu Tempuh</label>
-                            <input type="text" class="form-control" id="waktu_tempuh" name="waktu_tempuh" value="{{isset($data) ? $data->waktu_tempuh : ''}}" step="1" readonly>
-                        </div>
-                        <div class="mb-3 col-md-2 col-sm-12">
-                            <label for="waktu_tempuh" class="form-label">Waktu Referensi</label>
-                            <input type="text" class="form-control" id="waktu_tempuh" name="waktu_tempuh" value="{{ $waktu_referensi }}" step="1" readonly>
-                        </div>
-                        <div class="mb-3 col-md-2 col-sm-12">
-                            <label for="nilai_waktu" class="form-label">Nilai</label>
-                            <input type="number" class="form-control" id="nilai_waktu" name="nilai_waktu" value="{{isset($data) ? $data->nilai_waktu : ''}}" step="1" readonly>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                </form>
-            </div>
-        </div>
-         @if($penilaian)
-            @foreach($penilaian as $key => $value1)
-                <div class="card mb-4">
-                    <h5 class="card-header">
-                        Pencatatan Nilai 
-                        <span class="float-end">{{$value1->juri->name}}</span>
-                    </h5>
-                    <div class="card-body">
-                        <form method="POST" action="{{route('penilaian.'.$next)}}">
-                            @csrf
-                            <input type="hidden" name="id" value="{{isset($data) ? $data->id : ''}}">
-                            <div class="row row-cols-3">
-                                <div class="mb-3">
-                                    <label for="inputEmail3" class="form-label">Keutuhan Barisan</label>
-                                    <input type="number" class="form-control" id="inputEmail3" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}" min="0" max="110" step="10">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputEmail3" class="form-label">Kerapian</label>
-                                    <input type="number" class="form-control" id="inputEmail3" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}" min="20" max="100" step="5">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="inputEmail3" class="form-label">Semangat</label>
-                                    <input type="number" class="form-control" id="inputEmail3" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}" min="60" max="100" step="5">
-                                </div>
+        @if(!isset($data))
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="POST" action="{{route('penilaian.search')}}" >
+                        @csrf
+                        <div class="row g-2">
+                            <label class="col-sm-2">Nomor Peserta</label>
+                            <div class="col-sm-10">
+                                <input type="hidden" name="id_lomba" value="{{$id_lomba}}" class="form-control">
+                                <input type="text" name="no_peserta" class="form-control">
                             </div>
-                            <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                        </form>
+                            <div class="col-sm-10 offset-sm-2">
+                                <button class="btn btn-sm btn-primary">Cari</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @else
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-2">
+                        <label class="col-sm-2">Nomor Peserta</label>
+                        <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->no_peserta : ''}}</label>
+                        <label class="col-sm-2">Nama Regu / Instansi</label>
+                        <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->nama : ''}}</label>
+                        <label class="col-sm-2">Kategori Lomba</label>
+                        <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->lomba?->judul : ''}}</label>
+                        <label class="col-sm-2">Kategori Peserta</label>
+                        <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->kategori_peserta?->judul : ''}}</label>
                     </div>
                 </div>
-            @endforeach
+            </div>
+            @if(Auth::user()->gid == 1 || Auth::user()->gid == 3)
+            <div class="card mb-4">
+                <h5 class="card-header">
+                    Pencatatan Waktu
+                </h5>
+                <div class="card-body">
+                    <form method="POST" action="{{route('penilaian.'.$next.'.waktu')}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$data->id}}">
+                        <input type="hidden" name="id_nilai" value="1">
+                        <input type="hidden" name="id_juri" value="0">
+                        <div class="row">
+                            <div class="mb-3 col-md-3 col-sm-12">
+                                <label for="waktu_start" class="form-label">Waktu Start</label>
+                                <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1">
+                            </div>
+                            <div class="mb-3 col-md-3 col-sm-12">
+                                <label for="waktu_finish" class="form-label">Waktu Finish</label>
+                                <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1">
+                            </div>
+                            <div class="mb-3 col-md-2 col-sm-12">
+                                <label for="waktu_tempuh" class="form-label">Waktu Tempuh</label>
+                                <input type="hidden" class="form-control" id="waktu_tempuh" name="waktu_tempuh" value="{{isset($data) ? $data->waktu_tempuh : ''}}" step="1" readonly>
+                                <input type="text" class="form-control" id="waktu_tempuh_1" name="waktu_tempuh_1" value="{{isset($data) && $data->waktu_tempuh != null ? gmdate('H:i:s', $data->waktu_tempuh) : ''}}" step="1" readonly>
+                            </div>
+                            <div class="mb-3 col-md-2 col-sm-12">
+                                <label for="waktu_referensi" class="form-label">Waktu Referensi</label>
+                                <input type="hidden" class="form-control" id="waktu_referensi" name="waktu_referensi" value="{{ $waktu_referensi }}" step="1" readonly>
+                                <input type="text" class="form-control" id="waktu_referensi_1" name="waktu_referensi_1" value="{{ $waktu_referensi_1 }}" step="1" readonly>
+                            </div>
+                            <div class="mb-3 col-md-2 col-sm-12">
+                                <label for="nilai_waktu" class="form-label">Nilai</label>
+                                <input type="number" class="form-control" id="nilai_waktu" name="nilai_waktu" value="{{$penilaian[1][0] ?? ''}}" step="1" readonly>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+            @endif
+            @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
+                @if($posJuri)
+                    @foreach($posJuri as $key => $value1)
+                        <div class="card mb-4">
+                            <h5 class="card-header">
+                                Pencatatan Nilai 
+                                <span class="float-end">{{$value1->juri->name}}</span>
+                            </h5>
+                            <div class="card-body">
+                                <form method="POST" action="{{route('penilaian.'.$next.'.pos')}}">
+                                    <input type="hidden" name="id" value="{{$data->id}}">
+                                    <input type="hidden" name="id_juri" value="{{$value1->juri->id}}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{isset($data) ? $data->id : ''}}">
+                                    <div class="row row-cols-3">
+                                        <div class="mb-3">
+                                            <label for="nilai_2" class="form-label">Keutuhan Barisan</label>
+                                            <input type="number" class="form-control" id="nilai_2" name="nilai_2" value="{{$penilaian[2][$value1->juri->id] ?? ''}}" min="0" max="110" step="10">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nilai_3" class="form-label">Kerapian</label>
+                                            <input type="number" class="form-control" id="nilai_3" name="nilai_3" value="{{$penilaian[3][$value1->juri->id] ?? ''}}" min="20" max="100" step="5">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nilai_4" class="form-label">Semangat</label>
+                                            <input type="number" class="form-control" id="nilai_4" name="nilai_4" value="{{$penilaian[4][$value1->juri->id] ?? ''}}" min="60" max="100" step="5">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif  
+            @endif
         @endif
     </div>
 @endsection
