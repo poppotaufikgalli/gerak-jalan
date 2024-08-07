@@ -123,7 +123,6 @@ class PenilaianController extends Controller
     {
         //
         $data = Pendaftar::find($id);
-        //dd($data);
         $katPeserta = KatPeserta::select('ref_kecepatan')->find($data->id_peserta);
         
         $waktu_referensi = 0;
@@ -135,18 +134,25 @@ class PenilaianController extends Controller
 
         $a = $penilaian->where('id_pendaftar', $id)->get();
 
+        $dataPenilaian = [];
+
         foreach ($a as $key => $value) {
             $dataPenilaian[$value->id_nilai][$value->id_juri] = $value->nilai;
         }
 
-        //dd($dataPenilaian);
+        $selisih = $data->waktu_tempuh - $waktu_referensi;
+        $menit = intVal($selisih/60);
+        $detik = $selisih % 60;
+        $selisih = $detik > 5 ? $menit +1 : $menit;
 
         return view('admin.penilaian.formulir', [
             'data' => $data,
+            'ref_kecepatan' => $katPeserta->ref_kecepatan,
             'waktu_referensi_1' => gmdate("H:i:s", $waktu_referensi),
             'waktu_referensi' => $waktu_referensi,
             'posJuri' => JuriKategori::where('id_lomba', $data->id_lomba)->get(),
             'penilaian' => $dataPenilaian,
+            'selisih' => $selisih,
             'next' => 'update',
         ]);
     }

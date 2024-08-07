@@ -11,7 +11,6 @@
                     <thead class="table-dark text-center">
                         <tr>
                             <th rowspan="2" width="5%">No</th>
-                            <th rowspan="2">&nbsp;</th>
                             <th rowspan="2" width="10%">No Peserta</th>
                             <th rowspan="2" width="20%">Nama Regu/Instansi</th>
                             <th rowspan="2" width="10%">Waktu Tempuh</th>
@@ -31,14 +30,9 @@
 							@foreach($data as $key => $value)
 		                        <tr>
 		                            <td>{{ ($key+1) }}</td>
-                                    <td>
-                                        <a href="{{route('penilaian.show', ['id' => $value->id])}}" class="btn btn-sm btn-warning">
-                                            <i class="bx bx-trophy"></i>
-                                        </a>
-                                    </td>
                                     <td class="text-center">{{$value->no_peserta}}</td>
 		                            <td>{{$value->nama}}</td>
-		                            <td class="text-center">{{$value->waktu_tempuh}}</td>
+		                            <td class="text-center">{{$value->waktu_tempuh ? gmdate('H:i:s',$value->waktu_tempuh) : ''}}</td>
                                     @php($a=$penilaian[$value->id][1] ?? 0)
                                     <td class="text-center">{{$a}}</td>
                                     @php($b=intVal($penilaian[$value->id][2] ?? 0))

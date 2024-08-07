@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Pendaftar;
 use App\Models\Lomba;
 use App\Models\KatPeserta;
-
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Password;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
 use DB;
 use App\Rules\ReCaptcha;
@@ -153,5 +154,21 @@ class MainController extends Controller
             $no_peserta = $c->no_peserta_prefix .(sprintf('%03d', $c->no_peserta_mulai));
             return $no_peserta;
         }
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validated = $request->validate([
+            'password' => ['required', 'confirmed'],
+        ],[
+            'password.required' => "Password tidak boleh kosong",
+            'password.confirmed' => "Password tidak sama"
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return back()->withSuccess('Password berhasil diubah. Silahkan login kembali untuk mencoba password baru');
     }
 }

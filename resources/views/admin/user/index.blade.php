@@ -9,7 +9,7 @@
                     <a class="btn btn-sm btn-primary" href="{{route('user.create')}}">Tambah</a>
                 </div>
                 <hr>
-                <table class="table table-striped table-sm" id="datatablesSimple">
+                <table class="table small table-striped table-sm" id="datatablesSimple">
                     <thead class="table-dark text-center">
                         <tr>
                             <th width="5%">No</th>
@@ -28,7 +28,7 @@
 		                            <td>{{ ($key+1) }}</td>
                                     <td align="left">{{$value->name}}</td>
                                     <td>{{$value->username}}</td>
-		                            <td>{{$value->gid == 1 ? 'Administrator' : 'Juri'}}</td>
+		                            <td>{{$jnsJuri[$value->gid]}}</td>
                                     <td>
                                         <div class="d-flex justify-content-between align-items-start">
                                             @if($value->gid == 1)

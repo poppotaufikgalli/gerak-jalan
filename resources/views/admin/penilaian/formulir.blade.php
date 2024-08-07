@@ -33,6 +33,8 @@
                         <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->lomba?->judul : ''}}</label>
                         <label class="col-sm-2">Kategori Peserta</label>
                         <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->kategori_peserta?->judul : ''}}</label>
+                        <label class="col-sm-2">Referesi Kecepatan</label>
+                        <label class="col-sm-10 fw-semibold">{{$ref_kecepatan}} Km/Jam - {{$waktu_referensi_1}}</label>
                     </div>
                 </div>
             </div>
@@ -63,12 +65,16 @@
                             </div>
                             <div class="mb-3 col-md-2 col-sm-12">
                                 <label for="waktu_referensi" class="form-label">Waktu Referensi</label>
-                                <input type="hidden" class="form-control" id="waktu_referensi" name="waktu_referensi" value="{{ $waktu_referensi }}" step="1" readonly>
-                                <input type="text" class="form-control" id="waktu_referensi_1" name="waktu_referensi_1" value="{{ $waktu_referensi_1 }}" step="1" readonly>
+                                <input type="hidden" class="form-control" id="waktu_referensi" name="waktu_referensi" value="{{ $waktu_referensi }}" readonly>
+                                <input type="text" class="form-control" id="waktu_referensi_1" name="waktu_referensi_1" value="{{ $waktu_referensi_1 }}" readonly>
                             </div>
-                            <div class="mb-3 col-md-2 col-sm-12">
+                             <div class="mb-3 col-md-1 col-sm-12">
+                                <label for="waktu_referensi" class="form-label">Selisih Menit</label>
+                                <input type="text" class="form-control" value="{{ $selisih }}" readonly>
+                            </div>
+                            <div class="mb-3 col-md-1 col-sm-12">
                                 <label for="nilai_waktu" class="form-label">Nilai</label>
-                                <input type="number" class="form-control" id="nilai_waktu" name="nilai_waktu" value="{{$penilaian[1][0] ?? ''}}" step="1" readonly>
+                                <input type="number" class="form-control" id="nilai_waktu" name="nilai_waktu" value="{{$penilaian[1][0] ?? ''}}" readonly>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>

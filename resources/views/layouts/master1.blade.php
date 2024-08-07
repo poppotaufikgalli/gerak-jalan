@@ -20,8 +20,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-user"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" href="#!" data-bs-toggle="modal" data-bs-target="#gantiPasswordModal" >Ganti Password</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                         	<form method="POST" action="{{ route('logout') }}">
@@ -41,7 +40,11 @@
     	                <h2 class="mt-4 d-flex justify-content-between">
                             @yield('title')
                             @php($back = request()->segment(1))
-                            <a href="{{route($back)}}" class="link link-danger"><i class="bx bx-x-circle"></i></a>
+                            @if($back == 'penilaian' || $back == 'diskualifikasi')
+                                <a href="{{ url()->previous() }}" class="link link-danger"><i class="bx bx-x-circle"></i></a>
+                            @else
+                                <a href="{{ route($back) }}" class="link link-danger"><i class="bx bx-x-circle"></i></a>
+                            @endif
                         </h2>
     	                <ol class="breadcrumb mb-4">
     	                    <li class="breadcrumb-item active">@yield('subtitle')</li>
@@ -52,7 +55,7 @@
     	        <footer class="py-4 bg-light mt-auto">
     	            <div class="container-fluid px-4">
     	                <div class="d-flex align-items-center justify-content-between small">
-    	                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+    	                    <div class="text-muted">Copyright &copy; Gerak Jalan Proklamasi 2024</div>
     	                    <div>
     	                        <a href="#">Privacy Policy</a>
     	                        &middot;
@@ -62,6 +65,39 @@
     	            </div>
     	        </footer>
     	    </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="gantiPasswordModal" aria-labelledby="gantiPasswordModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="gantiPasswordModal">Ganti Password</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{route('password.reset1')}}">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="id" value="{{Auth::id()}}">
+                            <div class="row mb-3">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control form-control-sm" id="password" name="password" value="">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="password_confirmation" class="col-sm-2 col-form-label">Ulangi Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control form-control-sm" id="password_confirmation" name="password_confirmation" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 @yield('js-content')

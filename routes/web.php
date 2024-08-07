@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\KatPesertaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\DiskualifikasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -155,6 +156,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::post('resetPassword', [MainController::class, 'resetPassword'])->name('password.reset1');
 });
 
 //require __DIR__.'/auth.php';

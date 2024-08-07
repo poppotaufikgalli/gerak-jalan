@@ -21,9 +21,18 @@ class UserController extends Controller
     public function index()
     {
         //
+        $jnsJuri = [
+            0 => "",
+            1 => "Administrator",
+            2 => "Juri Pos",
+            3 => "Juri Waktu",
+            4 => "Juri Diskualifikasi",
+        ];
+
         confirmDelete("Hapus Data Pengguna", "Apakah anda yakin untuk menghapus data ini?");
         return view("admin.user.index", [
-            'data' => User::all(),
+            'data' => User::orderBy('gid')->get(),
+            'jnsJuri' => $jnsJuri,
         ]);
     }
 
