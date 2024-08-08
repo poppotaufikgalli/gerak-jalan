@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pendaftar;
 use App\Models\Lomba;
 use App\Models\KatPeserta;
+use App\Models\Konfig;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -35,12 +36,31 @@ class MainController extends Controller
 
     public function formPendaftaranPeserta($id_lomba, $id_peserta=null)
     {
-        return view("formPendaftaranPeserta", [
-            'id_lomba' => $id_lomba,
-            'id_peserta' => $id_peserta,
-            'lomba' => Lomba::find($id_lomba),
-            'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
-        ]);
+        $data = Konfig::where('aktif', 1)->first();
+
+        $now = strtotime(date("Y-m-d H:i:s"));
+        $tgl_buka = strtotime($data->tgl_buka);
+        $tgl_tutup = strtotime($data->tgl_tutup);
+
+        //dd($now, $tgl_buka, $tgl_tutup);
+        //dd($now >= $tgl_buka, $now <= $tgl_tutup, date("Y-m-d H:i:s",$now), date("Y-m-d H:i:s",$tgl_buka));
+
+        if($now >= $tgl_buka && $now <= $tgl_tutup) {
+            return view("formPendaftaranPeserta", [
+                'id_lomba' => $id_lomba,
+                'id_peserta' => $id_peserta,
+                'lomba' => Lomba::find($id_lomba),
+                'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
+            ]);
+        } else {
+            if($now < $tgl_buka) {
+                return redirect()->route('index')->with('errors', "Pendaftaran Belum Dibuka, Agar mendaftar kembali setelah Pendaftaran dibuka"); 
+            }else if($now > $tgl_tutup){
+                return redirect()->route('index')->with('errors', "Pendaftaran Telah Ditutup"); 
+            }else{
+                return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia"); 
+            }
+        }    
     }
 
     public function daftarUmum(Request $request)

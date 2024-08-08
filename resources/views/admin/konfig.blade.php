@@ -25,26 +25,26 @@
                     @csrf
                     <input type="hidden" name="id" value="{{isset($data) ? $data->id : ''}}">
                     <div class="row mb-3">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tahun</label>
+                        <label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-sm" id="inputEmail3" name="tahun" value="{{isset($data) ? $data->tahun : old('tahun')}}" required>
+                            <input type="text" class="form-control form-control-sm" id="tahun" name="tahun" value="{{isset($data) ? $data->tahun : old('tahun')}}" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="inputPassword3" class="col-sm-2 col-form-label">Tanggal Buka</label>
+                        <label for="tgl_buka" class="col-sm-2 col-form-label">Tanggal Buka</label>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control form-control-sm" id="inputEmail3" name="tgl_buka" value="{{isset($data) ? $data->tgl_buka->format('Y-m-d') : old('tgl_buka')}}" required>
+                            <input type="datetime-local" class="form-control form-control-sm" id="tgl_buka" name="tgl_buka" value="{{isset($data) ? $data->tgl_buka->format('Y-m-d H:i:s') : old('tgl_buka')}}" step="1" required>
                         </div>
                     
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal Tutup</label>
+                        <label for="tgl_tutup" class="col-sm-2 col-form-label">Tanggal Tutup</label>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control form-control-sm" id="inputEmail3" name="tgl_tutup" value="{{isset($data) ? $data->tgl_tutup->format('Y-m-d') : old('tgl_tutup')}}" required>
+                            <input type="datetime-local" class="form-control form-control-sm" id="tgl_tutup" name="tgl_tutup" value="{{isset($data) ? $data->tgl_tutup->format('Y-m-d H:i:s') : old('tgl_tutup')}}" step="1" required>
                         </div>
                     </div>
                     <div class="row mb-3 d-none">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Nomor Peserta Mulai</label>
+                        <label for="min_no_peserta" class="col-sm-2 col-form-label">Nomor Peserta Mulai</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control form-control-sm" id="inputEmail3" name="min_no_peserta" value="{{isset($data) ? $data->min_no_peserta : old('min_no_peserta')}}" required>
+                            <input type="number" class="form-control form-control-sm" id="min_no_peserta" name="min_no_peserta" value="{{isset($data) ? $data->min_no_peserta : old('min_no_peserta')}}" required>
                         </div>
                     </div>
                     <div class="row mb-3">

@@ -69,6 +69,7 @@
       <div class="container">
       	<div class="section-title">
       		<h3>Ayo Mendaftar</h3>
+          <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
       		<p>Isilah form berikut sesuai dengan data kepesertaan.</p>
       	</div>
         @if($katLomba)
