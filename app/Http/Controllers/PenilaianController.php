@@ -34,7 +34,7 @@ class PenilaianController extends Controller
             if($id > 0){
                 $query->where('id_lomba', $id);
             }
-        })->get();
+        })->orderByRaw('cast(no_peserta as unsigned)')->get();
 
         $lomba = Lomba::find($id);
 
@@ -54,7 +54,7 @@ class PenilaianController extends Controller
                 if($value->count_nilai == $lomba->jml_pos){
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos;
                 }else{
-                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = "Penilaian Belum Sesuai [".$value->count_nilai."/".$lomba->jml_pos."]";
+                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos ." [".$value->count_nilai."/".$lomba->jml_pos."]";
                 }
             }
         }
@@ -124,6 +124,7 @@ class PenilaianController extends Controller
         //
         $data = Pendaftar::find($id);
         $katPeserta = KatPeserta::select('ref_kecepatan')->find($data->id_peserta);
+        //dd($katPeserta);
         
         $waktu_referensi = 0;
         if($data->id_lomba == 1){
@@ -264,6 +265,8 @@ class PenilaianController extends Controller
             ], uniqueBy: ['id_pendaftar', 'id_nilai'], update: ['nilai', 'uid']);
         }
 
+        $this->hitungTotal($id, $request->jml_pos);
+
         return redirect()->back()->withSuccess('Pencatatan Waktu berhasil ditambahkan');
     }
 
@@ -274,7 +277,8 @@ class PenilaianController extends Controller
         $id = $request->id;
         //$id_nilai = $request->id_nilai;
         $id_juri = $request->id_juri;
-        $waktu_referensi = $request->waktu_referensi;
+        $jml_pos = $request->jml_pos;
+        //$waktu_referensi = $request->waktu_referensi;
 
         $reqData = $request->only('nilai_2', 'nilai_3', 'nilai_4');
 
@@ -325,7 +329,22 @@ class PenilaianController extends Controller
                 ],
             ], uniqueBy: ['id_pendaftar', 'id_nilai'], update: ['nilai', 'uid']);
 
+        $this->hitungTotal($id, $request->jml_pos);
+
         return redirect()->back()->withSuccess('Pencatatan Nilai Pos berhasil ditambahkan');
+    }
+
+    private function hitungTotal($id_pendaftar, $jml_pos)
+    {
+        $a = Penilaian::select(
+            'id_pendaftar',
+            'id_nilai',
+            DB::raw('sum(nilai) as sum_nilai'),
+        )->where('id_pendaftar', $id_pendaftar)->groupBy(['id_pendaftar', 'id_nilai'])->pluck('sum_nilai', 'id_nilai');
+
+        $total = $a[1] + (isset($a[2]) ? $a[2]/$jml_pos : 0) + (isset($a[3]) ? $a[3]/$jml_pos : 0) + (isset($a[4]) ? $a[4]/$jml_pos : 0);
+
+        Pendaftar::where('id', $id_pendaftar)->update(['total' => $total]);
     }
 
     /**

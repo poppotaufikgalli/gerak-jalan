@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pendaftar;
 use App\Models\Lomba;
 use App\Models\KatPeserta;
+use App\Models\Penilaian;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
@@ -25,7 +26,10 @@ class PendaftarController extends Controller
             if($id > 0){
                 $query->where('id_lomba', $id);
             }
-        })->get();
+        })->orderByRaw('cast(no_peserta as unsigned)')->get();
+        
+        confirmDelete('Hapus Data pendaftar!', "Apakah anda yakin untuk menghapus?");
+        
         return view("admin.pendaftar.index", [
             'id' => $id,
             'data' => $data,
@@ -124,13 +128,14 @@ class PendaftarController extends Controller
      * @param  \App\Models\pendaftar  $pendaftar
      * @return \Illuminate\Http\Response
      */
-    public function edit(pendaftar $pendaftar, $id)
+    public function edit(pendaftar $pendaftar, $id_lomba, $id)
     {
         //
         return view('admin.pendaftar.formulir', [
-            'id_lomba' => $id,
+            'id_lomba' => $id_lomba,
             'next' => 'update',
             'data' => $pendaftar::find($id),
+            'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
             'title' => "Edit Pendaftar",
         ]);
     }
@@ -153,8 +158,10 @@ class PendaftarController extends Controller
      * @param  \App\Models\pendaftar  $pendaftar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pendaftar $pendaftar)
+    public function destroy(pendaftar $pendaftar, $id)
     {
-        //
+        Pendaftar::find($id)->delete();
+        Penilaian::where('id_pendaftar', $id)->delete();
+        return redirect('pendaftar')->withSuccess('Data Pendaftaran berhasil dihapus');
     }
 }

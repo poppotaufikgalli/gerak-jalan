@@ -112,9 +112,26 @@ class MainController extends Controller
 
     public function main(){
         $jmlPendaftar = Pendaftar::select('id_lomba', DB::raw('count(*) as total'))->groupBy('id_lomba')->pluck('total', 'id_lomba');
+
         return view('admin.main', [
             'jmlPendaftar' => $jmlPendaftar,
             'pendaftar' => Pendaftar::all(),
+        ]);
+    }
+
+    public function rekapHasil($id=null)
+    {
+        $data = Pendaftar::where(function($query) use ($id){
+            if($id != null){
+                $query->where('id_peserta', $id);
+            }
+        })->where('diskualifikasi', 0)->orderBy('total', 'desc')->get();
+        $katPeserta = KatPeserta::all();
+        
+        return view('admin.rekapHasil', [
+            'data' => $data,
+            'katPeserta' => $katPeserta,
+            'id_peserta' => $id,
         ]);
     }
 

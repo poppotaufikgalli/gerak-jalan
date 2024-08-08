@@ -9,58 +9,60 @@
                     <a class="btn btn-sm btn-primary" href="{{route('user.create')}}">Tambah</a>
                 </div>
                 <hr>
-                <table class="table small table-striped table-sm" id="datatablesSimple">
-                    <thead class="table-dark text-center">
-                        <tr>
-                            <th width="5%">No</th>
-                            <th width="25%">Nama</th>
-                            <th width="10%">Username</th>
-                            <th width="10%">Group</th>
-                            <th width="35%">Kategori Penilaian Lomba</th>
-                            <th width="10%">Status</th>
-                            <th width="5%">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                    	@if(isset($data))
-							@foreach($data as $key => $value)
-		                        <tr>
-		                            <td>{{ ($key+1) }}</td>
-                                    <td align="left">{{$value->name}}</td>
-                                    <td>{{$value->username}}</td>
-		                            <td>{{$jnsJuri[$value->gid]}}</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between align-items-start">
-                                            @if($value->gid == 1)
-                                                <span class="badge text-bg-dark">Semua</span>
-                                            @else
-                                                <div class="row row-cols-auto gap-1 ms-0">
-                                                @foreach($value->juri_kategori as $item)
-                                                    <span class="col badge text-bg-dark">{{$item->judul}}</span>
-                                                @endforeach
-                                                </div>
-                                                <a href="{{route('user.edit', ['id' => $value->id] )}}" class="bg-warning px-2 py-1 text-dark bg-opacity-75 text-decoration-none" data-bs-toggle="modal" data-bs-target="#kategoriLombaModal" data-bs-id="{{$value->id}}" data-bs-kategori="{{$value->juri_kategori}}">
-                                                    <i class="bx bx-edit-alt"></i>
+                <div class="table-responsive">
+                    <table class="table small table-striped table-sm" id="datatablesSimple">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="25%">Nama</th>
+                                <th width="10%">Username</th>
+                                <th width="10%">Group</th>
+                                <th width="35%">Kategori Penilaian Lomba</th>
+                                <th width="10%">Status</th>
+                                <th width="5%">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        	@if(isset($data))
+    							@foreach($data as $key => $value)
+    		                        <tr>
+    		                            <td>{{ ($key+1) }}</td>
+                                        <td align="left">{{$value->name}}</td>
+                                        <td>{{$value->username}}</td>
+    		                            <td>{{$jnsJuri[$value->gid]}}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                @if($value->gid == 1)
+                                                    <span class="badge text-bg-dark">Semua</span>
+                                                @else
+                                                    <div class="row row-cols-auto gap-1 ms-0">
+                                                    @foreach($value->juri_kategori as $item)
+                                                        <span class="col badge text-bg-dark">{{$item->judul}}</span>
+                                                    @endforeach
+                                                    </div>
+                                                    <a href="{{route('user.edit', ['id' => $value->id] )}}" class="bg-warning px-2 py-1 text-dark bg-opacity-75 text-decoration-none" data-bs-toggle="modal" data-bs-target="#kategoriLombaModal" data-bs-id="{{$value->id}}" data-bs-kategori="{{$value->juri_kategori}}">
+                                                        <i class="bx bx-edit-alt"></i>
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </td>
+    		                            <td>{{$value->aktif == 1 ? '' : 'Tidak'}} Aktif</td>
+    		                            <td>
+                                            <div class="d-flex justify-content-end gap-2">
+                                                <a href="{{route('user.edit', ['id' => $value->id] )}}" class="bg-warning px-2 py-1 text-dark bg-opacity-75 text-decoration-none">
+                                                    <i class="bx bx-edit"></i>
                                                 </a>
-                                            @endif
-                                        </div>
-                                    </td>
-		                            <td>{{$value->aktif == 1 ? '' : 'Tidak'}} Aktif</td>
-		                            <td>
-                                        <div class="d-flex justify-content-end gap-2">
-                                            <a href="{{route('user.edit', ['id' => $value->id] )}}" class="bg-warning px-2 py-1 text-dark bg-opacity-75 text-decoration-none">
-                                                <i class="bx bx-edit"></i>
-                                            </a>
-                                            <a href="{{route('user.destroy', ['id' => $value->id] )}}" class="bg-danger px-2 py-1 text-white bg-opacity-75 text-decoration-none" data-confirm-delete="true">
-                                                <i class="bx bx-x-circle"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-		                        </tr>
-		                    @endforeach
-		                @endif
-                    </tbody>
-                </table>
+                                                <a href="{{route('user.destroy', ['id' => $value->id] )}}" class="bg-danger px-2 py-1 text-white bg-opacity-75 text-decoration-none" data-confirm-delete="true">
+                                                    <i class="bx bx-x-circle"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+    		                        </tr>
+    		                    @endforeach
+    		                @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- Modal -->

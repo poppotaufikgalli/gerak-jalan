@@ -22,48 +22,63 @@
                     </div>
                 </div>
                 <hr>
-                <table class="table table-sm small table-stiped table-sm" id="datatablesSimple">
-                    <thead class="table-dark text-center">
-                        <tr>
-                            <th width="5%">No</th>
-                            <th width="10%">No Peserta</th>
-                            <th width="30%">Nama Regu/Instansi</th>
-                            <th>PIC/No.WA</th>
-                            <th width="30%">Kategori</th>
-                            <th width="5%">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    	@if(isset($data))
-							@foreach($data as $key => $value)
-		                        <tr>
-		                            <td>{{ ($key+1) }}</td>
-                                    <td class="text-center">{{$value->no_peserta}}</td>
-		                            <td>{{$value->nama}}</td>
-		                            <td>{{$value->pic}}/ {{$value->telp}}</td>
-                                    <td>{{$value->lomba?->judul}} - {{$value->kategori_peserta?->judul}}</td>
-		                            <td>
-                                        <div class="d-flex justify-content-center">
-                                            @if($value->aktif == -1)
-                                                <div class="bg-danger px-2 py-1 text-white bg-opacity-75">
-                                                    <i class="bx bx-x"></i>
-                                                </div>
-                                            @elseif($value->aktif == 1)
-                                                <div class="bg-success px-2 py-1 text-white bg-opacity-75">
-                                                    <i class="bx bx-check"></i>
-                                                </div>
-                                            @else
-                                                <a href="{{route('pendaftar.edit', ['id' => $value->id])}}" class="btn btn-sm btn-outline-primary">
-                                                    <i class="bx bx-detail"></i>
+                <div class="table-responsive">
+                    <table class="table table-sm small table-stiped table-sm" id="datatablesSimple">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="10%">No Peserta</th>
+                                <th width="30%">Nama Regu/Instansi</th>
+                                <th width="30%">Kategori</th>
+                                <th>PIC/No.WA</th>
+                                <th width="5%">Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	@if(isset($data))
+    							@foreach($data as $key => $value)
+    		                        <tr>
+    		                            <td>{{ ($key+1) }}</td>
+                                        <td class="text-center">{{$value->no_peserta}}</td>
+    		                            <td>{{$value->nama}}</td>
+                                        <td>{{$value->lomba?->judul}} - {{$value->kategori_peserta?->judul}}</td>
+                                        <td>{{$value->pic}}/ {{$value->telp}}</td>
+    		                            <td>
+                                            <div class="d-flex justify-content-center">
+                                                @if($value->aktif == -1)
+                                                    <div class="bg-danger px-2 py-1 text-white bg-opacity-75">
+                                                        <i class="bx bx-x"></i>
+                                                    </div>
+                                                @elseif($value->aktif == 1)
+                                                    <div class="bg-success px-2 py-1 text-white bg-opacity-75">
+                                                        <i class="bx bx-check"></i>
+                                                    </div>
+                                                @else
+                                                    <a href="{{route('pendaftar.edit', ['id' => $value->id])}}" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bx bx-detail"></i>
+                                                    </a>
+                                                @endif      
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if(Auth::user()->gid == 1)
+                                            <div class="d-flex justify-content-end gap-2">
+                                                <a href="{{route('pendaftar.edit', ['id_lomba' => $value->id_lomba , 'id' => $value->id] )}}" class="bg-warning px-2 py-1 text-dark bg-opacity-75 text-decoration-none">
+                                                    <i class="bx bx-edit"></i>
                                                 </a>
-                                            @endif      
-                                        </div>
-                                    </td>
-		                        </tr>
-		                    @endforeach
-		                @endif
-                    </tbody>
-                </table>
+                                                <a href="{{route('pendaftar.destroy', ['id' => $value->id] )}}" class="bg-danger px-2 py-1 text-white bg-opacity-75 text-decoration-none" data-confirm-delete="true">
+                                                    <i class="bx bx-x-circle"></i>
+                                                </a>
+                                            </div>
+                                            @endif
+                                        </td>
+    		                        </tr>
+    		                    @endforeach
+    		                @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

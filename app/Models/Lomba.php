@@ -15,6 +15,11 @@ class Lomba extends Model
             ->join('users', 'users.id', '=', 'juri_kategoris.user_id');
     }
 
+    public function kategori_peserta()
+    {
+        return $this->hasMany(KatPeserta::class, 'id_lomba', 'id');
+    }
+
     protected $fillable = [
         'judul',
         'tahun',

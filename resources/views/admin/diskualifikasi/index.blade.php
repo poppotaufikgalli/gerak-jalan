@@ -9,36 +9,38 @@
                     <a class="btn btn-sm btn-primary" href="{{route('diskualifikasi.create',['id' => $id])}}">Tambah</a>
                 </div>
                 <hr>
-                <table class="table small table-stiped table-sm" id="datatablesSimple">
-                    <thead class="table-dark text-center">
-                        <tr>
-                            <th width="2%">No</th>
-                            <th width="2%">&nbsp;</th>
-                            <th width="10%">No Peserta</th>
-                            <th width="10%">Nama Regu/Instansi</th>
-                            <th width="10%">Total Diskualifikasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    	@if(isset($data))
-							@foreach($data as $key => $value)
-                                @if(isset($diskualifikasi[$value->id]))
-    		                        <tr>
-    		                            <td>{{ ($key+1) }}</td>
-                                        <td>
-                                            <a href="{{route('diskualifikasi.show', ['id' => $value->id])}}" class="btn btn-sm btn-danger">
-                                                <i class="bx bx-x-circle"></i>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">{{$value->no_peserta}}</td>
-                                        <td class="text-center">{{$value->nama}}</td>
-                                        <td class="text-center">{{$diskualifikasi[$value->id] ?? ''}}</td>
-    		                        </tr>
-                                @endif
-		                    @endforeach
-		                @endif
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table small table-stiped table-sm" id="datatablesSimple">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th width="2%">No</th>
+                                <th width="2%">&nbsp;</th>
+                                <th width="10%">No Peserta</th>
+                                <th width="10%">Nama Regu/Instansi</th>
+                                <th width="10%">Total Diskualifikasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	@if(isset($data))
+    							@foreach($data as $key => $value)
+                                    @if(isset($diskualifikasi[$value->id]))
+        		                        <tr>
+        		                            <td>{{ ($key+1) }}</td>
+                                            <td>
+                                                <a href="{{route('diskualifikasi.show', ['id' => $value->id])}}" class="btn btn-sm btn-danger">
+                                                    <i class="bx bx-x-circle"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">{{$value->no_peserta}}</td>
+                                            <td class="text-center">{{$value->nama}}</td>
+                                            <td class="text-center">{{$diskualifikasi[$value->id] ?? ''}}</td>
+        		                        </tr>
+                                    @endif
+    		                    @endforeach
+    		                @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -149,6 +149,7 @@ class DiskualifikasiController extends Controller
         $reqData['doc'] = $this->doUpload($request);
         
         Diskualifikasi::create($reqData);
+        Pendaftar::where('id', $id)->update(['diskualifikasi' => 1]);
         return redirect()->back()->withSuccess('Pencatatan Diskualifikasi berhasil ditambahkan');
     }
 

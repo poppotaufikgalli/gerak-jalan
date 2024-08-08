@@ -32,6 +32,8 @@ class pendaftar extends Model
         'telp',
         'telp_ketua',
         'aktif',
+        'total',
+        'diskualifikasi',
         'waktu_start',
         'waktu_finish',
     ];

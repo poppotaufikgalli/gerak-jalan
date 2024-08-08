@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('ketua')->nullable();
             $table->string('telp_ketua')->nullable();
             $table->integer('aktif');
+            $table->integer('total')->nullable();
+            $table->integer('diskualifikasi')->default(0);
             $table->integer('verif_id')->nullable();
             $table->datetime('verif_date')->nullable();
             $table->timestamps();

@@ -15,7 +15,9 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
+                                @if(Auth::user()->gid == 1)
                                 <a class="small text-dark stretched-link" href="{{route('pendaftar', ['id' => $value->id])}}">Lihat Detail</a>
+                                @endif
                                 <div class="small text-dark"><i class="bx bx-chevron-right"></i></div>
                             </div>
                         </div>
@@ -29,32 +31,38 @@
                 Data Pendaftaran
             </div>
             <div class="card-body">
-                <table class="table table-sm" id="datatablesSimple">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Kategori Lomba</th>
-                            <th>Nama Regu/Instansi</th>
-                            <th>PIC</th>
-                            <th>Telp. PIC</th>
-                            <th>Tanggal Daftar</th>
-                            <th>Verifikator</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if($pendaftar)
-                            @foreach($pendaftar as $key => $value)
-                                <tr>
-                                    <td>{{$value->lomba->judul}}</td>
-                                    <td>{{$value->nama}}</td>
-                                    <td>{{$value->pic}}</td>
-                                    <td>{{$value->telp}}</td>
-                                    <td>{{$value->created_at->format('d/m/Y H:i')}}</td>
-                                    <td>{{$value->verif_id}}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-sm small table-striped" id="datatablesSimple">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Kategori Lomba</th>
+                                <th>Kategori Peserta</th>
+                                <th>Nama Regu/Instansi</th>
+                                <th>PIC</th>
+                                <th>Telp. PIC</th>
+                                <th>Ketua</th>
+                                <th>Telp. Ketua</th>
+                                <th>Tanggal Daftar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if($pendaftar)
+                                @foreach($pendaftar as $key => $value)
+                                    <tr>
+                                        <td>{{$value->lomba->judul}}</td>
+                                        <td>{{$value->kategori_peserta->judul}}</td>
+                                        <td>{{$value->nama}}</td>
+                                        <td>{{$value->pic}}</td>
+                                        <td>{{$value->telp}}</td>
+                                        <td>{{$value->ketua}}</td>
+                                        <td>{{$value->telp_ketua}}</td>
+                                        <td>{{$value->created_at->format('d/m/Y H:i')}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

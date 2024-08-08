@@ -27,7 +27,7 @@
                                 <option value="">Kategori Peserta</option>
                                 @if($katPeserta)
                                     @foreach($katPeserta as $key => $value)
-                                        <option value="{{$value->id}}">{{$value->judul}}</option>
+                                        <option value="{{$value->id}}" {{$data->id_peserta == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
                                     @endforeach
                                 @endif
                             </select>

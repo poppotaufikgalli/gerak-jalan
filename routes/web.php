@@ -123,9 +123,9 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/create', [PendaftarController::class, 'create'])->name('pendaftar.create');
         Route::post('/store', [PendaftarController::class, 'store'])->name('pendaftar.store');
         Route::get('/show/{id}', [PendaftarController::class, 'show'])->name('pendaftar.show');
-        Route::get('/edit/{id}', [PendaftarController::class, 'edit'])->name('pendaftar.edit');
+        Route::get('/{id_lomba}/edit/{id}', [PendaftarController::class, 'edit'])->name('pendaftar.edit');
         Route::post('/update', [PendaftarController::class, 'update'])->name('pendaftar.update');
-        Route::post('/destroy', [PendaftarController::class, 'destroy'])->name('pendaftar.destroy');
+        Route::delete('/destroy/{id}', [PendaftarController::class, 'destroy'])->name('pendaftar.destroy');
     });
 
     //Penilaian
@@ -157,6 +157,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::post('resetPassword', [MainController::class, 'resetPassword'])->name('password.reset1');
+
+    Route::get('rekapHasil/{id?}', [MainController::class, 'rekapHasil'])->name('rekapHasil');
 });
 
 //require __DIR__.'/auth.php';

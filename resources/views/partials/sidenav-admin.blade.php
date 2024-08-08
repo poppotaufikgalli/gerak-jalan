@@ -24,6 +24,10 @@
                         <div class="sb-nav-link-icon"><i class="bx bx-user"></i></div>
                         Data Pendaftar
                     </a>
+                    <a class="nav-link" href="{{route('rekapHasil')}}">
+                        <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
+                        Rekapitulasi Hasil
+                    </a>
                 @endif
                 @if(Auth::user()->gid == 2)
                     <div class="sb-sidenav-menu-heading">Penjurian</div>

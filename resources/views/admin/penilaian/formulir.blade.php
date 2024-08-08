@@ -26,7 +26,12 @@
                 <div class="card-body">
                     <div class="row g-2">
                         <label class="col-sm-2">Nomor Peserta</label>
-                        <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->no_peserta : ''}}</label>
+                        <label class="col-sm-9 fw-semibold">{{isset($data) ? $data->no_peserta : ''}}</label>
+                        <div class="col-sm-1">
+                            <a href="{{route('penilaian.create', ['id' => $data->lomba->id])}}" class="btn btn-sm btn-primary">
+                                <i class="bx bx-search"></i>
+                            </a>
+                        </div>
                         <label class="col-sm-2">Nama Regu / Instansi</label>
                         <label class="col-sm-10 fw-semibold">{{isset($data) ? $data->nama : ''}}</label>
                         <label class="col-sm-2">Kategori Lomba</label>
@@ -49,6 +54,7 @@
                         <input type="hidden" name="id" value="{{$data->id}}">
                         <input type="hidden" name="id_nilai" value="1">
                         <input type="hidden" name="id_juri" value="0">
+                        <input type="hidden" name="jml_pos" value="{{$data->lomba->jml_pos}}">
                         <div class="row">
                             <div class="mb-3 col-md-3 col-sm-12">
                                 <label for="waktu_start" class="form-label">Waktu Start</label>
@@ -61,20 +67,20 @@
                             <div class="mb-3 col-md-2 col-sm-12">
                                 <label for="waktu_tempuh" class="form-label">Waktu Tempuh</label>
                                 <input type="hidden" class="form-control" id="waktu_tempuh" name="waktu_tempuh" value="{{isset($data) ? $data->waktu_tempuh : ''}}" step="1" readonly>
-                                <input type="text" class="form-control" id="waktu_tempuh_1" name="waktu_tempuh_1" value="{{isset($data) && $data->waktu_tempuh != null ? gmdate('H:i:s', $data->waktu_tempuh) : ''}}" step="1" readonly>
+                                <input type="text" class="form-control" id="waktu_tempuh_1" name="waktu_tempuh_1" value="{{isset($data) && $data->waktu_tempuh != null ? gmdate('H:i:s', $data->waktu_tempuh) : ''}}" step="1" disabled>
                             </div>
                             <div class="mb-3 col-md-2 col-sm-12">
                                 <label for="waktu_referensi" class="form-label">Waktu Referensi</label>
-                                <input type="hidden" class="form-control" id="waktu_referensi" name="waktu_referensi" value="{{ $waktu_referensi }}" readonly>
-                                <input type="text" class="form-control" id="waktu_referensi_1" name="waktu_referensi_1" value="{{ $waktu_referensi_1 }}" readonly>
+                                <input type="hidden" class="form-control" id="waktu_referensi" name="waktu_referensi" value="{{ $waktu_referensi }}" readonly >
+                                <input type="text" class="form-control" id="waktu_referensi_1" name="waktu_referensi_1" value="{{ $waktu_referensi_1 }}" disabled>
                             </div>
                              <div class="mb-3 col-md-1 col-sm-12">
                                 <label for="waktu_referensi" class="form-label">Selisih Menit</label>
-                                <input type="text" class="form-control" value="{{ $selisih }}" readonly>
+                                <input type="text" class="form-control" value="{{ $selisih }}" disabled>
                             </div>
                             <div class="mb-3 col-md-1 col-sm-12">
                                 <label for="nilai_waktu" class="form-label">Nilai</label>
-                                <input type="number" class="form-control" id="nilai_waktu" name="nilai_waktu" value="{{$penilaian[1][0] ?? ''}}" readonly>
+                                <input type="number" class="form-control" id="nilai_waktu" name="nilai_waktu" value="{{$penilaian[1][0] ?? ''}}" disabled>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
@@ -82,9 +88,9 @@
                 </div>
             </div>
             @endif
-            @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
-                @if($posJuri)
-                    @foreach($posJuri as $key => $value1)
+            @if($posJuri)
+                @foreach($posJuri as $key => $value1)
+                    @if((Auth::user()->gid == 1) || (Auth::user()->gid == 2 && Auth::user()->id == $value1->juri->id))
                         <div class="card mb-4">
                             <h5 class="card-header">
                                 Pencatatan Nilai 
@@ -92,9 +98,9 @@
                             </h5>
                             <div class="card-body">
                                 <form method="POST" action="{{route('penilaian.'.$next.'.pos')}}">
-                                    <input type="hidden" name="id" value="{{$data->id}}">
-                                    <input type="hidden" name="id_juri" value="{{$value1->juri->id}}">
                                     @csrf
+                                    <input type="hidden" name="id_juri" value="{{$value1->juri->id}}">
+                                    <input type="hidden" name="jml_pos" value="{{$data->lomba->jml_pos}}">
                                     <input type="hidden" name="id" value="{{isset($data) ? $data->id : ''}}">
                                     <div class="row row-cols-3">
                                         <div class="mb-3">
@@ -114,8 +120,8 @@
                                 </form>
                             </div>
                         </div>
-                    @endforeach
-                @endif  
+                    @endif  
+                @endforeach
             @endif
         @endif
     </div>
