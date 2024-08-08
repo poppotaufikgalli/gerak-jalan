@@ -342,7 +342,7 @@ class PenilaianController extends Controller
             DB::raw('sum(nilai) as sum_nilai'),
         )->where('id_pendaftar', $id_pendaftar)->groupBy(['id_pendaftar', 'id_nilai'])->pluck('sum_nilai', 'id_nilai');
 
-        $total = $a[1] + (isset($a[2]) ? $a[2]/$jml_pos : 0) + (isset($a[3]) ? $a[3]/$jml_pos : 0) + (isset($a[4]) ? $a[4]/$jml_pos : 0);
+        $total = (isset($a[1]) ? $a[1] : 0) + (isset($a[2]) ? $a[2]/$jml_pos : 0) + (isset($a[3]) ? $a[3]/$jml_pos : 0) + (isset($a[4]) ? $a[4]/$jml_pos : 0);
 
         Pendaftar::where('id', $id_pendaftar)->update(['total' => $total]);
     }

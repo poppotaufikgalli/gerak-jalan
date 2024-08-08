@@ -24,7 +24,7 @@
         	<div class="row content">
           		<div class="col-lg-6">
                 <p class="fw-bold">A. Kategori Perlombaan</p>
-            		<p>Kategori perlombaan gerak jalan proklamasi Tahun 2023 dibagi menjadi 2 kategori diantaranya :</p>
+            		<p>Kategori perlombaan gerak jalan proklamasi Tahun 2024 dibagi menjadi 2 kategori diantaranya :</p>
             		<ul>
               			<li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
               			<li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
@@ -40,14 +40,14 @@
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0">
                 <p class="fw-bold">C. Barisan</p>
-                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi Tahun 2023 sebagai berikut :</p>
+                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi Tahun 2024 sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Berisikan 10 orang anggota barisan dan 1 orang komandan barisan</li>
                     <li><i class="ri-check-double-line"></i> Bentuk formasi 2 berbanjar ke belakang dengan masing-masing barisan terdiri dari 5 orang</li>
                     <li><i class="ri-check-double-line"></i> Komandan barisan berada disamping kanan barisan</li>
                 </ul>
                 <p class="fw-bold">D. Pakaian dan Kelengkapan</p>
-                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi Tahun 2023 sebagai berikut :</p>
+                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi Tahun 2024 sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Pakaian olahraga lengkap dengan sepatu serta kelengkapan lainnya yang memenuhi etika kesopanan dan kepatutan</li>
                     <li><i class="ri-check-double-line"></i> Pakaian peserta yang melanggar etika kesopanan dan kepatutan tidak dizinkan untuk <span class="fst-italic">start</span></li>
