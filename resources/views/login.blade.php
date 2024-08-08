@@ -1,5 +1,6 @@
 @extends('layouts.login')
 @section('content')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <main>
         <section id="hero">
             <div class="hero-container">
@@ -19,7 +20,10 @@
                                     <div class="form-group">
                                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                    <div class="form-group">
+                                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between">
                                         <button type="submit">Login</button>
                                     </div>
                                 </div>
@@ -30,4 +34,14 @@
             </div>
         </section><!-- End Hero -->
     </main>
+@endsection
+@section('js-content')
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+            const $recaptcha = document.querySelector('#g-recaptcha-response');
+            if ($recaptcha) {
+                $recaptcha.setAttribute('required', 'required');
+            }
+        })
+    </script>
 @endsection
