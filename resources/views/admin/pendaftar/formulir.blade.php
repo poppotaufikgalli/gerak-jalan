@@ -23,11 +23,11 @@
                     <div class="row mb-3">
                         <label for="id_peserta" class="col-sm-2 col-form-label">Pilihan Kategori Peserta</label>
                         <div class="col-sm-10">
-                            <select class="form-control form-control-sm" name="id_peserta">
+                            <select class="form-control form-control-sm" name="id_peserta" id="id_peserta">
                                 <option value="">Kategori Peserta</option>
                                 @if($katPeserta)
                                     @foreach($katPeserta as $key => $value)
-                                        <option value="{{$value->id}}" {{$data->id_peserta == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
+                                        <option value="{{$value->id}}" data-prefix="{{$value->no_peserta_prefix}}" {{isset($data) && $data->id_peserta == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -36,7 +36,10 @@
                     <div class="row mb-3">
                         <label for="no_peserta" class="col-sm-2 col-form-label">Nomor Peserta</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-sm" id="no_peserta" name="no_peserta" value="{{isset($data) ? $data->no_peserta : old('no_peserta')}}">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm" id="no_peserta" name="no_peserta" value="{{isset($data) ? $data->no_peserta : old('no_peserta')}}" placeholder="{{$max}}">
+                                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nomorPesertaModal" >Nomor Peserta Tersedia</a>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -91,6 +94,35 @@
                 </form>
             </div>
         </div>
+        <div class="modal fade" id="nomorPesertaModal" aria-labelledby="nomorPesertaModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="nomorPesertaModal">Ganti Password</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="id" value="{{Auth::id()}}">
+                        <div class="row mb-3">
+                            <label for="password" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control form-control-sm" id="password" name="password" value="">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="password_confirmation" class="col-sm-2 col-form-label">Ulangi Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control form-control-sm" id="password_confirmation" name="password_confirmation" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('js-content')
@@ -102,6 +134,12 @@
         document.getElementById("id_lomba").addEventListener('change', function(){
             var id = this.value
             window.location.href = "/pendaftar/"+id+"/create/";
+        })
+
+        document.getElementById("id_peserta").addEventListener('change', function(){
+            var id = document.getElementById('id_lomba').value
+            var id_peserta = this.value
+            window.location.href = "/pendaftar/"+id+"/create/"+id_peserta;
         })
 
         const datatablesSimple = document.getElementById('datatablesSimple');

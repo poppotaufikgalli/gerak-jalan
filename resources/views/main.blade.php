@@ -83,6 +83,8 @@
       		<h3>Ayo Mendaftar</h3>
           @if(!$buka)
             <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
+          @else
+            <h3>Bagi yang telah mencoba mendaftar<span class="text-danger">sebelum pendaftaran dibuka</span> agar dapat mendaftar kembali</h3>
           @endif
       		<p>Isilah form berikut sesuai dengan data kepesertaan.</p>
       	</div>

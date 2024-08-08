@@ -81,7 +81,7 @@
 						<div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
 					</div>
 					<div class="text-center">
-						<button type="submit" disabled>Simpan</button>
+						<button type="submit">Simpan</button>
 					</div>
 				</form>
 			</div>

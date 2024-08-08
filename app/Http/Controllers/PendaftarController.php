@@ -42,12 +42,19 @@ class PendaftarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($id, $id_peserta=null)
     {
         //
+        $max = null;
+        if($id_peserta != null){
+            $dd = Pendaftar::orderByDesc('no_peserta')->where('id_lomba', $id)->where('id_peserta', $id_peserta)->first();
+            $max = $dd->no_peserta;
+
+        }
         return view('admin.pendaftar.formulir', [
             'id_lomba' => $id,
             'katPeserta' => KatPeserta::where('id_lomba', $id)->get(),
+            'max' => $max,
             'next' => 'store',
         ]);
     }
