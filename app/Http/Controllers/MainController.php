@@ -21,7 +21,19 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view("main");
+        $data = Konfig::where('aktif', 1)->first();
+
+        $now = strtotime(date("Y-m-d H:i:s"));
+        $tgl_buka = strtotime($data->tgl_buka);
+        $tgl_tutup = strtotime($data->tgl_tutup);
+
+        //dd($now, $tgl_buka, $tgl_tutup);
+        //dd($now >= $tgl_buka, $now <= $tgl_tutup, date("Y-m-d H:i:s",$now), date("Y-m-d H:i:s",$tgl_buka));
+        $buka = false;
+        if($now >= $tgl_buka && $now <= $tgl_tutup) {
+            $buka = true;
+        }
+        return view("main", ['buka' => $buka]);
     }
 
     public function daftarPeserta($id=0)

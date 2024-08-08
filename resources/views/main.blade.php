@@ -4,8 +4,8 @@
 	<!-- ======= Hero Section ======= -->
   	<section id="hero">
     	<div class="hero-container">
-    		<h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2024</h1>
-        <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a>
+        <div style="height: 45vh; width: 2px;"></div>
+    		<h1 class="d-none d-md-inline-block" style="text-shadow: 2px 4px 8px #000;">Lomba Gerak Jalan Proklamasi<br>Tahun 2024</h1>
     	</div>
   	</section><!-- End Hero -->
 
@@ -64,12 +64,26 @@
       	</div>
     </section><!-- End About Section -->
 
+    <section id="services" class="about our-values section-bg">
+        <div class="container">
+          <div class="section-title">
+              <h2>Pakta Integritas</h2>
+              <p>Download dan isi Pakta Integritas sebagai lampiran untuk melakukan Pendaftaran Ulang sesuai jadwal yang telah ditentukan</p>
+          </div>
+          <div class="d-flex justify-content-center content">
+            <a href="{{asset('PAKTA.INTEGRITAS.pdf')}}" target="_blank" class="btn-learn-more">Download Pakta Integritas</a>
+          </div>
+        </div>
+    </section><!-- End Our Values Section -->
+
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="cta">
       <div class="container">
       	<div class="section-title">
       		<h3>Ayo Mendaftar</h3>
-          <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
+          @if(!$buka)
+            <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
+          @endif
       		<p>Isilah form berikut sesuai dengan data kepesertaan.</p>
       	</div>
         @if($katLomba)

@@ -17,20 +17,16 @@
                         Kategori Lomba
                     </a>
                     <a class="nav-link" href="{{route('kat_peserta')}}">
-                        <div class="sb-nav-link-icon"><i class="bx bx-layer"></i></div>
+                        <div class="sb-nav-link-icon"><i class="bx bx-cube"></i></div>
                         Kategori Peserta
                     </a>
                     <a class="nav-link" href="{{route('pendaftar', ['id' => 0])}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-user"></i></div>
                         Data Pendaftar
                     </a>
-                    <a class="nav-link" href="{{route('rekapHasil')}}">
-                        <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
-                        Rekapitulasi Hasil
-                    </a>
                 @endif
                 @if(Auth::user()->gid == 2)
-                    <div class="sb-sidenav-menu-heading">Penjurian</div>
+                    <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
@@ -43,7 +39,7 @@
                     @endif
                 @endif
                 @if(Auth::user()->gid == 1 )
-                    <div class="sb-sidenav-menu-heading">Penjurian</div>
+                    <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             <a class="nav-link" href="{{route('penilaian', ['id' => $value->id])}}">
@@ -54,7 +50,7 @@
                     @endif
                 @endif
                 @if(Auth::user()->gid == 3 || Auth::user()->gid == 1)
-                    <div class="sb-sidenav-menu-heading">Diskualifikasi</div>
+                    <div class="sb-sidenav-menu-heading">Juri Keliling</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             <a class="nav-link" href="{{route('diskualifikasi', ['id' => $value->id])}}">
@@ -111,6 +107,19 @@
                         </div>
                     </nav>
                 </div>-->
+                <div class="sb-sidenav-menu-heading">Laporan</div>
+                <a class="nav-link" href="{{route('rekapHasil')}}">
+                    <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
+                    Rekapitulasi Hasil
+                </a>
+                <a class="nav-link" href="{{route('rekapHasil')}}">
+                    <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
+                    Rekapitulasi Pos
+                </a>
+                <a class="nav-link" href="{{route('rekapHasil')}}">
+                    <div class="sb-nav-link-icon"><i class="bx bx-refresh"></i></div>
+                    Rekapitulasi Keliling
+                </a>
                 @if(Auth::user()->gid == 1)
                     <div class="sb-sidenav-menu-heading">Addons</div>
                     <a class="nav-link" href="{{route('user')}}">

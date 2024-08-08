@@ -133,7 +133,7 @@ li.bg-gerak-jalan.active i {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(21, 5, 23, 0.25);
+  background: rgba(21, 5, 23, 0.75);
   transition: all 0.5s;
   z-index: 997;
   position: relative;
@@ -475,9 +475,10 @@ li.bg-gerak-jalan.active i {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../../public/img/Flag_map_of_Indonesia.svg") center;
-  background-size: contain;
+  background: #f5b700 url("../../public/img/flayer_gerak_jalan.pg.png") top;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: 50% 3%;
   position: relative;
   margin-bottom: -70px;
 }
@@ -490,7 +491,12 @@ li.bg-gerak-jalan.active i {
 
 #hero:before {
   content: "";
-  background: rgba(21, 5, 23, 0.5) linear-gradient(rgba(26, 0, 33, 0.5) 0%, rgba(26, 0, 33, 0.5) 5%, rgba(38, 6, 51, 0.5) 40%, rgba(147, 47, 69, 0.7) 76%, rgba(236, 97, 93, 0.7) 94%, rgba(236, 97, 93, 0.5) 100%) repeat scroll 0% 0%;
+  background: rgba(89, 89, 89, 0)
+    linear-gradient(
+      rgba(244, 233, 137, 0.1) 92%,
+      rgba(26, 0, 33, 0.5) 100%
+    )
+    repeat scroll 0% 0%;
   position: absolute;
   bottom: 0;
   top: 0;
