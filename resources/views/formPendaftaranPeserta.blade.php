@@ -74,7 +74,7 @@
 					<div class="row">
 						<div class="col-md-6 form-group form-check">
 							<input type="checkbox" name="pakta" class="" id="pakta" required>
-							<label class="form-check-label fw-semibold" for="pakta">Saya Bersedia mengisi Pakta Integritas</label>
+							<label class="form-check-label fw-semibold" for="pakta">Saya Bersedia mengisi <a href="{{asset('PAKTA.INTEGRITAS.docx')}}" target="_blank" class="text-decoration-underline">Pakta Integritas</a></label>
 						</div>
 					</div>
 					<div class="d-flex justify-content-center align-items-center mb-2">
