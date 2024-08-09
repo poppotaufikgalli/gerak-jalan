@@ -112,15 +112,21 @@
     <section id="clients" class="clients section-bg">
     	<div class="container">
       	<div class="row row-cols-5">
+          <!--<div class="col d-flex align-items-center justify-content-center">
+            <img src="{{asset('/img/logo-tpi.png')}}" class="img-fluid" alt="">
+          </div>
   				<div class="col d-flex align-items-center justify-content-center">
   					<img src="{{asset('/img/logo-tpi.png')}}" class="img-fluid" alt="">
-  				</div>
+  				</div>-->
   				<div class="col d-flex align-items-center justify-content-center">
   					<img src="{{asset('/img/logo-kormi.png')}}" class="img-fluid" alt="">
   				</div>
   				<div class="col d-flex align-items-center justify-content-center">
   					<img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
   				</div>
+          <div class="col d-flex align-items-center justify-content-center">
+            <img src="{{asset('/img/logo-tpi.png')}}" class="img-fluid" alt="">
+          </div>
   				<div class="col d-flex align-items-center justify-content-center">
   					<img src="{{asset('/img/logo-dispora.png')}}" class="img-fluid" alt="">
   				</div>

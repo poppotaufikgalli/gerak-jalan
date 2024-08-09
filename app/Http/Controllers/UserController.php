@@ -25,8 +25,9 @@ class UserController extends Controller
             0 => "",
             1 => "Administrator",
             2 => "Juri Pos",
-            3 => "Juri Waktu",
-            4 => "Juri Diskualifikasi",
+            3 => "Juri Waktu Start",
+            4 => "Juri Waktu Finish",
+            5 => "Juri Keliling",
         ];
 
         confirmDelete("Hapus Data Pengguna", "Apakah anda yakin untuk menghapus data ini?");

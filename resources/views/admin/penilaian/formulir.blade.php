@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            @if(Auth::user()->gid == 1 || Auth::user()->gid == 3)
+            @if(Auth::user()->gid == 1 || Auth::user()->gid == 3 || Auth::user()->gid == 4)
             <div class="card mb-4">
                 <h5 class="card-header">
                     Pencatatan Waktu
@@ -58,11 +58,23 @@
                         <div class="row">
                             <div class="mb-3 col-md-3 col-sm-12">
                                 <label for="waktu_start" class="form-label">Waktu Start</label>
-                                <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1">
+                                @if(Auth::user()->gid == 1)
+                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1">
+                                @elseif(Auth::user()->gid == 3)
+                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" {{isset($data) && $data->waktu_start != "" ? 'disabled' : ''}}>
+                                @else
+                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" disabled>
+                                @endif
                             </div>
                             <div class="mb-3 col-md-3 col-sm-12">
                                 <label for="waktu_finish" class="form-label">Waktu Finish</label>
-                                <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1">
+                                @if(Auth::user()->gid == 1)
+                                    <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1">
+                                @elseif(Auth::user()->gid == 4)
+                                    <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1" {{isset($data) && $data->waktu_finish != "" ? 'disabled' : ''}}>
+                                @else
+                                    <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1" disabled>
+                                @endif
                             </div>
                             <div class="mb-3 col-md-2 col-sm-12">
                                 <label for="waktu_tempuh" class="form-label">Waktu Tempuh</label>

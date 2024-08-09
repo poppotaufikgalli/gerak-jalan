@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            @if(Auth::user()->gid == 1 || Auth::user()->gid == 4)
+            @if(Auth::user()->gid == 1 || Auth::user()->gid == 5)
             <div class="card mb-4">
                 <h5 class="card-header">
                     Diskualifikasi

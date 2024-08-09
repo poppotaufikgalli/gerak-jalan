@@ -25,7 +25,7 @@
                         Data Pendaftar
                     </a>
                 @endif
-                @if(Auth::user()->gid == 2)
+                @if(Auth::user()->gid == 2 || Auth::user()->gid == 3 || Auth::user()->gid == 4)
                     <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
@@ -38,7 +38,7 @@
                         @endforeach
                     @endif
                 @endif
-                @if(Auth::user()->gid == 1 )
+                @if(Auth::user()->gid == 1)
                     <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)

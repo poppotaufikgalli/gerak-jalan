@@ -37,8 +37,8 @@
                         <label for="no_peserta" class="col-sm-2 col-form-label">Nomor Peserta</label>
                         <div class="col-sm-10">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" id="no_peserta" name="no_peserta" value="{{isset($data) ? $data->no_peserta : old('no_peserta')}}" placeholder="{{$max}}">
-                                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nomorPesertaModal" >Nomor Peserta Tersedia</a>
+                                <input type="text" class="form-control form-control-sm" id="no_peserta" name="no_peserta" value="{{isset($data) ? $data->no_peserta : old('no_peserta')}}" placeholder="">
+                                <!--<a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nomorPesertaModal" >Nomor Peserta Tersedia</a>-->
                             </div>
                         </div>
                     </div>
