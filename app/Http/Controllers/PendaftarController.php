@@ -157,6 +157,55 @@ class PendaftarController extends Controller
     public function update(Request $request, pendaftar $pendaftar)
     {
         //
+        $id = $request->id;
+        $id_lomba = $request->id_lomba;
+        $reqData = $request->only('no_peserta', 'nama', 'alamat', 'pic', 'telp', 'aktif', 'ketua', 'telp_ketua');
+        if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
+            $reqData['aktif'] = 1;
+        }else{
+            $reqData['aktif'] = 0;
+        }
+        //dd($reqData);
+        $validator = Validator::make($reqData, [
+            'no_peserta' => [
+                'sometimes',
+                Rule::unique('pendaftars')->where(function ($query) use($reqData, $id_lomba) {
+                    return $query->where('id_lomba', $id_lomba)
+                    ->where('no_peserta', $reqData['no_peserta']);
+                })->ignore($id),
+            ],
+            'nama' => [
+                'required',
+                'min:3',
+                Rule::unique('pendaftars')->where(function ($query) use($reqData, $id_lomba) {
+                    return $query->where('id_lomba', $id_lomba)
+                    ->where('nama', $reqData['nama']);
+                })->ignore($id),
+            ],
+            'alamat' => 'sometimes|nullable|min:3',
+            'pic' => 'sometimes|nullable|min:3',
+            'telp' => 'sometimes|nullable|min:3',
+        ],[
+            'nama.required' => 'Kategori Lomba tidak boleh kosong',
+
+            'no_peserta.unique' => 'Nomor Peserta telah terdaftar',
+            
+            'nama.required' => 'Nama Regu / Instansi tidak boleh kosong',
+            'nama.min' => 'Nama Regu / Instansi minimal 3 Karakter',
+            'nama.unique' => 'Nama Regu / Instansi telah terdaftar',
+
+            'alamat.min' => 'Alamat minimal 3 Karakter',
+            'pic.min' => 'Nama PIC minimal 3 Karakter',
+            'telp.min' => 'Nomor Telp/WA minimal 3 Karakter',
+        ]);
+
+        if($validator->fails())
+        {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+        
+        Pendaftar::find($id)->update($reqData);
+        return redirect('pendaftar/'.$id_lomba)->withSuccess('Data Pendaftaran berhasil diubah');
     }
 
     /**
