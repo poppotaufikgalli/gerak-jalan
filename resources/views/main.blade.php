@@ -71,7 +71,7 @@
               <p>Download dan isi Pakta Integritas sebagai lampiran untuk melakukan Pendaftaran Ulang sesuai jadwal yang telah ditentukan</p>
           </div>
           <div class="d-flex justify-content-center content">
-            <a href="{{asset('PAKTA.INTEGRITAS.pdf')}}" target="_blank" class="btn-learn-more">Download Pakta Integritas</a>
+            <a href="{{asset('PAKTA.INTEGRITAS.docx')}}" target="_blank" class="btn-learn-more">Download Pakta Integritas</a>
           </div>
         </div>
     </section><!-- End Our Values Section -->
