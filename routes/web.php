@@ -35,6 +35,8 @@ Route::get('/daftar-peserta/{id?}', [MainController::class, 'daftarPeserta'])->n
 Route::get('/form-pendaftaran-peserta/{id_lomba?}/{id_peserta?}', [MainController::class, 'formPendaftaranPeserta'])->name('form-pendaftaran-peserta');
 Route::post('/daftar-umum', [MainController::class, 'daftarUmum'])->name('daftar-umum');
 
+Route::get('/pakta/{id?}', [MainController::class, 'pakta'])->name('pakta');
+
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);

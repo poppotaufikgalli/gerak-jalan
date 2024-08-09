@@ -84,9 +84,9 @@
           @if(!$buka)
             <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
           @else
-            <h3>Bagi yang telah mencoba mendaftar<span class="text-danger">sebelum pendaftaran dibuka</span> agar dapat mendaftar kembali</h3>
+            <h5 class="text-light">Bagi yang telah mencoba mendaftar <span class="text-danger">sebelum pendaftaran dibuka</span> agar dapat mendaftar kembali</h5>
           @endif
-      		<p>Isilah form berikut sesuai dengan data kepesertaan.</p>
+      		<p>Pilih kategori sesuai dengan data kepesertaan anda</p>
       	</div>
         @if($katLomba)
           <div class="row">

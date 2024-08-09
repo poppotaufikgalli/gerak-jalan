@@ -16,9 +16,21 @@ use Illuminate\Support\Facades\Hash;
 
 use DB;
 use App\Rules\ReCaptcha;
+use PDF;
 
 class MainController extends Controller
 {
+    public function pakta($id=null){
+        $data = [
+            'data' => Pendaftar::find($id)
+        ];
+
+        $pdf = PDF::loadView('pakta', $data);
+
+        return $pdf->stream('document.pdf');
+        //return view('pakta');
+    }
+
     public function index()
     {
         $data = Konfig::where('aktif', 1)->first();
