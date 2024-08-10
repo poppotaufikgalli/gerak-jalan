@@ -159,13 +159,14 @@ class PendaftarController extends Controller
      * @param  \App\Models\pendaftar  $pendaftar
      * @return \Illuminate\Http\Response
      */
-    public function edit(pendaftar $pendaftar, $id_lomba, $id)
+    public function edit(pendaftar $pendaftar, $id_lomba, $id_peserta)
     {
         //
         return view('admin.pendaftar.formulir', [
             'id_lomba' => $id_lomba,
+            'id_peserta', => $id_peserta,
             'next' => 'update',
-            'data' => $pendaftar::find($id),
+            'data' => $pendaftar::find($id_peserta),
             'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
             'title' => "Edit Pendaftar",
         ]);
