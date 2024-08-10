@@ -11,7 +11,7 @@
                     <div class="row mb-3">
                         <label for="id_lomba" class="col-sm-2 col-form-label">Pilihan Kategori Lomba</label>
                         <div class="col-sm-10">
-                            <input type="text" name="id_lomba" value="{{$id_lomba}}">
+                            <input type="hidden" name="id_lomba" value="{{$id_lomba}}">
                             <select class="form-control form-control-sm" name="id_lomba" id="id_lomba" disabled>
                                 @if($katLomba)
                                     @foreach($katLomba as $key => $value)
@@ -24,7 +24,7 @@
                     <div class="row mb-3">
                         <label for="id_peserta" class="col-sm-2 col-form-label">Pilihan Kategori Peserta</label>
                         <div class="col-sm-10">
-                            <input type="text" name="id_peserta" value="{{$id_peserta}}">
+                            <input type="hidden" name="id_peserta" value="{{$id_peserta}}">
                             <select class="form-control form-control-sm" name="id_peserta" id="id_peserta" disabled>
                                 <option value="">Kategori Peserta</option>
                                 @if($katPeserta)
