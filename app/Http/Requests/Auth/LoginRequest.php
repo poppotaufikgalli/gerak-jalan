@@ -56,7 +56,8 @@ class LoginRequest extends FormRequest
             ]);
         }*/
 
-        if (! Auth::attempt($this->only('username', 'password'))) {
+        //if (! Auth::attempt($this->only('username', 'password'))) {
+        if (!Auth::attempt(['username' => $this->username, 'password' => $this->password, 'aktif' => 1])) {
             RateLimiter::hit($this->throttleKey());
 
             Alert::error('Login Gagal', 'Kombinasi username dan password salah');

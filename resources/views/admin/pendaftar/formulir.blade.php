@@ -11,7 +11,8 @@
                     <div class="row mb-3">
                         <label for="id_lomba" class="col-sm-2 col-form-label">Pilihan Kategori Lomba</label>
                         <div class="col-sm-10">
-                            <select class="form-control form-control-sm" name="id_lomba" id="id_lomba">
+                            <input type="text" name="id_lomba" value="{{$id_lomba}}">
+                            <select class="form-control form-control-sm" name="id_lomba" id="id_lomba" disabled>
                                 @if($katLomba)
                                     @foreach($katLomba as $key => $value)
                                         <option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
@@ -23,11 +24,12 @@
                     <div class="row mb-3">
                         <label for="id_peserta" class="col-sm-2 col-form-label">Pilihan Kategori Peserta</label>
                         <div class="col-sm-10">
-                            <select class="form-control form-control-sm" name="id_peserta" id="id_peserta">
+                            <input type="text" name="id_peserta" value="{{$id_peserta}}">
+                            <select class="form-control form-control-sm" name="id_peserta" id="id_peserta" disabled>
                                 <option value="">Kategori Peserta</option>
                                 @if($katPeserta)
                                     @foreach($katPeserta as $key => $value)
-                                        <option value="{{$value->id}}" data-prefix="{{$value->no_peserta_prefix}}" {{isset($data) && $data->id_peserta == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
+                                        <option value="{{$value->id}}" data-prefix="{{$value->no_peserta_prefix}}" {{$id_peserta == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -37,8 +39,8 @@
                         <label for="no_peserta" class="col-sm-2 col-form-label">Nomor Peserta</label>
                         <div class="col-sm-10">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm" id="no_peserta" name="no_peserta" value="{{isset($data) ? $data->no_peserta : old('no_peserta')}}" placeholder="">
-                                <!--<a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nomorPesertaModal" >Nomor Peserta Tersedia</a>-->
+                                <input type="text" class="form-control form-control-sm" id="no_peserta" name="no_peserta" value="{{isset($data) ? $data->no_peserta : old('no_peserta')}}" placeholder="Kosongkan untuk menggunakan Nomor Peserta Terakhir">
+                                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#nomorPesertaModal">Cek Nomor Peserta</a>
                             </div>
                         </div>
                     </div>
@@ -98,27 +100,24 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="nomorPesertaModal">Ganti Password</h1>
+                        <h1 class="modal-title fs-5" id="nomorPesertaModal">Nomor Peserta</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="id" id="id" value="{{Auth::id()}}">
-                        <div class="row mb-3">
-                            <label for="password" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control form-control-sm" id="password" name="password" value="">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="password_confirmation" class="col-sm-2 col-form-label">Ulangi Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control form-control-sm" id="password_confirmation" name="password_confirmation" value="">
-                            </div>
-                        </div>
+                        <table class="table table-sm small table-hover table-sm" width="100%" id="datatablesSimple">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>No Peserta</th>
+                                    <th>Nama Regu/Instansi</th>
+                                    <th>Pilih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -128,24 +127,38 @@
 @section('js-content')
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', event => {
-        // Simple-DataTables
-        // https://github.com/fiduswriter/Simple-DataTables/wiki
+            // Simple-DataTables
+            // https://github.com/fiduswriter/Simple-DataTables/wiki
 
-        document.getElementById("id_lomba").addEventListener('change', function(){
-            var id = this.value
-            window.location.href = "/pendaftar/"+id+"/create/";
-        })
+            var id_lomba = document.getElementById("id_lomba").value;
+            var id_peserta = document.getElementById("id_peserta").value;
 
-        document.getElementById("id_peserta").addEventListener('change', function(){
-            var id = document.getElementById('id_lomba').value
-            var id_peserta = this.value
-            window.location.href = "/pendaftar/"+id+"/create/"+id_peserta;
-        })
+            var table = new DataTable('#datatablesSimple', {
+                destroy: true,
+                ajax: '/api/cekNomorPeserta/'+id_lomba+'/'+id_peserta,
+                columnDefs: [{
+                    data: null,
+                    targets: -1,
+                    render: function (a, b, data, d) {
+                        if (data[1] == "") {
+                            return "<button class='btn btn-sm btn-primary' data-bs-dismiss='modal'>Pilih</button>";
+                        }
+                        return "";
+                    }
+                }],
+            });
 
-        const datatablesSimple = document.getElementById('datatablesSimple');
-        if (datatablesSimple) {
-            new DataTable(datatablesSimple);
-        }
-    });
+            table.on('click', 'button', function (e) {
+                let data = table.row(e.target.closest('tr')).data();
+                document.getElementById('no_peserta').value = data[0];
+            });
+
+            const nomorPesertaModal = document.getElementById('nomorPesertaModal');
+            if (nomorPesertaModal) {
+                nomorPesertaModal.addEventListener('show.bs.modal', event => {
+                    table.ajax.reload();
+                })
+            }
+        });
     </script>
 @endsection

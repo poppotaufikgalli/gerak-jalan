@@ -13,6 +13,8 @@ use Illuminate\Validation\Rule;
 
 use RealRashid\SweetAlert\Facades\Alert;
 
+use Auth;
+
 class PendaftarController extends Controller
 {
     /**
@@ -20,20 +22,26 @@ class PendaftarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id=0)
+    public function index($id_lomba=0, $id_peserta=null)
     {
-        $data = Pendaftar::where(function($query) use($id){
-            if($id > 0){
-                $query->where('id_lomba', $id);
+        $data = Pendaftar::where(function($query) use($id_lomba, $id_peserta){
+            if($id_lomba > 0){
+                $query->where('id_lomba', $id_lomba);
+            }
+
+            if($id_peserta != null){
+                $query->where('id_peserta', $id_peserta);
             }
         })->orderByRaw('cast(no_peserta as unsigned)')->get();
         
         confirmDelete('Hapus Data pendaftar!', "Apakah anda yakin untuk menghapus?");
         
         return view("admin.pendaftar.index", [
-            'id' => $id,
+            'id_lomba' => $id_lomba,
+            'id_peserta' => $id_peserta,
             'data' => $data,
-            'subtitle' => Lomba::find($id),
+            'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
+            'subtitle' => Lomba::find($id_lomba),
         ]);
     }
 
@@ -42,19 +50,18 @@ class PendaftarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id, $id_peserta=null)
+    public function create($id_lomba, $id_peserta)
     {
         //
-        $max = null;
-        if($id_peserta != null){
-            $dd = Pendaftar::orderByDesc('no_peserta')->where('id_lomba', $id)->where('id_peserta', $id_peserta)->first();
-            $max = $dd->no_peserta;
+        //$max = null;
+        //$pendaftar = Pendaftar::orderByDesc('no_peserta')->where('id_lomba', $id_lomba)->where('id_peserta', $id_peserta)->first();
+        //$no_peserta_max = $pendaftar->no_peserta;
 
-        }
         return view('admin.pendaftar.formulir', [
-            'id_lomba' => $id,
-            'katPeserta' => KatPeserta::where('id_lomba', $id)->get(),
-            'max' => $max,
+            'id_lomba' => $id_lomba,
+            'id_peserta' => $id_peserta,
+            'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
+            //'no_peserta_max' => $no_peserta_max,
             'next' => 'store',
         ]);
     }
@@ -77,6 +84,7 @@ class PendaftarController extends Controller
         //dd($reqData);
         $validator = Validator::make($reqData, [
             'id_lomba' => 'required',
+            'id_peserta' => 'required',
             'no_peserta' => [
                 'sometimes',
                 Rule::unique('pendaftars')->where(function ($query) use($reqData) {
@@ -108,6 +116,22 @@ class PendaftarController extends Controller
             'pic.min' => 'Nama PIC minimal 3 Karakter',
             'telp.min' => 'Nomor Telp/WA minimal 3 Karakter',
         ]);
+
+        if($reqData['no_peserta'] == ""){
+            $peserta = Pendaftar::select('no_peserta')->where('id_lomba', $reqData['id_lomba'])->where('id_peserta', $reqData['id_peserta'])->orderByRaw('CONVERT(no_peserta, SIGNED) desc')->first();
+            //dd($peserta);
+
+            if($peserta){
+                $reqData['no_peserta'] = $peserta->no_peserta +1;
+            }else{
+                $c = KatPeserta::find($reqData['id_peserta']);    
+
+                $no_peserta = $c->no_peserta_prefix .(sprintf('%03d', $c->no_peserta_mulai));
+                $reqData['no_peserta'] = $no_peserta;
+            }
+        }
+
+        $reqData['verif_id'] = Auth::user()->id;
 
         if($validator->fails())
         {
@@ -167,6 +191,8 @@ class PendaftarController extends Controller
         }
         //dd($reqData);
         $validator = Validator::make($reqData, [
+            'id_lomba' => 'required',
+            'id_peserta' => 'required',
             'no_peserta' => [
                 'sometimes',
                 Rule::unique('pendaftars')->where(function ($query) use($reqData, $id_lomba) {
@@ -198,6 +224,22 @@ class PendaftarController extends Controller
             'pic.min' => 'Nama PIC minimal 3 Karakter',
             'telp.min' => 'Nomor Telp/WA minimal 3 Karakter',
         ]);
+
+        if($reqData['no_peserta'] == ""){
+            $peserta = Pendaftar::select('no_peserta')->where('id_lomba', $reqData['id_lomba'])->where('id_peserta', $reqData['id_peserta'])->orderByRaw('CONVERT(no_peserta, SIGNED) desc')->first();
+            //dd($peserta);
+
+            if($peserta){
+                $reqData['no_peserta'] = $peserta->no_peserta +1;
+            }else{
+                $c = KatPeserta::find($reqData['id_peserta']);    
+
+                $no_peserta = $c->no_peserta_prefix .(sprintf('%03d', $c->no_peserta_mulai));
+                $reqData['no_peserta'] = $no_peserta;
+            }
+        }
+
+        $reqData['verif_id'] = Auth::id();
 
         if($validator->fails())
         {

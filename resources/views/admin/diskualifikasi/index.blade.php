@@ -1,5 +1,5 @@
 @extends('layouts.master1')
-@section('title',"Data Diskualifikasi")
+@section('title',"Data Pelanggaran")
 @section('subtitle',$subtitle->ket ?? 'Semua')
 @section('content')
 	<div class="container-fluid px-4">
@@ -17,7 +17,7 @@
                                 <th width="2%">&nbsp;</th>
                                 <th width="10%">No Peserta</th>
                                 <th width="10%">Nama Regu/Instansi</th>
-                                <th width="10%">Total Diskualifikasi</th>
+                                <th width="10%">Total Pelanggaran</th>
                             </tr>
                         </thead>
                         <tbody>

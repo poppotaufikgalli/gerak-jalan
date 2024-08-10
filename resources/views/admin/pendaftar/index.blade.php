@@ -5,20 +5,32 @@
 	<div class="container-fluid px-4">
         <div class="card mb-4">
             <div class="card-body">
-                <div class="row gap-2">
-                    <label class="col-md-2">Jenis Lomba</label>
-                    <div class="col">
+                <div class="row g-2">
+                    <label class="col-md-2">Kategori Lomba</label>
+                    <div class="col-md-9">
                         <select class="form-control form-control-sm" id="selKategoriLomba">
-                            <option value="0" {{$id == 0 ? 'selected': ''}}>Semua</option>
+                            <option value="0" {{$id_lomba == 0 ? 'selected': ''}}>Semua</option>
                             @if($katLomba)
                                 @foreach($katLomba as $key => $value)
-                                    <option value="{{$value->id}}" {{$id == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
+                                    <option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
                                 @endforeach
                             @endif
                         </select>
                     </div>
                     <div class="col-md-1">
-                        <a class="btn btn-sm btn-primary {{$id == 0 ? 'disabled' : ''}}" href="{{route('pendaftar.create', ['id'=> $id])}}" >Tambah</a>
+                        <!--<a class="btn btn-sm btn-primary {{$id_lomba == 0 ? 'disabled' : ''}}" href="{{route('pendaftar.create', ['id_lomba'=> $id_lomba])}}" >Tambah</a>-->
+                        <button id="btnTambahPendaftar" class="btn btn-sm btn-primary" {{$id_lomba == 0 || $id_peserta == null ? 'disabled' : ''}}>Tambah</button>
+                    </div>
+                    <label class="col-md-2">Kategori Peserta</label>
+                    <div class="col-md-9">
+                        <select class="form-control form-control-sm" id="selKategoriPeserta">
+                            <option value="" {{$id_peserta == null ? 'selected': ''}}>Semua</option>
+                            @if($katPeserta)
+                                @foreach($katPeserta as $key => $value)
+                                    <option value="{{$value->id}}" {{$id_peserta == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
+                                @endforeach
+                            @endif
+                        </select>
                     </div>
                 </div>
                 <hr>
@@ -106,6 +118,19 @@
             document.getElementById("selKategoriLomba").addEventListener('change', function() {
                 //var value = this.value
                 window.location.href = "/pendaftar/"+this.value
+            })
+
+            document.getElementById("selKategoriPeserta").addEventListener('change', function() {
+                //var value = this.value
+                //var id_lomba = '{{$id_lomba}}';
+                window.location.href = "/pendaftar/{{$id_lomba}}/"+this.value
+            })
+
+            document.getElementById("btnTambahPendaftar").addEventListener('click', function() {
+                //var value = this.value
+                //var id_lomba = '{{$id_lomba}}';
+                //var id_peserta = '{{$id_peserta}}'
+                window.location.href = "/pendaftar/{{$id_lomba}}/create/{{$id_peserta}}";
             })
 
         });

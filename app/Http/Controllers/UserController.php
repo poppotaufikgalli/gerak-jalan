@@ -60,7 +60,12 @@ class UserController extends Controller
     {
         //dd($request->all());
         
-        $reqData = $request->only('name', 'username', 'gid');
+        $reqData = $request->only('name', 'username', 'gid', 'aktif');
+        if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
+            $reqData['aktif'] = 1;
+        }else{
+            $reqData['aktif'] = 0;
+        }
         //dd($reqData);
         $reqData['password'] = Hash::make($request->password);
         $validator = Validator::make($reqData, [
@@ -119,7 +124,12 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $id = $request->id;
-        $reqData = $request->only('name', 'username', 'gid');
+        $reqData = $request->only('name', 'username', 'gid', 'aktif');
+        if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
+            $reqData['aktif'] = 1;
+        }else{
+            $reqData['aktif'] = 0;
+        }
 
         $validator = Validator::make($reqData, [
             'name' => 'required|unique:users,name,'.$id,

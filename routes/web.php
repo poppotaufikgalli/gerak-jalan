@@ -121,8 +121,8 @@ Route::middleware('auth')->group(function () {
 
      //pendaftar
     Route::prefix('pendaftar')->group(function () {
-        Route::get('{id?}/', [PendaftarController::class, 'index'])->name('pendaftar');
-        Route::get('{id}/create/{id_peserta?}', [PendaftarController::class, 'create'])->name('pendaftar.create');
+        Route::get('{id_lomba?}/{id_peserta?}', [PendaftarController::class, 'index'])->name('pendaftar');
+        Route::get('{id_lomba}/create/{id_peserta?}', [PendaftarController::class, 'create'])->name('pendaftar.create');
         Route::post('/store', [PendaftarController::class, 'store'])->name('pendaftar.store');
         Route::get('/show/{id}', [PendaftarController::class, 'show'])->name('pendaftar.show');
         Route::get('/{id_lomba}/edit/{id}', [PendaftarController::class, 'edit'])->name('pendaftar.edit');

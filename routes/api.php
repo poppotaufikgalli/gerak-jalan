@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/getKatPeserta/{id_lomba}', [ApiController::class, 'getKatPeserta'])->name('api.getKatPeserta');
+Route::get('/cekNomorPeserta/{id_lomba}/{id_peserta}', [ApiController::class, 'cekNomorPeserta'])->name('api.cekNomorPeserta');

@@ -34,6 +34,7 @@ class pendaftar extends Model
         'aktif',
         'total',
         'diskualifikasi',
+        'verif_id',
         'waktu_start',
         'waktu_finish',
     ];

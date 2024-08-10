@@ -9,6 +9,11 @@ class Diskualifikasi extends Model
 {
     use HasFactory;
 
+    public function juri()
+    {
+        return $this->hasOne(User::class, 'id', 'uid');
+    }
+
     protected $fillable = [
         'id_pendaftar',
         'alasan',

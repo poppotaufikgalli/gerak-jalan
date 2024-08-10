@@ -1,5 +1,5 @@
 @extends('layouts.master1')
-@section('title',"Tambah Diskualifikasi")
+@section('title',"Tambah Pelanggaran")
 @section('subtitle',"")
 @section('content')
     <div class="container-fluid px-4">
@@ -39,7 +39,7 @@
             @if(Auth::user()->gid == 1 || Auth::user()->gid == 5)
             <div class="card mb-4">
                 <h5 class="card-header">
-                    Diskualifikasi
+                    Pelanggaran
                 </h5>
                 <div class="card-body">
                     <form method="POST" action="{{route('diskualifikasi.'.$next)}}" enctype="multipart/form-data">
@@ -81,7 +81,7 @@
                     @if($diskualifikasi)
                         <div class="list-group">
                             @foreach($diskualifikasi as $key => $value)
-                                <a href="{{url('storage/'.$value->doc)}}" target="_blank" class="list-group-item list-group-item-action" aria-current="true">{{$value->alasan}}</a>
+                                <a href="{{url('storage/'.$value->doc)}}" target="_blank" class="list-group-item list-group-item-action" aria-current="true">{{$value->alasan}} <span class="badge text-bg-dark float-end">{{$value->juri->name}} | {{$value->created_at->format('d-m-Y H:i')}}</span></a>
                             @endforeach
                         </div>
                     @endif
