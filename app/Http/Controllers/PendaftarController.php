@@ -164,7 +164,7 @@ class PendaftarController extends Controller
         //
         return view('admin.pendaftar.formulir', [
             'id_lomba' => $id_lomba,
-            'id_peserta', => $id_peserta,
+            'id_peserta' => $id_peserta,
             'next' => 'update',
             'data' => $pendaftar::find($id_peserta),
             'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
