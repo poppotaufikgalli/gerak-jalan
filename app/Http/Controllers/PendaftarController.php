@@ -159,14 +159,15 @@ class PendaftarController extends Controller
      * @param  \App\Models\pendaftar  $pendaftar
      * @return \Illuminate\Http\Response
      */
-    public function edit(pendaftar $pendaftar, $id_lomba, $id_peserta)
+    public function edit(pendaftar $pendaftar, $id_lomba, $id)
     {
         //
+        $data = $pendaftar::find($id);
         return view('admin.pendaftar.formulir', [
             'id_lomba' => $id_lomba,
-            'id_peserta' => $id_peserta,
+            'id_peserta' => $data->id_peserta,
             'next' => 'update',
-            'data' => $pendaftar::find($id_peserta),
+            'data' => $data,
             'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
             'title' => "Edit Pendaftar",
         ]);
@@ -192,8 +193,6 @@ class PendaftarController extends Controller
         }
         //dd($reqData);
         $validator = Validator::make($reqData, [
-            'id_lomba' => 'required',
-            'id_peserta' => 'required',
             'no_peserta' => [
                 'sometimes',
                 Rule::unique('pendaftars')->where(function ($query) use($reqData, $id_lomba) {
