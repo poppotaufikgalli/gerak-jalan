@@ -244,7 +244,7 @@ class MainController extends Controller
             echo "$b";
             echo "</pre>";
 
-            $data[$b->id][]
+            //$data[$b->id][]
         }
         exit();
         /*$id_pendaftar = 0;
