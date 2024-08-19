@@ -6,8 +6,8 @@
         <div class="card mb-4">
             <div class="card-body">
                 <div class="row gap-2">
-                    <label class="col-md-2">Jenis Lomba</label>
-                    <div class="col">
+                    <label class="col-md-2">Kategori Peserta</label>
+                    <div class="col-md-9">
                         <select class="form-control form-control-sm" id="selKategoriPeserta">
                             <option value="" selected>Semua</option>
                             @if($katPeserta)
@@ -28,20 +28,20 @@
                                 <th width="15%">Nama Regu/Instansi</th>
                                 <th width="30%">Kategori</th>
                                 <th>Waktu Tempuh</th>
+                                <th>Dis?</th>
                                 <th>Total Nilai</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if(isset($data))
                                 @foreach($data as $key => $value)
-                                    <tr>
+                                    <tr class="{{$value->diskualifikasi ? 'text-bg-danger' : ''}}">
                                         <td>{{ ($key+1) }}</td>
                                         <td class="text-center">{{$value->no_peserta}}</td>
                                         <td>{{$value->nama}}</td>
                                         <td>{{$value->lomba?->judul}} - {{$value->kategori_peserta?->judul}}</td>
-                                        <td>{{$value->pic}}/ {{$value->telp}}</td>
                                         <td class="text-center">{{gmdate('H:i:s', $value->waktu_tempuh)}}</td>
+                                        <td class="text-center">{{$value->diskualifikasi ? 'Ya' : ''}}</td>
                                         <td class="text-center">{{$value->total}}</td>
                                     </tr>
                                 @endforeach

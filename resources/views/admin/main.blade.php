@@ -6,12 +6,27 @@
         <div class="row">
             @if($katLomba)
                 @foreach($katLomba as $key => $value)
-                    <div class="col-xl-2 col-md-6">
+                    <div class="col-xl-6 col-md-12">
                         <div class="card bg-light text-dark mb-4">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h6 class="fw-bold">{{$value->judul}}</h6>
                                     <p class="h2">{{$jmlPendaftar[$value->id] ?? 0}}</p>
+                                </div>
+                                <hr>
+                                <div>
+                                    @if($katPeserta)
+                                        <table class="table small table-sm table-striped">
+                                        @foreach($katPeserta as $k => $v)
+                                            <tr>
+                                            @if($v->id_lomba == $value->id)
+                                                <td>{{$v->judul}}</td>
+                                                <td>{{$jmlPeserta[$value->id][$v->id] ?? 0}}</td>
+                                            @endif
+                                            </tr>
+                                        @endforeach
+                                        </table>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">

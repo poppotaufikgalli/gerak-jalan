@@ -160,7 +160,8 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::post('resetPassword', [MainController::class, 'resetPassword'])->name('password.reset1');
 
-    Route::get('rekapHasil/{id?}', [MainController::class, 'rekapHasil'])->name('rekapHasil');
+    Route::get('rekapHasil/{id_peserta?}', [MainController::class, 'rekapHasil'])->name('rekapHasil');
+    Route::get('rekapPos/{id_lomba?}/{id_juri?}', [MainController::class, 'rekapPos'])->name('rekapPos');
 });
 
 //require __DIR__.'/auth.php';

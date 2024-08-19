@@ -7,6 +7,9 @@ use App\Models\Pendaftar;
 use App\Models\Lomba;
 use App\Models\KatPeserta;
 use App\Models\Konfig;
+use App\Models\PosJuri;
+use App\Models\Penilaian;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -156,26 +159,145 @@ class MainController extends Controller
 
     public function main(){
         $jmlPendaftar = Pendaftar::select('id_lomba', DB::raw('count(*) as total'))->groupBy('id_lomba')->pluck('total', 'id_lomba');
+        //dd($jmlPendaftar);
+        $jmlPendaftar = [];
+        $jmlPeserta = [];
+        $pendaftar = Pendaftar::all();
+
+        if($pendaftar){
+            foreach ($pendaftar as $key => $value) {
+                $idx = $value->id_lomba;
+                $idz = $value->id_peserta;
+                $jmlPendaftar[$idx] = isset($jmlPendaftar[$idx]) ? $jmlPendaftar[$idx] +1 : 1;
+                $jmlPeserta[$idx][$idz] = isset($jmlPeserta[$idx][$idz]) ? $jmlPeserta[$idx][$idz] +1 : 1;
+            }
+        }
 
         return view('admin.main', [
             'jmlPendaftar' => $jmlPendaftar,
-            'pendaftar' => Pendaftar::all(),
+            'jmlPeserta' => $jmlPeserta,
+            'pendaftar' => $pendaftar,
+            'katPeserta' => KatPeserta::all(),
         ]);
     }
 
-    public function rekapHasil($id=null)
+    public function rekapHasil($id_peserta=null)
     {
-        $data = Pendaftar::where(function($query) use ($id){
-            if($id != null){
-                $query->where('id_peserta', $id);
+        $data = Pendaftar::where(function($query) use ($id_peserta){
+            if($id_peserta != null){
+                $query->where('id_peserta', $id_peserta);
             }
-        })->where('diskualifikasi', 0)->orderBy('total', 'desc')->get();
+        })->orderBy('total', 'desc')->get();
         $katPeserta = KatPeserta::all();
         
         return view('admin.rekapHasil', [
             'data' => $data,
             'katPeserta' => $katPeserta,
-            'id_peserta' => $id,
+            'id_peserta' => $id_peserta,
+        ]);
+    }
+
+    public function rekapPos($id_lomba=null, $id_juri=null)
+    {
+        //dd($id_juri);
+        /*$posJuri = User::join('juri_kategoris', 'juri_kategoris.user_id', 'users.id')->join('lombas', 'lombas.id', 'juri_kategoris.id_lomba')->where('users.gid', 2)->where(function($query) use($id_lomba){
+            if($id_lomba != null){
+                $query->where('juri_kategoris.id_lomba', $id_lomba);
+            }
+        })->get();*/
+
+        $posJuri = User::whereHas('juri_kategori', function($query) use($id_lomba){
+            $query->where('juri_kategoris.id_lomba', $id_lomba);
+        })->where('gid', 2)->get();
+
+        //dd($posJuri);
+
+        /*$data = KatPeserta::whereHas('pendaftar', function($query) use($id_lomba){
+            $query->where('pendaftars.id_lomba', $id_lomba);
+        })->where('id_lomba', $id_lomba)->get();
+
+        if($data){
+            foreach ($data as $key => $value) {
+                if($value->pendaftar){
+                    //echo $value->pendaftar;
+                    $a = $value->pendaftar;
+                    //$b = $a->penilaian;
+                    if($a){
+                        foreach ($a as $k => $v) {
+                            echo "$v->penilaian";
+                        }
+                    }
+                    
+                }
+            }
+        }
+        exit();*/
+
+        $data = [];
+        $dt = Penilaian::where('id_juri', $id_juri)->get();
+        foreach ($dt as $key => $value) {
+            echo "<pre>";
+            $a = $value->pendaftar;
+            echo "$a";
+            echo "<br>";
+            $b = $a->kategori_peserta;
+            echo "$b";
+            echo "</pre>";
+
+            $data[$b->id][]
+        }
+        exit();
+        /*$id_pendaftar = 0;
+        if($d){
+            foreach ($d as $key => $value) {
+                if($id_pendaftar != $value->id_pendaftar){
+                    //$id_peserta = $value->pendaftar->id_peserta;
+                    $data[] = $value;    
+                    $id_pendaftar = $value->id_pendaftar;
+                }
+            }
+        }*/
+
+
+        //dd($data);
+
+        //dd($peserta);
+        //$posJuri = Penilaian::all();
+        /*$$peserta = Pendaftar::join('lombas', 'lombas.id', 'pendaftars.id_lomba')->where(function($query) use ($id_lomba) {
+            if($id_lomba != null){
+                $query->where('id_lomba', $id_lomba);
+            }
+        })->get();
+
+        penilaian = Penilaian::select('penilaians.*', 'pendaftars.no_peserta', 'lombas.judul')->join('pendaftars', 'pendaftars.id', 'penilaians.id_pendaftar')->join('lombas', 'lombas.id', 'pendaftars.id_lomba')->where(function($query) use ($id_lomba) {
+            if($id_lomba != null){
+                $query->where('lombas.id', $id_lomba);
+            }  
+        })->get();
+
+        $penilaian = Pendaftar::join('lombas', 'lombas.id', 'pendaftars.id_lomba')->leftJoin('penilaians','penilaians.id_pendaftar', 'pendaftars.id')->get();
+
+        dd($penilaian);
+
+        dd($data);
+        
+        $dataPenilaian = [];
+        if($penilaian){
+            foreach ($penilaian as $key => $value) {
+                $no_peserta = $value->no_peserta;
+                $id_juri = $value->id_juri;
+                $lomba_id = $value->id_lomba;
+                
+            }
+        }
+        dd($dataPenilaian);*/
+        
+        return view('admin.rekapPos', [
+            'data' => $data,
+            'posJuri' => $posJuri,
+            'id_lomba' => $id_lomba,
+            'id_juri' => $id_juri,
+            //'posJuri' => $posJuri,
         ]);
     }
 

@@ -3,24 +3,24 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Konfigurasi</div>
-                <a class="nav-link" href="{{route('main')}}">
+                <a class="nav-link {{request()->routeIs('main') ? 'active' : ''}}" href="{{route('main')}}">
                     <div class="sb-nav-link-icon"><i class="bx bx-tachometer"></i></div>
                     Dashboard
                 </a>
                 @if(Auth::user()->gid == 1)
-                    <a class="nav-link" href="{{route('konfig')}}">
+                    <a class="nav-link {{request()->routeIs('konfig') ? 'active' : ''}}" href="{{route('konfig')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-cog"></i></div>
                         Konfigurasi
                     </a>
-                    <a class="nav-link" href="{{route('lomba')}}">
+                    <a class="nav-link {{request()->routeIs('lomba') ? 'active' : ''}}" href="{{route('lomba')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-layer"></i></div>
                         Kategori Lomba
                     </a>
-                    <a class="nav-link" href="{{route('kat_peserta')}}">
+                    <a class="nav-link {{request()->routeIs('kat_peserta') ? 'active' : ''}}" href="{{route('kat_peserta')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-cube"></i></div>
                         Kategori Peserta
                     </a>
-                    <a class="nav-link" href="{{route('pendaftar', ['id' => 0])}}">
+                    <a class="nav-link {{request()->routeIs('pendaftar') ? 'active' : ''}}" href="{{route('pendaftar', ['id' => 0])}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-user"></i></div>
                         Data Pendaftar
                     </a>
@@ -30,8 +30,8 @@
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
-                                <a class="nav-link" href="{{route('penilaian', ['id' => $value->id])}}">
-                                    <div class="sb-nav-link-icon"><i class="bx bx-tachometer"></i></div>
+                                <a class="nav-link {{request()->routeIs('penilaian') ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
+                                    <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                     {{$value->judul}}
                                 </a>
                             @endif
@@ -42,8 +42,8 @@
                     <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link" href="{{route('penilaian', ['id' => $value->id])}}">
-                                <div class="sb-nav-link-icon"><i class="bx bx-tachometer"></i></div>
+                            <a class="nav-link {{request()->routeIs('penilaian') ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
+                                <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                 {{$value->judul}}
                             </a>
                         @endforeach
@@ -53,8 +53,8 @@
                     <div class="sb-sidenav-menu-heading">Juri Keliling</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link" href="{{route('diskualifikasi', ['id' => $value->id])}}">
-                                <div class="sb-nav-link-icon"><i class="bx bx-tachometer"></i></div>
+                            <a class="nav-link {{request()->routeIs('diskualifikasi') ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                                <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
                                 {{$value->judul}}
                             </a>
                         @endforeach
@@ -112,7 +112,7 @@
                     <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
                     Rekapitulasi Hasil
                 </a>
-                <a class="nav-link" href="{{route('rekapHasil')}}">
+                <a class="nav-link" href="{{route('rekapPos')}}">
                     <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
                     Rekapitulasi Pos
                 </a>

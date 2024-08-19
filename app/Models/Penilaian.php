@@ -9,6 +9,11 @@ class Penilaian extends Model
 {
     use HasFactory;
 
+    public function pendaftar()
+    {
+        return $this->hasOne(Pendaftar::class, 'id', 'id_pendaftar');
+    }
+
     protected $fillable = [
         'id_pendaftar',
         'id_juri',

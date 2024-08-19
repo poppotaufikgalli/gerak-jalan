@@ -21,6 +21,11 @@ class pendaftar extends Model
         return $this->hasOne(KatPeserta::class, 'id', 'id_peserta');
     }
 
+    public function penilaian()
+    {
+        return $this->hasMany(Penilaian::class, 'id_pendaftar', 'id');
+    }
+
     protected $fillable = [
         'id_lomba',
         'id_peserta',
