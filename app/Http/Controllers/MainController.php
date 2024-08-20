@@ -288,4 +288,26 @@ class MainController extends Controller
 
         return back()->withSuccess('Password berhasil diubah. Silahkan login kembali untuk mencoba password baru');
     }
+
+    public function resetPasswordUser(Request $request)
+    {
+        $validated = $request->validate([
+            'password' => ['required', 'confirmed'],
+        ],[
+            'password.required' => "Password tidak boleh kosong",
+            'password.confirmed' => "Password tidak sama"
+        ]);
+
+        $findUser = User::find($request->uid);
+
+        if($findUser){
+            $findUser->update([
+                'password' => Hash::make($validated['password']),
+            ]);
+        }else{
+            return back()->withError('Terjadi Kesalahan. Silahkan Ulangi Proses');
+        }
+
+        return back()->withSuccess('Password User berhasil diubah');
+    }
 }
