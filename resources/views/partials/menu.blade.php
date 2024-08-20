@@ -10,10 +10,10 @@
 	      	<nav id="navbar" class="navbar order-last order-lg-0">
 	        	<ul>
 	          		<li><a class="nav-link scrollto active" href="/#hero">Beranda</a></li>
+	          		<li><a class="nav-link scrollto" href="/#cta">Rute</a></li>
 	          		<li><a class="nav-link scrollto" href="/#about">Tentang Gerak Jalan Proklamasi</a></li>
 	          		<li><a class="nav-link scrollto" href="/#services">Pakta Integritas</a></li>
-	          		<!--<li><a class="nav-link scrollto" href="/#team">Persyaratan</a></li>
-	          		<li><a class="nav-link scrollto" href="/#cta">Rute</a></li>-->
+	          		<!--<li><a class="nav-link scrollto" href="/#team">Persyaratan</a></li>-->
 	          		<li><a class="nav-link scrollto" href="{{route('form-pendaftaran-peserta')}}">Ayo Mendaftar</a></li>
 	          		<li><a class="nav-link scrollto" href="{{route('daftar-peserta')}}">Daftar Peserta</a></li>
 	        	</ul>

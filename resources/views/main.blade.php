@@ -13,6 +13,24 @@
 
 	<main id="main">
 
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="about">
+      <div class="container">
+        <div class="section-title">
+            <h2>Rute</h2>
+            <p>Rute Gerak Jalan Proklamasi untuk 8Km dan 17Km</p>
+        </div>
+        <div class="row row-cols-2">
+          <div class="col d-flex align-items-center justify-content-center">
+            <img src="{{asset('/img/rute8.jpeg')}}" class="img-fluid" alt="">
+          </div>
+          <div class="col d-flex align-items-center justify-content-center">
+            <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </section><!-- End Cta Section -->
+
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       	<div class="container">
