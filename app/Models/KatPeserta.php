@@ -16,7 +16,7 @@ class KatPeserta extends Model
 
     public function pendaftar()
     {
-        return $this->hasMany(Pendaftar::class, 'id_peserta', 'id');
+        return $this->hasMany(Pendaftar::class, 'id_peserta', 'id')->orderBy('no_peserta');
     }
 
     protected $fillable = [

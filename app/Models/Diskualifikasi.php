@@ -17,6 +17,7 @@ class Diskualifikasi extends Model
     protected $fillable = [
         'id_pendaftar',
         'alasan',
+        'ket',
         'uid',
         'doc',
     ];

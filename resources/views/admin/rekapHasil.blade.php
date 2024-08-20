@@ -40,7 +40,7 @@
                                         <td class="text-center">{{$value->no_peserta}}</td>
                                         <td>{{$value->nama}}</td>
                                         <td>{{$value->lomba?->judul}} - {{$value->kategori_peserta?->judul}}</td>
-                                        <td class="text-center">{{gmdate('H:i:s', $value->waktu_tempuh)}}</td>
+                                        <td class="text-center">{{$value->waktu_tempuh != null ? gmdate('H:i:s', $value->waktu_tempuh) : ''}}</td>
                                         <td class="text-center">{{$value->diskualifikasi ? 'Ya' : ''}}</td>
                                         <td class="text-center">{{$value->total}}</td>
                                     </tr>

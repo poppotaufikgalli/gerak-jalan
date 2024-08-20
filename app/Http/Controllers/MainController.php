@@ -199,105 +199,39 @@ class MainController extends Controller
 
     public function rekapPos($id_lomba=null, $id_juri=null)
     {
-        //dd($id_juri);
-        /*$posJuri = User::join('juri_kategoris', 'juri_kategoris.user_id', 'users.id')->join('lombas', 'lombas.id', 'juri_kategoris.id_lomba')->where('users.gid', 2)->where(function($query) use($id_lomba){
-            if($id_lomba != null){
-                $query->where('juri_kategoris.id_lomba', $id_lomba);
-            }
-        })->get();*/
-
         $posJuri = User::whereHas('juri_kategori', function($query) use($id_lomba){
             $query->where('juri_kategoris.id_lomba', $id_lomba);
         })->where('gid', 2)->get();
 
-        //dd($posJuri);
+        $data = KatPeserta::with('pendaftar')->with('pendaftar.penilaian')->where('id_lomba', $id_lomba)->get();
 
-        /*$data = KatPeserta::whereHas('pendaftar', function($query) use($id_lomba){
-            $query->where('pendaftars.id_lomba', $id_lomba);
-        })->where('id_lomba', $id_lomba)->get();
-
-        if($data){
+        if($data && $id_juri != null){
             foreach ($data as $key => $value) {
                 if($value->pendaftar){
-                    //echo $value->pendaftar;
-                    $a = $value->pendaftar;
-                    //$b = $a->penilaian;
-                    if($a){
-                        foreach ($a as $k => $v) {
-                            echo "$v->penilaian";
+                    $sudah = [];
+                    $belum = [];
+                    $pendaftar = $value->pendaftar;
+                    foreach ($pendaftar as $k => $v) {
+                        $arr_id_juri = $v->penilaian->pluck('id_juri');
+
+                        if(in_array($id_juri, $arr_id_juri->toArray())){
+                            $sudah[] = $v->no_peserta;
+                        }else{
+                            $belum[] = $v->no_peserta;
                         }
                     }
-                    
+
+                    $value['sudah'] = implode(", ", $sudah);
+                    $value['belum'] = implode(", ", $belum);
                 }
             }
         }
-        exit();*/
-
-        $data = [];
-        $dt = Penilaian::where('id_juri', $id_juri)->get();
-        foreach ($dt as $key => $value) {
-            echo "<pre>";
-            $a = $value->pendaftar;
-            echo "$a";
-            echo "<br>";
-            $b = $a->kategori_peserta;
-            echo "$b";
-            echo "</pre>";
-
-            //$data[$b->id][]
-        }
-        exit();
-        /*$id_pendaftar = 0;
-        if($d){
-            foreach ($d as $key => $value) {
-                if($id_pendaftar != $value->id_pendaftar){
-                    //$id_peserta = $value->pendaftar->id_peserta;
-                    $data[] = $value;    
-                    $id_pendaftar = $value->id_pendaftar;
-                }
-            }
-        }*/
-
-
-        //dd($data);
-
-        //dd($peserta);
-        //$posJuri = Penilaian::all();
-        /*$$peserta = Pendaftar::join('lombas', 'lombas.id', 'pendaftars.id_lomba')->where(function($query) use ($id_lomba) {
-            if($id_lomba != null){
-                $query->where('id_lomba', $id_lomba);
-            }
-        })->get();
-
-        penilaian = Penilaian::select('penilaians.*', 'pendaftars.no_peserta', 'lombas.judul')->join('pendaftars', 'pendaftars.id', 'penilaians.id_pendaftar')->join('lombas', 'lombas.id', 'pendaftars.id_lomba')->where(function($query) use ($id_lomba) {
-            if($id_lomba != null){
-                $query->where('lombas.id', $id_lomba);
-            }  
-        })->get();
-
-        $penilaian = Pendaftar::join('lombas', 'lombas.id', 'pendaftars.id_lomba')->leftJoin('penilaians','penilaians.id_pendaftar', 'pendaftars.id')->get();
-
-        dd($penilaian);
-
-        dd($data);
-        
-        $dataPenilaian = [];
-        if($penilaian){
-            foreach ($penilaian as $key => $value) {
-                $no_peserta = $value->no_peserta;
-                $id_juri = $value->id_juri;
-                $lomba_id = $value->id_lomba;
-                
-            }
-        }
-        dd($dataPenilaian);*/
         
         return view('admin.rekapPos', [
             'data' => $data,
             'posJuri' => $posJuri,
             'id_lomba' => $id_lomba,
             'id_juri' => $id_juri,
-            //'posJuri' => $posJuri,
         ]);
     }
 

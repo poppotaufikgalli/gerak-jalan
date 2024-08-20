@@ -31,13 +31,13 @@
                 </div>
                 <hr>
                 <div class="table-responsive">
-                    <table class="table table-sm small table-stiped table-sm" id="datatablesSimple">
+                    <table class="table table-sm small table-bordered table-sm" id="datatablesSimple">
                         <thead class="table-dark text-center">
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="10%">Kategori</th>
-                                <th width="10%">Sudah</th>
-                                <th width="45%">Belum</th>
+                                <th width="35%">Kategori</th>
+                                <th width="30%">Sudah</th>
+                                <th width="30%">Belum</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,15 +46,8 @@
                                     <tr>
                                         <td>{{ ($key+1) }}</td>
                                         <td>{{$value->judul}}</td>
-                                        <td>
-                                            @if($value->pendaftar)
-                                                @foreach($value->pendaftar as $k1 => $v1)
-                                                    {{$v1->no_peserta}}
-                                                    {{$v1->penilaian}}
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                        <td>{{$value->pendaftar}}</td>
+                                        <td>{{$value->sudah}}</td>
+                                        <td>{{$value->belum}}</td>
                                     </tr>
                                 @endforeach
                             @endif

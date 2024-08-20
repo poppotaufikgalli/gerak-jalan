@@ -131,7 +131,7 @@ class DiskualifikasiController extends Controller
     {
         //
         $id = $request->id;
-        $reqData = $request->only('alasan');
+        $reqData = $request->only('alasan', 'ket');
 
         $validator = Validator::make($reqData, [
             'alasan' => 'required',
@@ -163,15 +163,20 @@ class DiskualifikasiController extends Controller
         ]);
 
         $file = $request->file('file');
-        $fileName = $file->hashName();
-        $file->storeAs('public', $fileName);
+        
+        if($file){
+            $fileName = $file->hashName();
+            $file->storeAs('public', $fileName);  
+            return $fileName;  
+        }
+        
 
         /*File::create([
             'original_name' => $file->getClientOriginalName(),
             'generated_name' => $fileName
         ]);*/
 
-        return $fileName;
+        return null;
     }
 
     /**

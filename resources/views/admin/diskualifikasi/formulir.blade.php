@@ -67,6 +67,10 @@
                                 <label for="waktu_finish" class="form-label">Upload Foto</label>
                                 <input type="file" class="form-control" id="file" name="file" accept="image/png,image/jpg">
                             </div>
+                            <div class="mb-3 col-md-12 col-sm-12">
+                                <label for="waktu_finish" class="form-label">Keterangan Lokasi/Waktu Kejadian</label>
+                                <input type="text" class="form-control" id="ket" name="ket">
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
                     </form>
@@ -81,7 +85,15 @@
                     @if($diskualifikasi)
                         <div class="list-group">
                             @foreach($diskualifikasi as $key => $value)
-                                <a href="{{url('storage/'.$value->doc)}}" target="_blank" class="list-group-item list-group-item-action" aria-current="true">{{$value->alasan}} <span class="badge text-bg-dark float-end">{{$value->juri->name}} | {{$value->created_at->format('d-m-Y H:i')}}</span></a>
+                                <a href="{{$value->doc ? url('storage/'.$value->doc) : '#'}}" target="_blank" class="list-group-item list-group-item-action" aria-current="true">
+                                    <div>
+                                        <span class="text-decoration-underline"> {{$value->alasan}}</span>
+                                        <span class="badge text-bg-dark float-end">{{$value->juri->name}} | {{$value->created_at->format('d-m-Y H:i')}}
+                                    </div>
+                                    <span class="small fw-semibold">
+                                        {{$value->ket}}
+                                    </span>
+                                </a>
                             @endforeach
                         </div>
                     @endif
