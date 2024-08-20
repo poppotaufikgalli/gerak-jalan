@@ -55,7 +55,7 @@
 						<div class="col-sm-10 offset-sm-2">
 							<button type="submit" class="btn btn-sm btn-primary">Simpan</button>
 							<a href="{{route('user')}}" type="button" class="btn btn-sm btn-secondary">Batal</a>
-							@if($next == "update" || Auth::user()->gid == 1)
+							@if($next == "update" && Auth::user()->gid == 1)
 								<a href="#" class="btn btn-sm btn-danger float-end" data-bs-toggle="modal" data-bs-target="#gantiPasswordModal" data-bs-uid="{{$data->id}}">Ganti Password</a>
 							@endif
 						</div>
