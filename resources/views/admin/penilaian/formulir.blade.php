@@ -117,15 +117,18 @@
                                     <div class="row row-cols-3">
                                         <div class="mb-3">
                                             <label for="nilai_2" class="form-label">Keutuhan Barisan</label>
-                                            <input type="number" class="form-control" id="nilai_2" name="nilai_2" value="{{$penilaian[2][$value1->juri->id] ?? ''}}" min="0" max="110" step="10">
+                                            <input type="number" class="form-control" id="nilai_2" name="nilai_2" value="{{$penilaian[2][$value1->juri->id] ?? ''}}" min="0" max="110" step="10" {{isset($penilaian[2][$value1->juri->id]) && $penilaian[2][$value1->juri->id] != "" ? (Auth::user()->gid == 1 ? '': 'disabled') : ''}}>
+                                            <label class="form-text">*) Nilai Valid Kelipatan 10, Min 10, Max 110</label>
                                         </div>
                                         <div class="mb-3">
                                             <label for="nilai_3" class="form-label">Kerapian</label>
-                                            <input type="number" class="form-control" id="nilai_3" name="nilai_3" value="{{$penilaian[3][$value1->juri->id] ?? ''}}" min="20" max="100" step="5">
+                                            <input type="number" class="form-control" id="nilai_3" name="nilai_3" value="{{$penilaian[3][$value1->juri->id] ?? ''}}" min="20" max="100" step="5" {{isset($penilaian[3][$value1->juri->id]) && $penilaian[3][$value1->juri->id] != "" ? (Auth::user()->gid == 1 ? '': 'disabled') : ''}}>
+                                            <label class="form-text">*) Nilai Valid Kelipatan 5, Min 20, Max 100</label>
                                         </div>
                                         <div class="mb-3">
                                             <label for="nilai_4" class="form-label">Semangat</label>
-                                            <input type="number" class="form-control" id="nilai_4" name="nilai_4" value="{{$penilaian[4][$value1->juri->id] ?? ''}}" min="60" max="100" step="5">
+                                            <input type="number" class="form-control" id="nilai_4" name="nilai_4" value="{{$penilaian[4][$value1->juri->id] ?? ''}}" min="60" max="100" step="5" {{isset($penilaian[4][$value1->juri->id]) && $penilaian[4][$value1->juri->id] != "" ? (Auth::user()->gid == 1 ? '': 'disabled') : ''}}>
+                                            <label class="form-text">*) Nilai Valid Kelipatan 5, Min 60, Max 100</label>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-sm btn-primary">Simpan</button>

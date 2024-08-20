@@ -59,18 +59,18 @@ class PenilaianController extends Controller
             }
         }
 
-        $diskualifikasi = Diskualifikasi::selectRaw(
-            'distinct(id_pendaftar) as d_id_pendaftar',
-        )->get()->pluck('d_id_pendaftar');
+        //$diskualifikasi = Diskualifikasi::selectRaw(
+        //    'distinct(id_pendaftar) as d_id_pendaftar',
+        //)->get()->pluck('d_id_pendaftar');
         //dd($diskualifikasi);
 
         return view("admin.penilaian.index", [
             'id' => $id,
             'data' => $data,
             'subtitle' => $lomba,
-            'posJuri' => JuriKategori::where('id_lomba', $id)->get(),
+            //'posJuri' => JuriKategori::where('id_lomba', $id)->get(),
             'penilaian' => $dataPenilaian,
-            'diskualifikasi' => $diskualifikasi->toArray(),
+            //'diskualifikasi' => $diskualifikasi->toArray(),
         ]);
     }
 
@@ -151,7 +151,9 @@ class PenilaianController extends Controller
             'ref_kecepatan' => $katPeserta->ref_kecepatan,
             'waktu_referensi_1' => gmdate("H:i:s", $waktu_referensi),
             'waktu_referensi' => $waktu_referensi,
-            'posJuri' => JuriKategori::where('id_lomba', $data->id_lomba)->get(),
+            'posJuri' => JuriKategori::whereHas('juri', function($query){
+                $query->where('gid', 2)->where('aktif',1);
+            })->where('id_lomba', $data->id_lomba)->get(),
             'penilaian' => $dataPenilaian,
             'selisih' => $selisih,
             'next' => 'update',

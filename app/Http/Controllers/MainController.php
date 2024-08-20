@@ -201,7 +201,7 @@ class MainController extends Controller
     {
         $posJuri = User::whereHas('juri_kategori', function($query) use($id_lomba){
             $query->where('juri_kategoris.id_lomba', $id_lomba);
-        })->where('gid', 2)->get();
+        })->where('gid', 2)->where('aktif', 1)->get();
 
         $data = KatPeserta::with('pendaftar')->with('pendaftar.penilaian')->where('id_lomba', $id_lomba)->get();
 

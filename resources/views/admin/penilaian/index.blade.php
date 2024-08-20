@@ -44,15 +44,6 @@
                                         <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
                                         @php($total=$a + $b +$c+$d ?? 0)
                                         <td class="text-center">{{$value->total}}</td>
-                                        <!--<td>
-                                            <div class="d-flex justify-content-center">
-                                                @if(in_array($value->id, $diskualifikasi))
-                                                    <div class="bg-danger px-2 py-1 text-white bg-opacity-75">
-                                                        <i class="bx bx-user-x"></i>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </td>-->
     		                        </tr>
     		                    @endforeach
     		                @endif

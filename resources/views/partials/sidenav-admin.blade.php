@@ -108,18 +108,22 @@
                     </nav>
                 </div>-->
                 <div class="sb-sidenav-menu-heading">Laporan</div>
+                @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
                 <a class="nav-link" href="{{route('rekapHasil')}}">
                     <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
                     Rekapitulasi Hasil
                 </a>
+                @endif
+                @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
                 <a class="nav-link" href="{{route('rekapPos')}}">
                     <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
                     Rekapitulasi Pos
                 </a>
-                <a class="nav-link" href="{{route('rekapHasil')}}">
+                @endif
+                <!--<a class="nav-link" href="{{route('rekapHasil')}}">
                     <div class="sb-nav-link-icon"><i class="bx bx-refresh"></i></div>
                     Rekapitulasi Keliling
-                </a>
+                </a>-->
                 @if(Auth::user()->gid == 1)
                     <div class="sb-sidenav-menu-heading">Addons</div>
                     <a class="nav-link" href="{{route('user')}}">

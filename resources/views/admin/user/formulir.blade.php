@@ -74,7 +74,7 @@
 					<form method="POST" action="{{route('password.reset2')}}">
 						@csrf
 						<div class="modal-body">
-							<input type="text" name="uid" id="uid">
+							<input type="hidden" name="uid" id="uid">
 							<div class="row mb-3">
 								<label for="password" class="col-sm-2 col-form-label">Password</label>
 								<div class="col-sm-10">
