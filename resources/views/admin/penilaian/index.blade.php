@@ -31,7 +31,9 @@
     							@foreach($data as $key => $value)
     		                        <tr>
     		                            <td>{{ ($key+1) }}</td>
-                                        <td class="text-center">{{$value->no_peserta}}</td>
+                                        <td class="text-center">
+                                            <a href="{{route('penilaian.show', ['id' => $value->id])}}" class="text-decoration-none">{{$value->no_peserta}}</a>
+                                        </td>
     		                            <td>{{$value->nama}}</td>
     		                            <td class="text-center">{{$value->waktu_tempuh ? gmdate('H:i:s',$value->waktu_tempuh) : ''}}</td>
                                         @php($a=$penilaian[$value->id][1] ?? 0)

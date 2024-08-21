@@ -108,9 +108,11 @@
             if (datatablesSimple) {
                 new DataTable(datatablesSimple, {
                     layout: {
-                        topStart: 'pageLength',
+                        topStart: {
+                            buttons: ['excelHtml5', 'pdfHtml5']
+                        },
                         topEnd: 'search',
-                        bottomStart: 'info',
+                        bottomStart: 'pageLength',
                         bottomEnd: 'paging',
                     }
                 });
