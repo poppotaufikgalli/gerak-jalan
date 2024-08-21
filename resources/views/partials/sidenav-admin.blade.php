@@ -49,7 +49,7 @@
                         @endforeach
                     @endif
                 @endif
-                @if(Auth::user()->gid == 3 || Auth::user()->gid == 1)
+                @if(Auth::user()->gid == 5 || Auth::user()->gid == 1)
                     <div class="sb-sidenav-menu-heading">Juri Keliling</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
@@ -107,18 +107,16 @@
                         </div>
                     </nav>
                 </div>-->
-                <div class="sb-sidenav-menu-heading">Laporan</div>
                 @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
-                <a class="nav-link" href="{{route('rekapHasil')}}">
-                    <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
-                    Rekapitulasi Hasil
-                </a>
-                @endif
-                @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
-                <a class="nav-link" href="{{route('rekapPos')}}">
-                    <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
-                    Rekapitulasi Pos
-                </a>
+                    <div class="sb-sidenav-menu-heading">Laporan</div>
+                    <a class="nav-link" href="{{route('rekapHasil')}}">
+                        <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
+                        Rekapitulasi Hasil
+                    </a>
+                    <a class="nav-link" href="{{route('rekapPos')}}">
+                        <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
+                        Rekapitulasi Pos
+                    </a>
                 @endif
                 <!--<a class="nav-link" href="{{route('rekapHasil')}}">
                     <div class="sb-nav-link-icon"><i class="bx bx-refresh"></i></div>
