@@ -53,10 +53,12 @@
                     <div class="sb-sidenav-menu-heading">Juri Keliling</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link {{request()->routeIs('diskualifikasi') ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
-                                <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
-                                {{$value->judul}}
-                            </a>
+                            @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
+                                <a class="nav-link {{request()->routeIs('diskualifikasi') ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                                    <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
+                                    {{$value->judul}}
+                                </a>
+                            @endif
                         @endforeach
                     @endif
                 @endif
