@@ -38,6 +38,8 @@ class PenilaianController extends Controller
 
         $lomba = Lomba::find($id);
 
+        $id_juri = Auth::id();
+        //dd($id_juri);
         $a = Penilaian::select(
             'id_pendaftar',
             'id_nilai',
@@ -347,6 +349,13 @@ class PenilaianController extends Controller
         $total = (isset($a[1]) ? $a[1] : 0) + (isset($a[2]) ? $a[2]/$jml_pos : 0) + (isset($a[3]) ? $a[3]/$jml_pos : 0) + (isset($a[4]) ? $a[4]/$jml_pos : 0);
 
         Pendaftar::where('id', $id_pendaftar)->update(['total' => $total]);
+    }
+
+    public function update_ulang($id_pendaftar, $jml_pos)
+    {
+        $this->hitungTotal($id_pendaftar, $jml_pos);
+
+        return redirect()->back()->withSuccess('Pencatatan Nilai telah dihitung ulang');
     }
 
     /**

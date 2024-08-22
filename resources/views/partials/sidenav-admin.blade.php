@@ -26,11 +26,11 @@
                     </a>
                 @endif
                 @if(Auth::user()->gid == 2 || Auth::user()->gid == 3 || Auth::user()->gid == 4)
-                    <div class="sb-sidenav-menu-heading">Juri Pos</div>
+                    <div class="sb-sidenav-menu-heading">Juri {{Auth::user()->gid == 2 ? 'Pos' : 'Waktu'}}</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
-                                <a class="nav-link {{request()->routeIs('penilaian') ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
+                                <a class="nav-link {{request()->routeIs('penilaian') && (request()->route()->id == $value->id) ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
                                     <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                     {{$value->judul}}
                                 </a>
@@ -42,23 +42,34 @@
                     <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link {{request()->routeIs('penilaian') ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
+                            <a class="nav-link {{request()->routeIs('penilaian') && (request()->route()->id == $value->id)  ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
                                 <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                 {{$value->judul}}
                             </a>
                         @endforeach
                     @endif
                 @endif
-                @if(Auth::user()->gid == 5 || Auth::user()->gid == 1)
+                @if(Auth::user()->gid == 5)
                     <div class="sb-sidenav-menu-heading">Juri Keliling</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
-                                <a class="nav-link {{request()->routeIs('diskualifikasi') ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                                <a class="nav-link {{request()->routeIs('diskualifikasi') && (request()->route()->id == $value->id)  ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
                                     <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
                                     {{$value->judul}}
                                 </a>
                             @endif
+                        @endforeach
+                    @endif
+                @endif
+                @if(Auth::user()->gid == 1)
+                    <div class="sb-sidenav-menu-heading">Juri Keliling</div>
+                    @if($katLomba)
+                        @foreach($katLomba as $key => $value)
+                            <a class="nav-link {{request()->routeIs('diskualifikasi') && (request()->route()->id == $value->id) ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                                <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
+                                {{$value->judul}}
+                            </a>
                         @endforeach
                     @endif
                 @endif
@@ -109,12 +120,19 @@
                         </div>
                     </nav>
                 </div>-->
-                @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)
+                @if(Auth::user()->gid == 1)
                     <div class="sb-sidenav-menu-heading">Laporan</div>
                     <a class="nav-link" href="{{route('rekapHasil')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-trophy"></i></div>
                         Rekapitulasi Hasil
                     </a>
+                    <a class="nav-link" href="{{route('rekapPos')}}">
+                        <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
+                        Rekapitulasi Pos
+                    </a>
+                @endif
+                @if(Auth::user()->gid == 2)
+                    <div class="sb-sidenav-menu-heading">Laporan</div>
                     <a class="nav-link" href="{{route('rekapPos')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
                         Rekapitulasi Pos

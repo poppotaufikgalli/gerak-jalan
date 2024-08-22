@@ -11,19 +11,19 @@
                     <table class="table small table-stiped table-sm" id="datatablesSimple">
                         <thead class="table-dark text-center">
                             <tr>
-                                <th rowspan="2" width="2%">No</th>
-                                <th rowspan="2" width="10%">No Peserta</th>
-                                <th rowspan="2" width="18%">Nama Regu/Instansi</th>
-                                <th rowspan="2" width="10%">Waktu Tempuh</th>
-                                <th colspan="4">Nilai</th>
-                                <th rowspan="2" width="10%">Total</th>
-                                <!--<th rowspan="2" width="10%">Diskualifikasi</th>-->
-                            </tr>
-                            <tr>
+                                <th width="2%">No</th>
+                                <th width="10%">No Peserta</th>
+                                <th width="15%">Nama Regu/Instansi</th>
+                                <th width="10%">Waktu Start</th>
+                                <th width="10%">Waktu Finish</th>
+                                <th width="10%">Waktu Tempuh</th>
                                 <th width="10%">Nilai Waktu</th>
                                 <th width="10%">Keutuhan Barisan</th>
                                 <th width="10%">Kerapian</th>
                                 <th width="10%">Semangat</th>
+                                <th width="10%">Total</th>
+                                <th width="5%"></th>
+                                <!--<th rowspan="2" width="10%">Diskualifikasi</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -35,17 +35,26 @@
                                             <a href="{{route('penilaian.show', ['id' => $value->id])}}" class="text-decoration-none">{{$value->no_peserta}}</a>
                                         </td>
     		                            <td>{{$value->nama}}</td>
+                                        <td class="text-center">{{$value->waktu_start ? $value->waktu_start->format('H:i:s') : ''}}</td>
+                                        <td class="text-center">{{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}</td>
     		                            <td class="text-center">{{$value->waktu_tempuh ? gmdate('H:i:s',$value->waktu_tempuh) : ''}}</td>
                                         @php($a=$penilaian[$value->id][1] ?? 0)
                                         <td class="text-center">{{$a}}</td>
-                                        @php($b=intVal($penilaian[$value->id][2] ?? 0))
+                                        @php($b=floatval($penilaian[$value->id][2] ?? 0))
                                         <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
-                                        @php($c=intVal($penilaian[$value->id][3] ?? 0))
+                                        @php($c=floatval($penilaian[$value->id][3] ?? 0))
                                         <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
-                                        @php($d=intVal($penilaian[$value->id][4] ?? 0))
+                                        @php($d=floatval($penilaian[$value->id][4] ?? 0))
                                         <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
                                         @php($total=$a + $b +$c+$d ?? 0)
                                         <td class="text-center">{{$value->total}}</td>
+                                        <td>
+                                            @if($total != $value->total)
+                                                <a href="{{route('penilaian.update.ulang', ['id_pendaftar' => $value->id, 'jml_pos' => $value->lomba->jml_pos] )}}" class="bg-info px-2 py-1 text-white bg-opacity-75 text-decoration-none">
+                                                    <i class="bx bx-refresh"></i>
+                                                </a>
+                                            @endif
+                                        </td>
     		                        </tr>
     		                    @endforeach
     		                @endif
