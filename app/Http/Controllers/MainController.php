@@ -189,11 +189,34 @@ class MainController extends Controller
             }
         })->orderBy('total', 'desc')->get();
         $katPeserta = KatPeserta::all();
+
+        $a = Penilaian::select(
+            'id_pendaftar',
+            'id_nilai',
+            DB::raw('sum(nilai) as sum_nilai'),
+            DB::raw('count(nilai) as count_nilai'),
+        )->groupBy(['id_pendaftar', 'id_nilai'])->get();
+
+        $dataPenilaian = [];
+
+        foreach ($a as $key => $value) {
+            if($value->id_nilai == 1){
+                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai;
+            }else{
+                /*if($value->count_nilai == $lomba->jml_pos){
+                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos;
+                }else{
+                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos ." [".$value->count_nilai."/".$lomba->jml_pos."]";
+                } */
+                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / 10;   
+            }
+        }
         
         return view('admin.rekapHasil', [
             'data' => $data,
             'katPeserta' => $katPeserta,
             'id_peserta' => $id_peserta,
+            'penilaian' => $dataPenilaian,
         ]);
     }
 

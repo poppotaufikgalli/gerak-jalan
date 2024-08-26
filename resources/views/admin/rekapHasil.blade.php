@@ -23,13 +23,19 @@
                     <table class="table table-sm small table-stiped table-sm" id="datatablesSimple">
                         <thead class="table-dark text-center">
                             <tr>
-                                <th width="5%">No</th>
+                                <th width="2%">No</th>
                                 <th width="10%">No Peserta</th>
-                                <th width="15%">Nama Regu/Instansi</th>
-                                <th width="30%">Kategori</th>
-                                <th>Waktu Tempuh</th>
-                                <th>Dis?</th>
-                                <th>Total Nilai</th>
+                                <th width="10%">Nama Regu/Instansi</th>
+                                <th width="10%">Kategori</th>
+                                <th width="8%">Waktu Mulai</th>
+                                <th width="8%">Waktu Finish</th>
+                                <th width="8%">Waktu Tempuh</th>
+                                <th width="8%">Nilai Waktu</th>
+                                <th width="8%">Keutuhan Barisan</th>
+                                <th width="8%">Kerapian</th>
+                                <th width="8%">Semangat</th>
+                                <th width="8%">Total Nilai</th>
+                                <th width="8%">Dis?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,9 +46,25 @@
                                         <td class="text-center">{{$value->no_peserta}}</td>
                                         <td>{{$value->nama}}</td>
                                         <td>{{$value->lomba?->judul}} - {{$value->kategori_peserta?->judul}}</td>
+                                        <td class="text-center">{{$value->waktu_start ? $value->waktu_start->format('H:i:s') : ''}}</td>
+                                        <td class="text-center">{{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}</td>
                                         <td class="text-center">{{$value->waktu_tempuh != null ? gmdate('H:i:s', $value->waktu_tempuh) : ''}}</td>
-                                        <td class="text-center">{{$value->diskualifikasi ? 'Ya' : ''}}</td>
+
+                                        @php($a=$penilaian[$value->id][1] ?? 0)
+                                        @php($b=floatval($penilaian[$value->id][2] ?? 0))
+                                        @php($c=floatval($penilaian[$value->id][3] ?? 0))
+                                        @php($d=floatval($penilaian[$value->id][4] ?? 0))
+
+                                        <td class="text-center">{{$a}}</td>
+                                        
+                                        <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
+                                        <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
+                                        <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
+                                        
+                                        @php($total= $a + $b + $c + $d ?? 0)
+
                                         <td class="text-center">{{$value->total}}</td>
+                                        <td class="text-center">{{$value->diskualifikasi ? 'Ya' : ''}}</td>
                                     </tr>
                                 @endforeach
                             @endif
