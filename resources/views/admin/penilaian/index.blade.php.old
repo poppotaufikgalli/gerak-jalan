@@ -11,18 +11,26 @@
                     <table class="table small table-stiped table-sm" id="datatablesSimple">
                         <thead class="table-dark text-center">
                             <tr>
-                                <th width="3%">No</th>
+                                <th width="5%">No</th>
                                 <th width="8%">No Peserta</th>
-                                <th width="15%">Nama Regu/Instansi</th>
-                                <th width="10%">Waktu Start</th>
-                                <th width="10%">Waktu Finish</th>
-                                <th width="10%">Waktu Tempuh</th>
-                                <th width="10%">Nilai Waktu</th>
-                                <th width="10%">Keutuhan Barisan</th>
-                                <th width="10%">Kerapian</th>
-                                <th width="10%">Semangat</th>
-                                <th width="10%">Total</th>
+                                <th>Nama Regu/Instansi</th>
+                                @if(Auth::user()->gid == 1 || Auth::user()->gid == 3 || Auth::user()->gid == 4) 
+                                <th width="20%">Waktu Start</th>
+                                <th width="20%">Waktu Finish</th>
+                                <th width="20%">Waktu Tempuh</th>
+                                @endif
+                                @if(Auth::user()->gid == 1)
+                                <th width="20%">Nilai Waktu</th>
+                                @endif
+                                @if(Auth::user()->gid == 1 || Auth::user()->gid == 2) 
+                                <th width="20%">Keutuhan Barisan</th>
+                                <th width="20%">Kerapian</th>
+                                <th width="20%">Semangat</th>
+                                @endif
+                                @if(Auth::user()->gid == 1)
+                                <th width="20%">Total</th>
                                 <th width="5%"></th>
+                                @endif
                                 <!--<th rowspan="2" width="10%">Diskualifikasi</th>-->
                             </tr>
                         </thead>
@@ -35,24 +43,31 @@
                                             <a href="{{route('penilaian.show', ['id' => $value->id])}}" class="text-decoration-none">{{$value->no_peserta}}</a>
                                         </td>
     		                            <td>{{$value->nama}}</td>
+                                        
+                                        @if(Auth::user()->gid == 1 || Auth::user()->gid == 3 || Auth::user()->gid == 4) 
                                         <td class="text-center">{{$value->waktu_start ? $value->waktu_start->format('H:i:s') : ''}}</td>
                                         <td class="text-center">{{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}</td>
     		                            <td class="text-center">{{$value->waktu_tempuh ? gmdate('H:i:s',$value->waktu_tempuh) : ''}}</td>
+                                        @endif
 
                                         @php($a=$penilaian[$value->id][1] ?? 0)
                                         @php($b=floatval($penilaian[$value->id][2] ?? 0))
                                         @php($c=floatval($penilaian[$value->id][3] ?? 0))
                                         @php($d=floatval($penilaian[$value->id][4] ?? 0))
 
+                                        @if(Auth::user()->gid == 1)
                                         <td class="text-center">{{$a}}</td>
-
+                                        @endif
+                                        
+                                        @if(Auth::user()->gid == 1 || Auth::user()->gid == 2)                                         
                                         <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
+                                        @endif
                                         
-                                        @php($total= $a + $b + $c + $d ?? 0)
+                                        @php($total=$a + $b +$c+$d ?? 0)
                                         
-
+                                        @if(Auth::user()->gid == 1)
                                         <td class="text-center">{{$value->total}}</td>
                                         <td>
                                             @if($total != $value->total)
@@ -61,6 +76,7 @@
                                                 </a>
                                             @endif
                                         </td>
+                                        @endif
     		                        </tr>
     		                    @endforeach
     		                @endif

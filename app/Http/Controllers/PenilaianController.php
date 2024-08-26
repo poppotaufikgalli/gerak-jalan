@@ -45,6 +45,8 @@ class PenilaianController extends Controller
             'id_nilai',
             DB::raw('sum(nilai) as sum_nilai'),
             DB::raw('count(nilai) as count_nilai'),
+            //DB::raw('group_concat(id_juri, ":", nilai) as pos_nilai'),
+            DB::raw('sum(case id_juri when '.$id_juri.' then nilai else 0 end) as pos_nilai'),
         )->groupBy(['id_pendaftar', 'id_nilai'])->get();
 
         $dataPenilaian = [];
@@ -57,14 +59,9 @@ class PenilaianController extends Controller
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos;
                 }else{
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos ." [".$value->count_nilai."/".$lomba->jml_pos."]";
-                }
+                }    
             }
         }
-
-        //$diskualifikasi = Diskualifikasi::selectRaw(
-        //    'distinct(id_pendaftar) as d_id_pendaftar',
-        //)->get()->pluck('d_id_pendaftar');
-        //dd($diskualifikasi);
 
         return view("admin.penilaian.index", [
             'id' => $id,

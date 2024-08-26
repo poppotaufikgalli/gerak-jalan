@@ -61,7 +61,16 @@
 
             const datatablesSimple = document.getElementById('datatablesSimple');
             if (datatablesSimple) {
-                new DataTable(datatablesSimple);
+                new DataTable(datatablesSimple, {
+                    layout: {
+                        topStart: {
+                            buttons: ['excelHtml5', 'pdfHtml5']
+                        },
+                        topEnd: 'search',
+                        bottomStart: 'info',
+                        bottomEnd: 'paging',
+                    },
+                });
             }
 
             document.getElementById("selKategoriPeserta").addEventListener('change', function() {

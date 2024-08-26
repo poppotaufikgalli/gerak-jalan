@@ -61,9 +61,9 @@
                                 @if(Auth::user()->gid == 1)
                                     <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1">
                                 @elseif(Auth::user()->gid == 3)
-                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" {{isset($data) && $data->waktu_start != "" ? 'disabled' : ''}}>
+                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" {{isset($data) && $data->waktu_start != "" ? 'readonly' : ''}}>
                                 @else
-                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" disabled>
+                                    <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" readonly>
                                 @endif
                             </div>
                             <div class="mb-3 col-md-3 col-sm-12">
