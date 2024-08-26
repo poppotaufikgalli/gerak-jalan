@@ -86,7 +86,14 @@
                 new DataTable(datatablesSimple, {
                     layout: {
                         topStart: {
-                            buttons: ['excelHtml5', 'pdfHtml5']
+                            //buttons: ['excelHtml5', 'pdfHtml5'],
+                            buttons: [
+                                {
+                                    extend: 'pdfHtml5',
+                                    orientation: 'landscape',
+                                    pageSize: 'LEGAL'
+                                }, 'excelHtml5'
+                            ]
                         },
                         topEnd: 'search',
                         bottomStart: 'info',
