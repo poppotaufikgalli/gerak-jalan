@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('ket')->nullable();
             $table->integer('aktif');
             $table->integer('verif_id');
-            $table->timestamps('waktu_start');
-            $table->timestamps('waktu_start');
             $table->timestamps();
         });
     }

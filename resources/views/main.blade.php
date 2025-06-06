@@ -2,10 +2,28 @@
 @section('title',"judul")
 @section('content')
 	<!-- ======= Hero Section ======= -->
-  	<section id="hero">
-    	<div class="hero-container">
-        <div style="height: 45vh; width: 2px;"></div>
-    		<h1 class="d-none d-md-inline-block" style="text-shadow: 2px 4px 8px #000;">Lomba Gerak Jalan Proklamasi<br>Tahun 2024</h1>
+  	<section id="hero" >
+    	<div class="">
+    		<!-- <h1 class="d-none d-md-inline-block" style="text-shadow: 2px 4px 8px #000;">Lomba Gerak Jalan Proklamasi<br>{{"Tahun ".$data->tahun}}</h1> -->
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              @if($banner)
+                @foreach($banner as $key => $value)
+                  <div class="carousel-item">
+                    <img src="{{asset('/img/banner/'.$value['basename'])}}" class="d-block w-100" alt="{{$value['basename']}}">
+                  </div>
+                @endforeach
+              @endif
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
     	</div>
   	</section><!-- End Hero -->
 
@@ -18,11 +36,14 @@
       <div class="container">
         <div class="section-title">
             <h2>Rute</h2>
-            <p>Rute Gerak Jalan Proklamasi untuk 8Km dan 17Km</p>
+            <p>Rute Gerak Jalan Proklamasi untuk 8Km, 17Km, 45Km</p>
         </div>
-        <div class="row row-cols-2">
+        <div class="row row-cols-md-3 row-cols-1 g-3">
           <div class="col d-flex align-items-center justify-content-center">
             <img src="{{asset('/img/rute8.jpeg')}}" class="img-fluid" alt="">
+          </div>
+          <div class="col d-flex align-items-center justify-content-center">
+            <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt="">
           </div>
           <div class="col d-flex align-items-center justify-content-center">
             <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt="">
@@ -42,10 +63,11 @@
         	<div class="row content">
           		<div class="col-lg-6">
                 <p class="fw-bold">A. Kategori Perlombaan</p>
-            		<p>Kategori perlombaan gerak jalan proklamasi Tahun 2024 dibagi menjadi 2 kategori diantaranya :</p>
+            		<p>Kategori perlombaan gerak jalan proklamasi {{"Tahun ".$data->tahun}} dibagi menjadi 3 kategori diantaranya :</p>
             		<ul>
               			<li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
               			<li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
+                    <li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 45 KM</li>
             		</ul>
                 <p class="fw-bold">B. Kategori Peserta</p>
                 <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
@@ -58,24 +80,19 @@
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0">
                 <p class="fw-bold">C. Barisan</p>
-                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi Tahun 2024 sebagai berikut :</p>
+                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data->tahun}} sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Berisikan 10 orang anggota barisan dan 1 orang komandan barisan</li>
                     <li><i class="ri-check-double-line"></i> Bentuk formasi 2 berbanjar ke belakang dengan masing-masing barisan terdiri dari 5 orang</li>
                     <li><i class="ri-check-double-line"></i> Komandan barisan berada disamping kanan barisan</li>
                 </ul>
                 <p class="fw-bold">D. Pakaian dan Kelengkapan</p>
-                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi Tahun 2024 sebagai berikut :</p>
+                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data->tahun}} sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Pakaian olahraga lengkap dengan sepatu serta kelengkapan lainnya yang memenuhi etika kesopanan dan kepatutan</li>
                     <li><i class="ri-check-double-line"></i> Pakaian peserta yang melanggar etika kesopanan dan kepatutan tidak dizinkan untuk <span class="fst-italic">start</span></li>
                     <li><i class="ri-check-double-line"></i> Diperbolehkan menggunakan pakaian kreasi tetapi tetap tidak melanggar etika kesopanan dan kepatutan</li>
                 </ul>
-                
-            		<!--<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            		<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            		<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            		<p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
             		<a href="{{asset('REGULASI.GERAK.JALAN.pdf')}}" target="_blank" class="btn-learn-more">Download Pengumuman</a>
           		</div>
         	</div>
@@ -161,13 +178,11 @@
   <script type="text/javascript">
       window.addEventListener('DOMContentLoaded', event => {
         var selIdLomba = 0;
-        // Simple-DataTables
-        // https://github.com/fiduswriter/Simple-DataTables/wiki
-        
 
-        //document.getElementById("id_lomba").addEventListener('change', function(){
-        //  alert(this.value)
-        //})
+        document.querySelectorAll('.carousel').forEach(el => {
+            var inner = el.querySelector('.carousel-inner')
+            console.log(inner.children[0].classList.add('active'))
+        })
     });
   </script>
 @endsection

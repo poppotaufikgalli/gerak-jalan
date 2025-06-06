@@ -20,7 +20,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
         $jnsJuri = [
             0 => "",
             1 => "Administrator",

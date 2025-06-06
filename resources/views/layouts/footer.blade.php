@@ -5,7 +5,11 @@
 	        	<div class="row  justify-content-center">
 	          		<div class="col-lg-6">
 	            		<h3>Gerak Jalan Proklamasi</h3>
-	            		<p>Dinas Pemuda dan Olahraga Kota Tanjungpinang</p>
+	            		<p>
+	            			Dinas Pemuda dan Olahraga Kota Tanjungpinang
+	            			<br>
+	            			Dinas Komunikasi dan Informatika Kota Tanjungpinang
+	            		</p>
 	          		</div>
 	        	</div>
 

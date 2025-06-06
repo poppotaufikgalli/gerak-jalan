@@ -41,12 +41,6 @@
                             <input type="datetime-local" class="form-control form-control-sm" id="tgl_tutup" name="tgl_tutup" value="{{isset($data) ? $data->tgl_tutup->format('Y-m-d H:i:s') : old('tgl_tutup')}}" step="1" required>
                         </div>
                     </div>
-                    <div class="row mb-3 d-none">
-                        <label for="min_no_peserta" class="col-sm-2 col-form-label">Nomor Peserta Mulai</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control form-control-sm" id="min_no_peserta" name="min_no_peserta" value="{{isset($data) ? $data->min_no_peserta : old('min_no_peserta')}}" required>
-                        </div>
-                    </div>
                     <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
                             <div class="form-check">

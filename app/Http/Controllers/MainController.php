@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Hash;
 use DB;
 use App\Rules\ReCaptcha;
 use PDF;
+use Carbon\Carbon;
+use File;
 
 class MainController extends Controller
 {
@@ -36,19 +38,26 @@ class MainController extends Controller
 
     public function index()
     {
+        $now = Carbon::now();
+        $buka = false;
         $data = Konfig::where('aktif', 1)->first();
 
-        $now = strtotime(date("Y-m-d H:i:s"));
-        $tgl_buka = strtotime($data->tgl_buka);
-        $tgl_tutup = strtotime($data->tgl_tutup);
-
-        //dd($now, $tgl_buka, $tgl_tutup);
-        //dd($now >= $tgl_buka, $now <= $tgl_tutup, date("Y-m-d H:i:s",$now), date("Y-m-d H:i:s",$tgl_buka));
-        $buka = false;
-        if($now >= $tgl_buka && $now <= $tgl_tutup) {
-            $buka = true;
+        if(isset($data)){
+            $tgl_buka = Carbon::parse($data->tgl_buka);
+            $tgl_tutup = Carbon::parse($data->tgl_tutup);
+            
+            if($now >= $tgl_buka && $now <= $tgl_tutup) {
+                $buka = true;
+            }
         }
-        return view("main", ['buka' => $buka]);
+        $banner = [];
+        $filesInFolder = File::allFiles(public_path('img/banner'));
+        foreach($filesInFolder as $path) { 
+            $banner[] = pathinfo($path);
+            //$file['filename'] ;
+        } 
+        //dd($banner);
+        return view("main", compact('buka', 'data', 'banner'));
     }
 
     public function daftarPeserta($id=0)
