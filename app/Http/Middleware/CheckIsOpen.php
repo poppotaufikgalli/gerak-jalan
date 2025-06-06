@@ -26,11 +26,10 @@ class CheckIsOpen
             $tgl_buka = Carbon::parse($data->tgl_buka);
             $tgl_tutup = Carbon::parse($data->tgl_tutup);
             
-            if($now < $tgl_buka) {
-                return redirect('/commingSoon');
+            if($now >= $tgl_buka && $now <= $tgl_tutup) {
+                return $next($request);
             }
         }
-
-        return $next($request);
+        return redirect('/commingSoon');
     }
 }
