@@ -47,7 +47,7 @@
       </p>
 
       <!-- Date -->
-      <p class="fs-5 fw-semibold mb-4">📅 17 Agustus 2025</p>
+      <p class="fs-5 fw-semibold mb-4">🗓 Agustus 2025</p>
 
       <!-- Form -->
       <p class="mb-3 text-white-50">Website resmi sedang disiapkan.</p>
