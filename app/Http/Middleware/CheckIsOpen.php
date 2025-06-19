@@ -16,7 +16,7 @@ class CheckIsOpen
      */
     public function handle(Request $request, Closure $next)
     {
-        $commingSoon = @env('COMMING_SOON');
+        $commingSoon = env('COMMING_SOON');
         if(!$commingSoon){
             return $next($request);
         }

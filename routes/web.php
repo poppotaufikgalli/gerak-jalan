@@ -30,7 +30,7 @@ Route::get('/commingSoon', function () {
     return view('commingSoon');
 })->name('commingSoon');
 
-Route::middleware(['isopen'])->group(function () {
+Route::middleware('isopen')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');
 
     Route::get('/daftar-peserta/{id?}', [MainController::class, 'daftarPeserta'])->name('daftar-peserta');
