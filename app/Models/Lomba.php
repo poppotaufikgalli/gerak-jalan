@@ -21,7 +21,7 @@ class Lomba extends Model
     }
 
     public function konfig(){
-        return $this->hasOne(konfig::class, 'tahun', 'tahun');
+        return $this->hasOne(Konfig::class, 'tahun', 'tahun');
     }
 
     protected $fillable = [
