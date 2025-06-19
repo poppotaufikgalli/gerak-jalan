@@ -8,7 +8,7 @@
                 <div class="row gap-2">
                     <label class="col-md-2">Kategori Peserta</label>
                     <div class="col-md-9">
-                        <select class="form-control form-control-sm" id="selKategoriPeserta">
+                        <select class="form-select form-select-sm" id="selKategoriPeserta">
                             <option value="" selected>Semua</option>
                             @if($katPeserta)
                                 @foreach($katPeserta as $key => $value)

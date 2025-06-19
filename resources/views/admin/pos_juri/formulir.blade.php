@@ -17,7 +17,7 @@
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Juri</label>
                         <div class="col-sm-10">
-                            <select class="form-control form-control-sm" name="user_id">
+                            <select class="form-select form-select-sm" name="user_id">
                                 <option value="" selected>Pilih Juri</option>
                                 @if($juri)
                                     @foreach($juri as $key => $value1)
