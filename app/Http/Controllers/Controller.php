@@ -21,19 +21,6 @@ class Controller extends BaseController
         })->where('aktif', 1)->get();
     }
 
-    public function GetKategoriPeserta($id=null){
-        $katPeserta = KatPeserta::whereHas('lomba', function($query){
-            $query->where('aktif', 1);
-        });
-
-        if($id==null){
-            //return KatPeserta::where('aktif', 1)->get();
-            return $katPeserta->where('aktif', 1)->get();
-        }else{
-            return $katPeserta->where('aktif', 1)->where('id', $id)->get();
-        }
-    }
-
     public function GetKonfigurasi(){
         return Konfig::where('aktif', 1)->first();
     }
