@@ -20,6 +20,10 @@ class Lomba extends Model
         return $this->hasMany(KatPeserta::class, 'id_lomba', 'id');
     }
 
+    public function konfig(){
+        return $this->hasOne(konfig::class, 'tahun', 'tahun');
+    }
+
     protected $fillable = [
         'judul',
         'tahun',

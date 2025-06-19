@@ -17,7 +17,7 @@
 				<form action="{{route('daftar-umum')}}" method="post" role="form" class="php-email-form">
 					@csrf
 					<div class="form-group">
-						<select class="form-control" name="id_lomba" id="id_lomba" required>
+						<select class="form-select" name="id_lomba" id="id_lomba" required>
 							<option value="" disabled selected>Pilihan Kategori Lomba</option>
 							@if($katLomba)
 								@foreach($katLomba as $key => $value)
@@ -27,7 +27,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<select class="form-control" name="id_peserta" id="id_peserta" required>
+						<select class="form-select" name="id_peserta" id="id_peserta" required>
 							<option value="" disabled selected>Pilihan Kategori Peserta</option>
 							@if($katPeserta)
 								@foreach($katPeserta as $key => $value)
@@ -38,7 +38,7 @@
 					</div>
 					@if($id_peserta == 9 || $id_peserta == 1)
 					<div class="form-group">
-						<select class="form-control" name="jns_instansi" id="jns_instansi" required>
+						<select class="form-select" name="jns_instansi" id="jns_instansi" required>
 							<option value="" disabled selected>Pilihan Jenis Instansi</option>
 							<option value="1">TNI AD</option>
 							<option value="2">TNI AL</option>

@@ -8,7 +8,7 @@
                 <div class="row g-2">
                     <label class="col-md-2">Kategori Lomba</label>
                     <div class="col-md-9">
-                        <select class="form-control form-control-sm" id="selKategoriLomba">
+                        <select class="form-select form-select-sm" id="selKategoriLomba">
                             <option value="0" {{$id_lomba == 0 ? 'selected': ''}}>Semua</option>
                             @if($katLomba)
                                 @foreach($katLomba as $key => $value)
@@ -23,7 +23,7 @@
                     </div>
                     <label class="col-md-2">Kategori Peserta</label>
                     <div class="col-md-9">
-                        <select class="form-control form-control-sm" id="selKategoriPeserta">
+                        <select class="form-select form-select-sm" id="selKategoriPeserta">
                             <option value="" {{$id_peserta == null ? 'selected': ''}}>Semua</option>
                             @if($katPeserta)
                                 @foreach($katPeserta as $key => $value)

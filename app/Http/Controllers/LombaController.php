@@ -19,7 +19,8 @@ class LombaController extends Controller
      */
     public function index()
     {
-        $data = Lomba::all();
+        $konfig = $this->GetKonfigurasi();
+        $data = Lomba::where('tahun', $konfig->tahun)->get();
         confirmDelete('Hapus Data Lomba!', "Apakah anda yakin untuk menghapus?");
         return view('admin.lomba.index', [
             'data' => $data,
@@ -47,15 +48,11 @@ class LombaController extends Controller
     public function store(Request $request)
     {
         //
-        $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos');
-        if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
-            $reqData['aktif'] = 1;
-        }else{
-            $reqData['aktif'] = 0;
-        }
-        //dd($reqData);
+        $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos', 'aktif');
+        
+        // dd($reqData);
         $validator = Validator::make($reqData, [
-            'judul' => 'required|min:3|unique:lombas,judul',
+            'judul' => 'required|min:3|unique:lombas,tahun,judul',
             'ket' => 'sometimes|nullable|min:3',
         ],[
             'judul.required' => 'Judul Lomba tidak boleh kosong',

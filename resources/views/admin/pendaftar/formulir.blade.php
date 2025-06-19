@@ -12,7 +12,7 @@
                         <label for="id_lomba" class="col-sm-2 col-form-label">Pilihan Kategori Lomba</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id_lomba" id="id_lomba" value="{{$id_lomba}}">
-                            <select class="form-control form-control-sm" name="sid_lomba" id="sid_lomba" disabled>
+                            <select class="form-select form-select-sm" name="sid_lomba" id="sid_lomba" disabled>
                                 @if($katLomba)
                                     @foreach($katLomba as $key => $value)
                                         <option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
@@ -25,7 +25,7 @@
                         <label for="id_peserta" class="col-sm-2 col-form-label">Pilihan Kategori Peserta</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id_peserta" id="id_peserta" value="{{$id_peserta}}">
-                            <select class="form-control form-control-sm" name="sid_peserta" id="sid_peserta" disabled>
+                            <select class="form-select form-select-sm" name="sid_peserta" id="sid_peserta" disabled>
                                 <option value="">Kategori Peserta</option>
                                 @if($katPeserta)
                                     @foreach($katPeserta as $key => $value)

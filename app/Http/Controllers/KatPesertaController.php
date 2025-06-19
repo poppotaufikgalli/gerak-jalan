@@ -19,7 +19,9 @@ class KatPesertaController extends Controller
     public function index()
     {
         //
-        $data = KatPeserta::all();
+        $data = KatPeserta::whereHas('lomba.konfig', function($query){
+            $query->where('aktif', 1);
+        })->get();
         confirmDelete('Hapus Data Kategori Peserta!', "Apakah anda yakin untuk menghapus?");
         return view('admin.kat_peserta.index', [
             'data' => $data,

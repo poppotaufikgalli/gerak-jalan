@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('judul');
             $table->integer('jml_pos');
             $table->string('ket')->nullable();
-            $table->integer('aktif');
+            $table->integer('aktif')->default(0);
             $table->integer('verif_id');
             $table->timestamps();
         });

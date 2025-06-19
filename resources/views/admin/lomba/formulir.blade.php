@@ -35,7 +35,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck1" name="aktif" {{isset($data) && $data->aktif == 1 ? 'checked' : ''}}>
+                                <input class="form-check-input" type="checkbox" id="gridCheck1" name="aktif" value="1" {{isset($data) && $data->aktif == 1 ? 'checked' : ''}}>
                                 <label class="form-check-label" for="gridCheck1">
                                     Aktif
                                 </label>

@@ -16,14 +16,21 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function GetKategoriLomba(){
-        return Lomba::where('aktif', 1)->get();
+        return Lomba::whereHas('konfig', function($query){
+            $query->where('aktif', 1);
+        })->where('aktif', 1)->get();
     }
 
     public function GetKategoriPeserta($id=null){
+        $katPeserta = KatPeserta::whereHas('lomba', function($query){
+            $query->where('aktif', 1);
+        });
+
         if($id==null){
-            return KatPeserta::where('aktif', 1)->get();
+            //return KatPeserta::where('aktif', 1)->get();
+            return $katPeserta->where('aktif', 1)->get();
         }else{
-            return KatPeserta::where('aktif', 1)->where('id', $id)->get();
+            return $katPeserta->where('aktif', 1)->where('id', $id)->get();
         }
     }
 

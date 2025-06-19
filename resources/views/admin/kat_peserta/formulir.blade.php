@@ -11,10 +11,12 @@
                     <div class="row mb-3">
                         <label for="id_lomba" class="col-sm-2 col-form-label">Pilihan Kategori Lomba</label>
                         <div class="col-sm-10">
-                            <select class="form-control form-control-sm" name="id_lomba">
+                            <select class="form-select form-control-sm" name="id_lomba">
                                 @if($katLomba)
                                     @foreach($katLomba as $key => $value)
-                                        <option value="{{$value->id}}" {{isset($data) && $data->id_lomba == $value->id ? 'selected': ''}}>{{$value->judul}}</option>
+                                        <option value="{{$value->id}}" {{isset($data) && $data->id_lomba == $value->id ? 'selected': ''}}>
+                                            {{$value->tahun}} - {{$value->judul}}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -23,7 +25,7 @@
                     <div class="row mb-3">
                         <label for="judul" class="col-sm-2 col-form-label">Kategori Peserta</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control form-control-sm" id="judul" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}" required>
+                            <input type="text" class="form-control form-control-sm" id="judul" name="judul" value="{{isset($data) ? $data->judul : old('judul')}}" placeholder="misalnya : TNI / POLRI / SATPOL PP / Damkar / Basarnas / Polsus / Security / KPLP / BNPB / Beacukai" required>
                         </div>
                     </div>
                     <!--<div class="row mb-3">
@@ -35,7 +37,7 @@
                     <div class="row mb-3">
                         <label for="ref_kecepatan" class="col-sm-2 col-form-label">Referensi Kecepatan</label>
                         <div class="col-sm-10">
-                            <div class="input-group">
+                            <div class="input-group input-group-sm">
                                 <input type="number" class="form-control form-control-sm" id="ref_kecepatan" name="ref_kecepatan" value="{{isset($data) ? $data->ref_kecepatan : old('ref_kecepatan')}}" required>
                                 <span class="input-group-text">Km/jam</span>
                             </div>

@@ -65,7 +65,9 @@ class MainController extends Controller
         return view("daftarPeserta", [
             "selPeserta" => KatPeserta::find($id),
             "selid" => $id,
-            "katPeserta" => KatPeserta::all(),
+            "katPeserta" => KatPeserta::whereHas('lomba.konfig', function($query){
+                $query->where('aktif', 1);
+            })->get(),
             'data' => Pendaftar::where('id_peserta', $id)->orderByRaw('CONVERT(no_peserta, SIGNED) desc')->get(),
         ]);
     }

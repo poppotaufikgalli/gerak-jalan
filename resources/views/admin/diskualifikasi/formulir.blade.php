@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="mb-3 col-md-6 col-sm-12">
                                 <label for="waktu_start" class="form-label">Alasan</label>
-                                <select class="form-control" name="alasan" required>
+                                <select class="form-select" name="alasan" required>
                                     <option value="" selected>Pilih Alasan</option>
                                     <option>Barisan bubar sebelum memasuki garis finish</option>
                                     <option>Personil barisan tidak sesuai pada Kategori Perlombaan</option>
