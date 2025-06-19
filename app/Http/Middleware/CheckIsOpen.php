@@ -4,8 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Konfig;
-use Carbon\Carbon;
 
 class CheckIsOpen
 {
@@ -18,17 +16,10 @@ class CheckIsOpen
      */
     public function handle(Request $request, Closure $next)
     {
-        $now = Carbon::now();
-
-        $data = Konfig::where('aktif', 1)->first();
+        $commingSoon = env('commingSoon');
         
-        if(isset($data)){
-            $tgl_buka = Carbon::parse($data->tgl_buka);
-            $tgl_tutup = Carbon::parse($data->tgl_tutup);
-            
-            if($now >= $tgl_buka && $now <= $tgl_tutup) {
-                return $next($request);
-            }
+        if(!$commingSoon){
+            return $next($request);
         }
         return redirect('/commingSoon');
     }

@@ -2,32 +2,21 @@
 @section('title',"judul")
 @section('content')
 	<!-- ======= Hero Section ======= -->
-  	<section id="hero" >
-    	<div class="">
-    		<!-- <h1 class="d-none d-md-inline-block" style="text-shadow: 2px 4px 8px #000;">Lomba Gerak Jalan Proklamasi<br>{{"Tahun ".$data->tahun}}</h1> -->
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              @if($banner)
-                @foreach($banner as $key => $value)
-                  <div class="carousel-item">
-                    <img src="{{asset('/img/banner/'.$value['basename'])}}" class="d-block w-100" alt="{{$value['basename']}}">
-                  </div>
-                @endforeach
-              @endif
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-    	</div>
-  	</section><!-- End Hero -->
-
-  	@include('partials.menu')
+  <div class="position-relative">
+  	<section id="hero">
+      <div class="hero-container">
+        <!-- <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2024</h1>
+        <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
+      </div>
+    </section>
+    <!-- End Hero -->
+    <div class="position-absolute top-50 start-50 translate-middle">
+      <div class="d-flex align-items-center">
+        <img src="{{asset('img/top-banner-2025.jpeg')}}" style="width: 650px" />
+      </div>
+    </div>
+  </div>
+  @include('partials.menu')
 
 	<main id="main">
 
@@ -40,13 +29,13 @@
         </div>
         <div class="row row-cols-md-3 row-cols-1 g-3">
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute8.jpeg')}}" class="img-fluid" alt="">
+            <!-- <img src="{{asset('/img/rute8.jpeg')}}" class="img-fluid" alt=""> -->
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt="">
+            <!-- <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt=""> -->
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt="">
+            <!-- <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt=""> -->
           </div>
         </div>
       </div>
@@ -63,7 +52,7 @@
         	<div class="row content">
           		<div class="col-lg-6">
                 <p class="fw-bold">A. Kategori Perlombaan</p>
-            		<p>Kategori perlombaan gerak jalan proklamasi {{"Tahun ".$data->tahun}} dibagi menjadi 3 kategori diantaranya :</p>
+            		<p>Kategori perlombaan gerak jalan proklamasi {{"Tahun ". $data?->tahun }} dibagi menjadi 3 kategori diantaranya :</p>
             		<ul>
               			<li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
               			<li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
@@ -80,14 +69,14 @@
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0">
                 <p class="fw-bold">C. Barisan</p>
-                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data->tahun}} sebagai berikut :</p>
+                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data?->tahun}} sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Berisikan 10 orang anggota barisan dan 1 orang komandan barisan</li>
                     <li><i class="ri-check-double-line"></i> Bentuk formasi 2 berbanjar ke belakang dengan masing-masing barisan terdiri dari 5 orang</li>
                     <li><i class="ri-check-double-line"></i> Komandan barisan berada disamping kanan barisan</li>
                 </ul>
                 <p class="fw-bold">D. Pakaian dan Kelengkapan</p>
-                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data->tahun}} sebagai berikut :</p>
+                <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data?->tahun}} sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Pakaian olahraga lengkap dengan sepatu serta kelengkapan lainnya yang memenuhi etika kesopanan dan kepatutan</li>
                     <li><i class="ri-check-double-line"></i> Pakaian peserta yang melanggar etika kesopanan dan kepatutan tidak dizinkan untuk <span class="fst-italic">start</span></li>

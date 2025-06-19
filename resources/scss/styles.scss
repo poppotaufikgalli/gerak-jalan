@@ -475,12 +475,14 @@ li.bg-gerak-jalan.active i {
 #hero {
   width: 100%;
   height: 100vh;
-  /* background: #f5b700 url("../../public/img/top-banner.jpeg") top; */
+  background: #f5b700 url("../../public/img/top-banner-2025.jpeg") top;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 50% 3%;
+  background-position: 50% 30%;
   position: relative;
   margin-bottom: -70px;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
 }
 
 @media (max-width: 992px) {
