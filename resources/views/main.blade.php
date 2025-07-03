@@ -51,12 +51,12 @@
 
         	<div class="row content">
           		<div class="col-lg-6">
-                <p class="fw-bold">A. Kategori Perlombaan</p>
-            		<p>Kategori perlombaan gerak jalan proklamasi {{"Tahun ". $data?->tahun }} dibagi menjadi 3 kategori diantaranya :</p>
+                <p class="fw-bold">A. Nomor Perlombaan</p>
+            		<p>Nomor perlombaan gerak jalan proklamasi {{"Tahun ". $data?->tahun }} dibagi menjadi 3 kategori diantaranya :</p>
             		<ul>
-              			<li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
-              			<li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
-                    <li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 45 KM</li>
+              			<li><i class="ri-check-double-line"></i> Gerak Jalan jarak tempuh 17 KM</li>
+              			<li><i class="ri-check-double-line"></i> Gerak Jalan jarak tempuh 8 KM</li>
+                    <li><i class="ri-check-double-line"></i> Gerak Jalan jarak tempuh 45 KM</li>
             		</ul>
                 <p class="fw-bold">B. Kategori Peserta</p>
                 <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
