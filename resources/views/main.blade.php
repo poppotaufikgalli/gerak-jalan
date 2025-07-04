@@ -12,7 +12,7 @@
     <!-- End Hero -->
     <div class="position-absolute top-50 start-50 translate-middle">
       <div class="d-flex align-items-center">
-        <img src="{{asset('img/top-banner-2025.jpeg')}}" style="width: 650px" />
+        <img src="{{asset('img/top-banner-2025.jpeg')}}" style="width: 650px;" />
       </div>
     </div>
   </div>
