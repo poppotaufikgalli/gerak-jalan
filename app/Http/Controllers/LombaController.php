@@ -111,11 +111,11 @@ class LombaController extends Controller
         $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos');
         //dd($reqData);
 
-        if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
-            $reqData['aktif'] = 1;
-        }else{
-            $reqData['aktif'] = 0;
-        }
+        // if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
+        //     $reqData['aktif'] = 1;
+        // }else{
+        //     $reqData['aktif'] = 0;
+        // }
         //dd($reqData);
         $validator = Validator::make($reqData, [
             'judul' => 'required|min:3|unique:lombas,judul,'.$id,

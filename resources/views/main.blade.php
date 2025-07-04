@@ -29,13 +29,13 @@
         </div>
         <div class="row row-cols-md-3 row-cols-1 g-3">
           <div class="col d-flex align-items-center justify-content-center">
-            <!-- <img src="{{asset('/img/rute8.jpeg')}}" class="img-fluid" alt=""> -->
+            <img src="{{asset('/img/rute-8-2025.jpeg')}}" class="img-fluid" alt="">
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <!-- <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt=""> -->
+            <img src="{{asset('/img/rute-17-2025.jpeg')}}" class="img-fluid" alt="">
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <!-- <img src="{{asset('/img/rute17.jpeg')}}" class="img-fluid" alt=""> -->
+            <img src="{{asset('/img/rute-45-2025.jpeg')}}" class="img-fluid" alt="">
           </div>
         </div>
       </div>
@@ -52,11 +52,11 @@
         	<div class="row content">
           		<div class="col-lg-6">
                 <p class="fw-bold">A. Nomor Perlombaan</p>
-            		<p>Nomor perlombaan gerak jalan proklamasi {{"Tahun ". $data?->tahun }} dibagi menjadi 3 kategori diantaranya :</p>
+            		<p>Nomor perlombaan gerak jalan proklamasi {{"Tahun ". $data?->tahun }} dibagi menjadi 3 Nomor diantaranya :</p>
             		<ul>
-              			<li><i class="ri-check-double-line"></i> Gerak Jalan jarak tempuh 17 KM</li>
-              			<li><i class="ri-check-double-line"></i> Gerak Jalan jarak tempuh 8 KM</li>
-                    <li><i class="ri-check-double-line"></i> Gerak Jalan jarak tempuh 45 KM</li>
+              			<li><i class="ri-check-double-line"></i> Gerak Jalan 8 KM (4 kategori Peserta)</li>
+                    <li><i class="ri-check-double-line"></i> Gerak Jalan 17 KM (4 kategori Peserta)</li>
+                    <li><i class="ri-check-double-line"></i> Gerak Jalan 45 KM (3 kategori Peserta /tanpa kategori (4) pelajar)</li>
             		</ul>
                 <p class="fw-bold">B. Kategori Peserta</p>
                 <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
@@ -116,7 +116,7 @@
         @if($katLomba)
           <div class="row">
             @foreach($katLomba as $item)
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-12 mb-4">
               <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
                 <div class="icon-box card card-body text-center">
                   
