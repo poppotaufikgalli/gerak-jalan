@@ -6,7 +6,7 @@
         <div class="row">
             @if($katLomba)
                 @foreach($katLomba as $key => $value)
-                    <div class="col-xl-6 col-md-12">
+                    <div class="col-xl-4 col-md-12">
                         <div class="card bg-light text-dark mb-4">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">

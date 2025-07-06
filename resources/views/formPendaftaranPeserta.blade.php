@@ -36,7 +36,7 @@
 							@endif
 						</select>
 					</div>
-					@if($id_peserta == 9 || $id_peserta == 1)
+					@if($id_peserta == 14 || $id_peserta == 18 || $id_peserta == 22)
 					<div class="form-group">
 						<select class="form-select" name="jns_instansi" id="jns_instansi" required>
 							<option value="" disabled selected>Pilihan Jenis Instansi</option>
