@@ -46,41 +46,145 @@
       	<div class="container">
 
         	<div class="section-title">
-          		<h2>Tentang Gerak Jalan Proklamasi</h2>
+          		<h2>Tentang Gerak Jalan Proklamasi Tahun 2025</h2>
         	</div>
 
         	<div class="row content">
           		<div class="col-lg-6">
-                <p class="fw-bold">A. Nomor Perlombaan</p>
-            		<p>Nomor perlombaan gerak jalan proklamasi {{"Tahun ". $data?->tahun }} dibagi menjadi 3 Nomor diantaranya :</p>
+                <p class="fw-bold">A. Kategori Perlombaan</p>
+            		<p>Kategori perlombaan gerak jalan proklamasi Tahun 2025 dibagi menjadi 3 kategori diantaranya </p>
             		<ul>
-              			<li><i class="ri-check-double-line"></i> Gerak Jalan 8 KM (4 kategori Peserta)</li>
-                    <li><i class="ri-check-double-line"></i> Gerak Jalan 17 KM (4 kategori Peserta)</li>
-                    <li><i class="ri-check-double-line"></i> Gerak Jalan 45 KM (3 kategori Peserta /tanpa kategori (4) pelajar)</li>
+              			<li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
+                    <li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
+                    <li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 45 KM</li>
             		</ul>
                 <p class="fw-bold">B. Kategori Peserta</p>
                 <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
                 <ul>
-                    <li><i class="ri-check-double-line"></i> Kategori 1 : TNI / POLRI / SATPOL PP / Damkar / Basarnas / Polsus / Security / KPLP / BNPB / Beacukai</li>
-                    <li><i class="ri-check-double-line"></i> Kategori 2 : OPD / Instansi Vertikal / PKK / GOW / Darmawanita / BUMN / BUMD/ Guru</li>
-                    <li><i class="ri-check-double-line"></i> Kategori 3 : Umum / Ormas / Mahasiswa / RT / RW</li>
-                    <li><i class="ri-check-double-line"></i> Kategori 4 : Pelajar</li>
+                    <li><i class="ri-check-double-line"></i> Kategori 1 : TNI / POLRI / SATPOL PP / Damkar / Basarnas / Polsus / Security / KPLP / BNPB / Beacukai / Navigasi <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
+                    <li><i class="ri-check-double-line"></i> Kategori 2 : OPD / Instansi Vertikal / PKK / GOW / Darmawanita / BUMN / BUMD/ Guru <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
+                    <li><i class="ri-check-double-line"></i> Kategori 3 : Umum / Ormas / Mahasiswa / RT / RW <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
+                    <li><i class="ri-check-double-line"></i> Kategori 4 : Pelajar <b>(Jarak 17 Km, 8 Km)</b></li>
+                </ul>
+                <p class="fw-bold">C. Jadwal Pendaftaran Gerak Jalan Proklamasi Tahun 2025</p>
+                <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2025 dilaksanakan secara online yang akan dilakukan sebagai berikut:</p>
+                <ul>
+                    <li><i class="ri-check-double-line"></i> Tanggal : 08 Juli s/d 15 Agustus 2025</li>
+                </ul>
+                <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2025 dilaksanakan secara online yang akan dilakukan sebagai berikut:</p>
+                <ul>
+                  <li><i class="ri-check-double-line"></i> Istagram : <a href="https://www.instagram.com/dispora_tanjungpinang/" target="_blank">@dispora_tanjungpinang</a></li>
+                  <li><i class="ri-check-double-line"></i> Group Whatsapp : melalui nomor WA (<a href="https://wa.me/6281266097649" target="_blank">0812-6609-7649</a>; <a href="https://wa.me/628122770400" target="_blank">0812-2770-400</a>)</li>
+                </ul>
+                <p class="fw-bold">D. Nomor Peserta</p>
+                <p>Nomor peserta akan diberikan pada:</p>
+                <ul>
+                    <li><i class="ri-check-double-line"></i> Hari : Selasa s.d Jum`at</li>
+                    <li><i class="ri-check-double-line"></i> Tanggal : 19 s.d 22 Agustus 2025</li>
+                    <li><i class="ri-check-double-line"></i> Jam : 09.00 s.d 16.00</li>
+                    <li><i class="ri-check-double-line"></i> Tempat : Kantor KONI Tanjungpinang (Lapangan Pamedan)</li>
+                </ul>
+                <p>Setiap Regu akan diberikan nomor peserta, dengan ketentuan pemasangan yaitu:</p>
+                <ul>
+                  <li><i class="ri-check-double-line"></i> 1 Nomor peserta dipasangkan pada barisan kanan paling depan; dan</li>
+                  <li><i class="ri-check-double-line"></i> 1 Nomor peserta dipasangkan pada barisan kiri paling belakang.</li>
                 </ul>
               </div>
               <div class="col-lg-6 pt-4 pt-lg-0">
-                <p class="fw-bold">C. Barisan</p>
+                <p class="fw-bold">E. Pelaksanaan Gerak Jalan Proklamasi Tahun 2025</p>
+                <ul>
+                    <li><i class="ri-check-double-line"></i> <b>1. 
+                    Gerak Jalan 17 Km</b></li>
+                    <li>
+                      <table>
+                          <tr>
+                            <td>Hari/Tanggal</td>
+                            <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                            <td>Sabtu / 23 Agustus 2025</td>
+                          </tr>
+                          <tr>
+                            <td>Jam</td>
+                            <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                            <td>06.00 s.d Selesai</td>
+                          </tr>
+                          <tr>
+                            <td>Tempat</td>
+                            <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                            <td>Start → Terminal Sungai Carang, Bintan Center</td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>Finish → Belakang Panggung Pelataran Tugu Sirih</td>
+                          </tr>
+                        </table>
+                    </li>
+                    <li><i class="ri-check-double-line"></i> <b>2. Gerak Jalan 8 Km</b></li>
+                    <li>
+                      <table>
+                          <tr>
+                            <td>Hari/Tanggal</td>
+                            <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                            <td>Minggu / 24 Agustus 2025</td>
+                          </tr>
+                          <tr>
+                            <td>Jam</td>
+                            <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                            <td>06.00 s.d Selesai</td>
+                          </tr>
+                          <tr>
+                            <td>Tempat</td>
+                            <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                            <td>Start → Terminal Sungai Carang, Bintan Center</td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>Finish → Lapangan Pamedan Gerbang Kantor KONI</td>
+                          </tr>
+                        </table>
+                    </li>
+                    <li><i class="ri-check-double-line"></i> <b>3. Gerak Jalan 45 Km</b></li>
+                    <li>
+                      <table>
+                        <tr>
+                          <td>Hari/Tanggal</td>
+                          <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                          <td>Sabtu s.d Minggu / 30 s.d 31 Agustus 2025</td>
+                        </tr>
+                        <tr>
+                          <td>Jam</td>
+                          <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                          <td>20.00 s.d Selesai</td>
+                        </tr>
+                        <tr>
+                          <td>Tempat</td>
+                          <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
+                          <td>Start → Kantor Walikota Senggaran</td>
+                        </tr>
+                        <tr>
+                          <td>&nbsp;</td>
+                          <td>&nbsp;</td>
+                          <td>Finish → Belakang Panggung Pelataran Tugu Sirih</td>
+                        </tr>
+                      </table>
+                    </li>
+                </ul>
+                <p class="fw-bold">F. Barisan</p>
                 <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data?->tahun}} sebagai berikut :</p>
                 <ul>
                     <li><i class="ri-check-double-line"></i> Berisikan 10 orang anggota barisan dan 1 orang komandan barisan</li>
                     <li><i class="ri-check-double-line"></i> Bentuk formasi 2 berbanjar ke belakang dengan masing-masing barisan terdiri dari 5 orang</li>
                     <li><i class="ri-check-double-line"></i> Komandan barisan berada disamping kanan barisan</li>
                 </ul>
-                <p class="fw-bold">D. Pakaian dan Kelengkapan</p>
+                <p class="fw-bold">G. Pakaian dan Kelengkapan</p>
                 <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun ".$data?->tahun}} sebagai berikut :</p>
                 <ul>
-                    <li><i class="ri-check-double-line"></i> Pakaian olahraga lengkap dengan sepatu serta kelengkapan lainnya yang memenuhi etika kesopanan dan kepatutan</li>
-                    <li><i class="ri-check-double-line"></i> Pakaian peserta yang melanggar etika kesopanan dan kepatutan tidak dizinkan untuk <span class="fst-italic">start</span></li>
-                    <li><i class="ri-check-double-line"></i> Diperbolehkan menggunakan pakaian kreasi tetapi tetap tidak melanggar etika kesopanan dan kepatutan</li>
+                    <li><i class="ri-check-double-line"></i> Pakaian olahraga lengkap dengan sepatu serta kelengkapan lainnya yang memenuhi etika kesopanan, kepatutan dan tidak mengandung unsur sara</li>
+                    <li><i class="ri-check-double-line"></i> Diperbolehkan menggunakan pakaian kreasi tetapi tetap tidak melanggar etika kesopanan, kepatutan dan tidak mengandung unsur sara</li>
+                    <li><i class="ri-check-double-line"></i> Pakaian peserta yang melanggar etika kesopanan dan kepatutan tidak dizinkan untuk dilepas pada saat <span class="fst-italic">start</span></li>
+                    <li><i class="ri-check-double-line"></i> Jika masih terdapat dijalanan peserta yang menggunakan pakaian/seragam yang melanggar ketentuan maka peserta regu tersebut akan langsung di bubarkan oleh tim keamanan dan nomor peserta ditarik oleh panitia</li>
+                    <li><i class="ri-check-double-line"></i> Dilarang menggunakan pakaian dengan model menyerupai hantu</li>
                 </ul>
             		<a href="{{asset('REGULASI.GERAK.JALAN.pdf')}}" target="_blank" class="btn-learn-more">Download Pengumuman</a>
           		</div>
@@ -95,7 +199,7 @@
               <p>Download dan isi Pakta Integritas sebagai lampiran untuk melakukan Pendaftaran Ulang sesuai jadwal yang telah ditentukan</p>
           </div>
           <div class="d-flex justify-content-center content">
-            <a href="{{asset('PAKTA.INTEGRITAS.docx')}}" target="_blank" class="btn-learn-more">Download Pakta Integritas</a>
+            <a href="{{asset('FAKTA.INTEGRITAS.2025.pdf')}}" target="_blank" class="btn-learn-more">Download Pakta Integritas</a>
           </div>
         </div>
     </section><!-- End Our Values Section -->
