@@ -29,13 +29,13 @@
         </div>
         <div class="row row-cols-md-3 row-cols-1 g-3">
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute-8-2025.jpeg')}}" class="img-fluid" alt="">
+            <img src="{{asset('/img/rute-8-2025-1.jpeg')}}" class="img-fluid" alt="">
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute-17-2025.jpeg')}}" class="img-fluid" alt="">
+            <img src="{{asset('/img/rute-17-2025-1.jpeg')}}" class="img-fluid" alt="">
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute-45-2025.jpeg')}}" class="img-fluid" alt="">
+            <img src="{{asset('/img/rute-45-2025-1.jpeg')}}" class="img-fluid" alt="">
           </div>
         </div>
       </div>
