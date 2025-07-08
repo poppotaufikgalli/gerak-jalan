@@ -279,12 +279,18 @@ class MainController extends Controller
             if(count($a) == 0){
                 return $no_peserta;
             }else{
-                
                 if($no_peserta == "1001"){
-                    return "1005";
+                    $polri = Pendaftar::where('no_peserta', "1005")->where('id_lomba', $data['id_lomba'])->where('id_peserta', $data['id_peserta'])->get();
+                    //return "1005";
+                    //dd($polri);
+
+                    if(count($polri) == 0){
+                        return "1005";
+                    }
                 }
 
                 $b = Pendaftar::select('no_peserta')->where('id_lomba', $data['id_lomba'])->where('id_peserta', $data['id_peserta'])->orderByRaw('CONVERT(no_peserta, SIGNED) asc')->get();
+
                 foreach($b as $key => $value){
                     $no_peserta = $value->no_peserta +1;    
                 }
