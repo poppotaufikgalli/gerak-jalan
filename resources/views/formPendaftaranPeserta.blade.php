@@ -56,7 +56,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 form-group">
-							<input type="text" name="pic" class="form-control" id="pic" placeholder="Nama Kontak Penanggung Jawab" value="{{old('pic')}}" required>
+							<input type="text" name="pic" class="form-control" id="pic" placeholder="Nama Penanggung Jawab" value="{{old('pic')}}" required>
 						</div>
 						<div class="col-md-6 form-group mt-md-0">
 							<input type="text" class="form-control" name="telp" id="telp" placeholder="Nomor Telepon/Wa Penanggung Jawab" value="{{old('telp')}}" required>
