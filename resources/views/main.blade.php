@@ -72,10 +72,13 @@
                     <li><i class="ri-check-double-line"></i> Tanggal : 08 Juli s/d 15 Agustus 2025</li>
                 </ul>
                 <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2025 dilaksanakan secara online yang akan dilakukan sebagai berikut:</p>
-                <ul>
-                  <li><i class="ri-check-double-line"></i> Istagram : <a href="https://www.instagram.com/dispora_tanjungpinang/" target="_blank">@dispora_tanjungpinang</a></li>
-                  <li><i class="ri-check-double-line"></i> Group Whatsapp : melalui nomor WA (<a href="https://wa.me/6281266097649" target="_blank">0812-6609-7649</a>; <a href="https://wa.me/628122770400" target="_blank">0812-2770-400</a>)</li>
-                </ul>
+                <div class="d-flex">
+                  <ul>
+                    <li><i class="ri-check-double-line"></i> Istagram : <a href="https://www.instagram.com/dispora_tanjungpinang/" target="_blank">@dispora_tanjungpinang</a></li>
+                    <li><i class="ri-check-double-line"></i> Group Whatsapp : melalui nomor WA (<a href="https://wa.me/6281266097649" target="_blank">0812-6609-7649</a>; <a href="https://wa.me/628122770400" target="_blank">0812-2770-400</a>)</li>
+                  </ul>
+                  <img src="{{asset('/img/group-wh.jpeg')}}" class="img-fluid" alt="" style="width: 200px">
+                </div>
                 <p class="fw-bold">D. Nomor Peserta</p>
                 <p>Nomor peserta akan diberikan pada:</p>
                 <ul>
