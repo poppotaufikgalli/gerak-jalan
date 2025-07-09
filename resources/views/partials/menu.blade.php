@@ -11,8 +11,16 @@
 	        	<ul>
 	          		<li><a class="nav-link scrollto active" href="/#hero">Beranda</a></li>
 	          		<li><a class="nav-link scrollto" href="/#cta">Rute</a></li>
-	          		<li><a class="nav-link scrollto" href="/#about">Tentang Gerak Jalan Proklamasi</a></li>
-	          		<li><a class="nav-link scrollto" href="/#services">Pakta Integritas</a></li>
+	          		<li>
+	          			<a class="nav-link scrollto position-relative" href="/#about">
+	          				Tentang Gerak Jalan Proklamasi <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru <span class="visually-hidden">Pengumuman Baru</span></span>
+	          			</a>
+	          		</li>
+	          		<li>
+	          			<a class="nav-link scrollto position-relative" href="/#services">
+	          				Pakta Integritas <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru <span class="visually-hidden">Pengumuman Baru</span></span>
+	          			</a>
+	          		</li>
 	          		<!--<li><a class="nav-link scrollto" href="/#team">Persyaratan</a></li>-->
 	          		<li><a class="nav-link scrollto" href="{{route('form-pendaftaran-peserta')}}">Ayo Mendaftar</a></li>
 	          		<li><a class="nav-link scrollto" href="{{route('daftar-peserta')}}">Daftar Peserta</a></li>
