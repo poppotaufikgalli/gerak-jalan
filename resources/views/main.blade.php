@@ -189,7 +189,9 @@
                     <li><i class="ri-check-double-line"></i> Jika masih terdapat dijalanan peserta yang menggunakan pakaian/seragam yang melanggar ketentuan maka peserta regu tersebut akan langsung di bubarkan oleh tim keamanan dan nomor peserta ditarik oleh panitia</li>
                     <li><i class="ri-check-double-line"></i> Dilarang menggunakan pakaian dengan model menyerupai hantu</li>
                 </ul>
-            		<a href="{{asset('REGULASI.GERAK.JALAN.pdf')}}" target="_blank" class="btn-learn-more">Download Pengumuman</a>
+                <a href="{{asset('REGULASI.GERAK.JALAN.2025.pdf')}}" target="_blank" class="btn-learn-more position-relative">
+                  Download Pengumuman <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span class="visually-hidden">Pengumuman Baru</span></span>
+                </a>
           		</div>
         	</div>
       	</div>
@@ -202,7 +204,9 @@
               <p>Download dan isi Pakta Integritas sebagai lampiran untuk melakukan Pendaftaran Ulang sesuai jadwal yang telah ditentukan</p>
           </div>
           <div class="d-flex justify-content-center content">
-            <a href="#" target="_blank" class="btn-learn-more">Download Pakta Integritas</a>
+            <a href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2025.pdf')}}" target="_blank" class="btn-learn-more position-relative">
+                  Download Pakta Integritas <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span class="visually-hidden">Pengumuman Baru</span></span>
+                </a>
           </div>
         </div>
     </section><!-- End Our Values Section -->
