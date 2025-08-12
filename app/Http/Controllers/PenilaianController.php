@@ -126,10 +126,13 @@ class PenilaianController extends Controller
         //dd($katPeserta);
         
         $waktu_referensi = 0;
-        if($data->id_lomba == 1){
+        //dd($data->id_lomba);
+        if($data->id_lomba == 17){
             $waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
-        }else{
+        }else if($data->id_lomba == 18){
             $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
+        }else{
+            $waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
         }
 
         $a = $penilaian->where('id_pendaftar', $id)->get();
