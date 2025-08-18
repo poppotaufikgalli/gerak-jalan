@@ -59,20 +59,26 @@
                             <div class="mb-3 col-md-3 col-sm-12">
                                 <label for="waktu_start" class="form-label">Waktu Start</label>
                                 @if(Auth::user()->gid == 1)
+                                    <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_start" name="tanggal_start" value="{{$domWaktu[$data->id_lomba][1]}}">
                                     <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1">
                                 @elseif(Auth::user()->gid == 3)
+                                    <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_start" name="tanggal_start" value="{{$domWaktu[$data->id_lomba][1]}}" {{isset($data) && $data->waktu_start != "" ? 'readonly' : ''}}>
                                     <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" {{isset($data) && $data->waktu_start != "" ? 'readonly' : ''}}>
                                 @else
+                                    <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_start" name="tanggal_start" value="{{$domWaktu[$data->id_lomba][1]}}" readonly>
                                     <input type="time" class="form-control" id="waktu_start" name="waktu_start" value="{{isset($data) ? $data->waktu_start?->format('H:i:s') : old('waktu_start')}}" step="1" readonly>
                                 @endif
                             </div>
                             <div class="mb-3 col-md-3 col-sm-12">
                                 <label for="waktu_finish" class="form-label">Waktu Finish</label>
                                 @if(Auth::user()->gid == 1)
+                                    <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_finish" name="tanggal_finish" value="{{$domWaktu[$data->id_lomba][2]}}">
                                     <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1">
                                 @elseif(Auth::user()->gid == 4)
+                                    <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_finish" name="tanggal_finish" value="{{$domWaktu[$data->id_lomba][2]}}" {{isset($data) && $data->waktu_finish != "" ? 'disabled' : ''}}>
                                     <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1" {{isset($data) && $data->waktu_finish != "" ? 'disabled' : ''}}>
                                 @else
+                                    <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_finish" name="tanggal_finish" value="{{$domWaktu[$data->id_lomba][2]}}" disabled>
                                     <input type="time" class="form-control" id="waktu_finish" name="waktu_finish" value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}" step="1" disabled>
                                 @endif
                             </div>

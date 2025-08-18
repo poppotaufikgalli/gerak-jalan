@@ -123,7 +123,6 @@ class PenilaianController extends Controller
         //
         $data = Pendaftar::find($id);
         $katPeserta = KatPeserta::select('ref_kecepatan')->find($data->id_peserta);
-        //dd($katPeserta);
         
         $waktu_referensi = 0;
         //dd($data->id_lomba);
@@ -131,8 +130,10 @@ class PenilaianController extends Controller
             $waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
         }else if($data->id_lomba == 18){
             $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
-        }else{
+        }else if($data->id_lomba == 19){
             $waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
+            // tambahan 30 menit untuk 45 Km
+            $waktu_referensi = $waktu_referensi + 1800;
         }
 
         $a = $penilaian->where('id_pendaftar', $id)->get();
@@ -147,6 +148,13 @@ class PenilaianController extends Controller
         $menit = intVal($selisih/60);
         $detik = $selisih % 60;
         $selisih = $detik > 5 ? $menit +1 : $menit;
+        //dd($data);
+
+        $domWaktu = [
+            17 => ['hidden', '2025-08-23', '2025-08-23'],
+            18 => ['hidden', '2025-08-24', '2025-08-24'],
+            19 => ['date', '2025-08-30', '2025-08-31'],
+        ];
 
         return view('admin.penilaian.formulir', [
             'data' => $data,
@@ -158,6 +166,7 @@ class PenilaianController extends Controller
             })->where('id_lomba', $data->id_lomba)->get(),
             'penilaian' => $dataPenilaian,
             'selisih' => $selisih,
+            'domWaktu' => $domWaktu,
             'next' => 'update',
         ]);
     }
@@ -223,6 +232,11 @@ class PenilaianController extends Controller
         $id_juri = $request->id_juri;
         $waktu_referensi = $request->waktu_referensi;
 
+        $request->merge([
+            'waktu_start' => $request->tanggal_start." ".$request->waktu_start,
+            'waktu_finish' => $request->filled('waktu_finish') ? $request->tanggal_finish." ".$request->waktu_finish : null,
+        ]);
+
         $reqData = $request->only('waktu_start', 'waktu_finish');
 
         $validator = Validator::make($reqData, [
@@ -241,7 +255,7 @@ class PenilaianController extends Controller
         Pendaftar::find($id)->update($reqData);
 
         //hitung waktu
-        if($reqData['waktu_start'] != null && $reqData['waktu_finish'] != null){
+        if($reqData['waktu_start'] != null && isset($reqData['waktu_finish']) && $reqData['waktu_finish'] != null){
             $pendaftar = Pendaftar::find($id);
             $selisih = $pendaftar->waktu_tempuh - $waktu_referensi;
 
