@@ -127,11 +127,20 @@ class PenilaianController extends Controller
         $waktu_referensi = 0;
         //dd($data->id_lomba);
         if($data->id_lomba == 17){
-            $waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
+            //$waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
+
+            /* 2025-08-22 jarak pengukuran 7 km 950 m */
+            $waktu_referensi = (7.95 / $katPeserta->ref_kecepatan) * 3600;
         }else if($data->id_lomba == 18){
-            $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
+            //$waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
+
+            /* 2025-08-22 jarak pengukuran 17 km 100 m */
+            $waktu_referensi = (17.1 / $katPeserta->ref_kecepatan) * 3600;
         }else if($data->id_lomba == 19){
-            $waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
+            //$waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
+
+            /* 2025-08-22 jarak pengukuran 45 km 100 m */
+            $waktu_referensi = (45.1 / $katPeserta->ref_kecepatan) * 3600;
             // tambahan 30 menit untuk 45 Km
             $waktu_referensi = $waktu_referensi + 1800;
         }
@@ -144,11 +153,14 @@ class PenilaianController extends Controller
             $dataPenilaian[$value->id_nilai][$value->id_juri] = $value->nilai;
         }
 
-        $selisih = $data->waktu_tempuh - $waktu_referensi;
-        $menit = intVal($selisih/60);
-        $detik = $selisih % 60;
-        $selisih = $detik > 5 ? $menit +1 : $menit;
-        //dd($data);
+        if($data->waktu_tempuh > 0){
+            $selisih = $data->waktu_tempuh - $waktu_referensi;
+            $menit = intVal($selisih/60);
+            $detik = $selisih % 60;
+            $selisih = $detik > 5 ? $menit +1 : $menit;    
+        }else{
+            $selisih = 0;
+        }
 
         $domWaktu = [
             17 => ['hidden', '2025-08-23', '2025-08-23'],
