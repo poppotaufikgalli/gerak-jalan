@@ -219,7 +219,7 @@
           @if(!$buka)
             <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
           @else
-            <h3 class="text-bg-danger py-1"><i class="bi bi-flag"></i> Pendaftaran Telah dibuka !!! <i class="bi bi-flag"></i></h3>
+            <h3 class="text-bg-danger py-1"><i class="bi bi-flag"></i> Pendaftaran kembali dibuka !!! <i class="bi bi-flag"></i></h3>
             <h5 class="text-light">Bagi yang telah mencoba mendaftar <span class="text-danger">sebelum pendaftaran dibuka</span> agar dapat mendaftar kembali</h5>
           @endif
       		<p>Pilih kategori sesuai dengan data kepesertaan anda</p>
@@ -227,17 +227,19 @@
         @if($katLomba)
           <div class="row">
             @foreach($katLomba as $item)
-            <div class="col-lg-4 col-md-12 mb-4">
-              <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
-                <div class="icon-box card card-body text-center">
-                  
-                  <div class="icon"><i class="bi bi-star-half" style="color: #ff689b;"></i></div>
-                  <h4 class="title">{{$item->judul}}</h4>
-                  <p class="description">{{$item->ket}}</p>
-                  
+              @if($item->id == 19)
+                <div class="col-lg-12 col-md-12 mb-4">
+                  <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
+                    <div class="icon-box card card-body text-center">
+                      
+                      <div class="icon"><i class="bi bi-star-half" style="color: #ff689b;"></i></div>
+                      <h4 class="title">{{$item->judul}}</h4>
+                      <p class="description">{{$item->ket}}</p>
+                      
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
+              @endif
             @endforeach          
           </div>
         @endif

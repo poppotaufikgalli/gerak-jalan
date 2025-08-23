@@ -75,8 +75,9 @@ class MainController extends Controller
     public function formPendaftaranPeserta($id_lomba, $id_peserta=null)
     {
         $data = Konfig::where('aktif', 1)->first();
-
-        if($data){
+        //if($data){
+        // buka hanya 45 km
+        if($data && $id_lomba == 19){
             $now = strtotime(date("Y-m-d H:i:s"));
             $tgl_buka = strtotime($data->tgl_buka);
             $tgl_tutup = strtotime($data->tgl_tutup);
