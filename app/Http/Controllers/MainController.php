@@ -201,7 +201,9 @@ class MainController extends Controller
                 $query->where('id_peserta', $id_peserta);
             }
         })->orderBy('total', 'desc')->get();
-        $katPeserta = KatPeserta::all();
+        $katPeserta = KatPeserta::whereHas('lomba.konfig', function($query){
+                $query->where('aktif', 1);
+            })->get();
 
         $a = Penilaian::select(
             'id_pendaftar',
