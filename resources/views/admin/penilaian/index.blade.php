@@ -17,12 +17,16 @@
                                 <th width="10%">Waktu Start</th>
                                 <th width="10%">Waktu Finish</th>
                                 <th width="10%">Waktu Tempuh</th>
+                                @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                 <th width="10%">Nilai Waktu</th>
+                                @endif
                                 <th width="10%">Keutuhan Barisan</th>
                                 <th width="10%">Kerapian</th>
                                 <th width="10%">Semangat</th>
+                                @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                 <th width="10%">Total</th>
                                 <th width="5%"></th>
+                                @endif
                                 <!--<th rowspan="2" width="10%">Diskualifikasi</th>-->
                             </tr>
                         </thead>
@@ -44,7 +48,9 @@
                                         @php($c=floatval($penilaian[$value->id][3] ?? 0))
                                         @php($d=floatval($penilaian[$value->id][4] ?? 0))
 
+                                        @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                         <td class="text-center">{{$a}}</td>
+                                        @endif
 
                                         <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
@@ -52,7 +58,7 @@
                                         
                                         @php($total= $a + $b + $c + $d ?? 0)
                                         
-
+                                        @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                         <td class="text-center">{{$value->total}}</td>
                                         <td>
                                             @if($total != $value->total)
@@ -61,6 +67,7 @@
                                                 </a>
                                             @endif
                                         </td>
+                                        @endif
     		                        </tr>
     		                    @endforeach
     		                @endif

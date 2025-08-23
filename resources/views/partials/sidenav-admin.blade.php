@@ -131,7 +131,7 @@
                         Rekapitulasi Pos
                     </a>
                 @endif
-                @if(Auth::user()->gid == 2)
+                @if(Auth::user()->gid == 2 || Auth::user()->gid == 6)
                     <div class="sb-sidenav-menu-heading">Laporan</div>
                     <a class="nav-link" href="{{route('rekapPos')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>

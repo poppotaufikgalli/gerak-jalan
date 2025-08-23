@@ -38,6 +38,7 @@
 								<option value="3" {{isset($data) && $data->gid == 3 ? "selected" : ""}}>Juri Waktu Start</option>
 								<option value="4" {{isset($data) && $data->gid == 4 ? "selected" : ""}}>Juri Waktu Finish</option>
 								<option value="5" {{isset($data) && $data->gid == 5 ? "selected" : ""}}>Juri Keliling</option>
+								<option value="6" {{isset($data) && $data->gid == 6 ? "selected" : ""}}>Lainnya</option>
 							</select>
 						</div>
 					</div>
