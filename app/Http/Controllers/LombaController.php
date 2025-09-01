@@ -48,7 +48,7 @@ class LombaController extends Controller
     public function store(Request $request)
     {
         //
-        $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos', 'aktif');
+        $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos', 'jml_etape', 'aktif');
         
         // dd($reqData);
         $validator = Validator::make($reqData, [
@@ -108,7 +108,7 @@ class LombaController extends Controller
     public function update(Request $request, Lomba $lomba)
     {
         $id = $request->id;
-        $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos');
+        $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos', 'jml_etape');
         //dd($reqData);
 
         // if(isset($reqData['aktif']) && $reqData['aktif'] == 'on'){
