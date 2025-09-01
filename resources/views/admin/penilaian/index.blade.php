@@ -65,8 +65,8 @@
                                                 <td class="text-center {{$aetape == 1 ? 'text-success' : ($aetape == -1 ? 'text-danger' : '')}}">{{ $aetape == 1 ? 'Lewat' : ($aetape == -1 ? 'Tidak Lewat' : "") }}</td>
                                             @endfor
                                         @endif -->
-                                        <td class="text-center">
                                         @if($subtitle->jml_etape > 0)
+                                            <td class="text-center">
                                             @php($etape = json_decode($value->etape, true))
                                             @if(isset($etape))
                                                 @foreach($etape as $k => $v)
@@ -78,8 +78,8 @@
 
                                                 @endforeach
                                             @endif
+                                            </td>
                                         @endif
-                                        </td>
 
                                         <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
