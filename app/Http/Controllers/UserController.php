@@ -27,13 +27,15 @@ class UserController extends Controller
             3 => "Juri Waktu Start",
             4 => "Juri Waktu Finish",
             5 => "Juri Keliling",
-            6 => "Lainnya",
+            6 => "Juri Etape",
+            9 => "Lainnya",
+
         ];
 
         confirmDelete("Hapus Data Pengguna", "Apakah anda yakin untuk menghapus data ini?");
         return view("admin.user.index", [
-            'data' => User::orderBy('gid')->get(),
-            'jnsJuri' => $jnsJuri,
+            'data'      => User::orderBy('gid')->get(),
+            'jnsJuri'   => $jnsJuri,
         ]);
     }
 

@@ -215,31 +215,35 @@
     <section id="faq" class="cta">
       <div class="container">
       	<div class="section-title">
-      		<h3>Ayo Mendaftar</h3>
           @if(!$buka)
-            <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
+            @if($data->tgl_buka > now())
+              <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
+            @endif
+
+            @if($data->tgl_tutup < now())
+              <h3>Pendaftaran telah ditutup. <span class="text-danger">Selamat berlomba dan Sampai jumpa tahun depan</h3>
+            @endif
           @else
-            <h3 class="text-bg-danger py-1"><i class="bi bi-flag"></i> Pendaftaran kembali dibuka !!! <i class="bi bi-flag"></i></h3>
+            <h3>Ayo Mendaftar</h3>
+            <h3 class="text-bg-danger py-1"><i class="bi bi-flag"></i> Pendaftaran telah dibuka !!! <i class="bi bi-flag"></i></h3>
             <h5 class="text-light">Bagi yang telah mencoba mendaftar <span class="text-danger">sebelum pendaftaran dibuka</span> agar dapat mendaftar kembali</h5>
           @endif
-      		<p>Pilih kategori sesuai dengan data kepesertaan anda</p>
       	</div>
-        @if($katLomba)
+        @if($katLomba && $buka)
+          <p>Pilih kategori sesuai dengan data kepesertaan anda</p> 
           <div class="row">
             @foreach($katLomba as $item)
-              @if($item->id == 19)
-                <div class="col-lg-12 col-md-12 mb-4">
-                  <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
-                    <div class="icon-box card card-body text-center">
-                      
-                      <div class="icon"><i class="bi bi-star-half" style="color: #ff689b;"></i></div>
-                      <h4 class="title">{{$item->judul}}</h4>
-                      <p class="description">{{$item->ket}}</p>
-                      
-                    </div>
-                  </a>
-                </div>
-              @endif
+              <div class="col-lg-4 col-md-12 mb-4">
+                <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
+                  <div class="icon-box card card-body text-center">
+                    
+                    <div class="icon"><i class="bi bi-star-half" style="color: #ff689b;"></i></div>
+                    <h4 class="title">{{$item->judul}}</h4>
+                    <p class="description">{{$item->ket}}</p>
+                    
+                  </div>
+                </a>
+              </div>
             @endforeach          
           </div>
         @endif

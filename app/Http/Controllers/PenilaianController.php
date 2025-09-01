@@ -179,6 +179,7 @@ class PenilaianController extends Controller
             'penilaian' => $dataPenilaian,
             'selisih' => $selisih,
             'domWaktu' => $domWaktu,
+            'jml_etape' => $data->lomba->jml_etape,
             'next' => 'update',
         ]);
     }
@@ -362,6 +363,49 @@ class PenilaianController extends Controller
         $this->hitungTotal($id, $request->jml_pos);
 
         return redirect()->back()->withSuccess('Pencatatan Nilai Pos berhasil ditambahkan');
+    }
+
+    public function update_etape(Request $request)
+    {
+        //dd($request->all());
+        $id = $request->id;
+        $reqData = $request->only('etape');
+
+        foreach ($reqData['etape'] as $key => $value) {
+            if($value == 1){
+                //$reqData['diskualifikasi'] = 0;
+                $a = Diskualifikasi::where(['id_pendaftar' => $id, 'alasan' => 'Peserta tidak melewati Etape '.$key])->get();
+                
+                if($a){
+                    foreach($a as $k => $v){
+                        $v->delete();        
+                    }
+                    
+                }
+            }
+            if($value == -1){
+                Diskualifikasi::upsert([
+                    [
+                        'id_pendaftar' => $id, 
+                        'alasan' => 'Peserta tidak melewati Etape '.$key, 
+                        'uid' => Auth::id() 
+                    ]
+                ], uniqueBy: ['id_pendaftar', 'alasan'], update: ['uid']);
+            }
+        }
+
+        $pendaftar = Pendaftar::find($id);
+
+        if(($pendaftar->diskualifikasi()->count() > 0) && ($pendaftar->diskualifikasi == 0)){
+            $reqData['diskualifikasi'] = 1;
+        }
+
+        if(($pendaftar->diskualifikasi()->count() == 0) && ($pendaftar->diskualifikasi == 1)){
+            $reqData['diskualifikasi'] = 0;
+        }
+
+        $pendaftar->update($reqData);
+        return redirect()->back()->withSuccess('Pencatatan Etape berhasil');
     }
 
     private function hitungTotal($id_pendaftar, $jml_pos)

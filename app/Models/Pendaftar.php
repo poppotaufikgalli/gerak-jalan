@@ -26,6 +26,11 @@ class pendaftar extends Model
         return $this->hasMany(Penilaian::class, 'id_pendaftar', 'id');
     }
 
+    public function diskualifikasi()
+    {
+        return $this->hasMany(Diskualifikasi::class, 'id_pendaftar', 'id');
+    }
+
     protected $fillable = [
         'id_lomba',
         'id_peserta',
@@ -38,6 +43,7 @@ class pendaftar extends Model
         'telp_ketua',
         'aktif',
         'total',
+        'etape',
         'diskualifikasi',
         'verif_id',
         'waktu_start',

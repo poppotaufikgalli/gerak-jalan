@@ -20,6 +20,12 @@
                                 @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                 <th width="10%">Nilai Waktu</th>
                                 @endif
+                                @if($subtitle->jml_etape > 0)
+                                    <!-- @for($i = 1; $i <= $subtitle->jml_etape; $i++)
+                                    <th width="10%">Etape {{$i}}</th>
+                                    @endfor -->
+                                    <th width="15%">Etape</th>
+                                @endif
                                 <th width="10%">Keutuhan Barisan</th>
                                 <th width="10%">Kerapian</th>
                                 <th width="10%">Semangat</th>
@@ -51,6 +57,29 @@
                                         @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                         <td class="text-center">{{$a}}</td>
                                         @endif
+
+                                        <!-- @if($subtitle->jml_etape > 0)
+                                            @php($etape = json_decode($value->etape, true))
+                                            @for($i = 1; $i <= $subtitle->jml_etape; $i++)
+                                                @php($aetape = $etape[$i] ?? 0)
+                                                <td class="text-center {{$aetape == 1 ? 'text-success' : ($aetape == -1 ? 'text-danger' : '')}}">{{ $aetape == 1 ? 'Lewat' : ($aetape == -1 ? 'Tidak Lewat' : "") }}</td>
+                                            @endfor
+                                        @endif -->
+                                        <td class="text-center">
+                                        @if($subtitle->jml_etape > 0)
+                                            @php($etape = json_decode($value->etape, true))
+                                            @if(isset($etape))
+                                                @foreach($etape as $k => $v)
+                                                    @if($v == 1)
+                                                        Etape {{$k}},
+                                                    @else
+                                                        <span class="text-decoration-line-through">Etape {{$k}}</span>,
+                                                    @endif
+
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        </td>
 
                                         <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>

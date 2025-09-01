@@ -29,7 +29,7 @@
     		                            <td>{{ ($key+1) }}</td>
                                         <td align="left">{{$value->name}}</td>
                                         <td>{{$value->username}}</td>
-    		                            <td>{{$jnsJuri[$value->gid]}}</td>
+    		                            <td>{{$jnsJuri[$value->gid] ?? ''}}</td>
                                         <td>
                                             <div class="d-flex justify-content-between align-items-start">
                                                 @if($value->gid == 1)

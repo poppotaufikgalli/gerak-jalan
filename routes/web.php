@@ -13,6 +13,7 @@ use App\Http\Controllers\KatPesertaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\DiskualifikasiController;
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -135,6 +136,17 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', [PendaftarController::class, 'update'])->name('pendaftar.update');
             Route::delete('/destroy/{id}', [PendaftarController::class, 'destroy'])->name('pendaftar.destroy');
         });
+
+        //Reset
+        Route::prefix('reset')->group(function () {
+            Route::match(['get', 'post'], '{id_lomba?}', [ResetController::class, 'index'])->name('reset');
+            // Route::get('{id_lomba}/create/{id_peserta?}', [ResetController::class, 'create'])->name('reset.create');
+            Route::post('/store', [ResetController::class, 'store'])->name('reset.store');
+            Route::get('/show/{id}', [ResetController::class, 'show'])->name('reset.show');
+            // Route::get('/{id_lomba}/edit/{id}', [ResetController::class, 'edit'])->name('reset.edit');
+            // Route::post('/update', [ResetController::class, 'update'])->name('reset.update');
+            // Route::delete('/destroy/{id}', [ResetController::class, 'destroy'])->name('reset.destroy');
+        });
     });
 
     //Penilaian
@@ -148,6 +160,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update', [PenilaianController::class, 'update'])->name('penilaian.update');
         Route::post('/update-waktu', [PenilaianController::class, 'update_waktu'])->name('penilaian.update.waktu');
         Route::post('/update-pos', [PenilaianController::class, 'update_pos'])->name('penilaian.update.pos');
+        Route::post('/update-etape', [PenilaianController::class, 'update_etape'])->name('penilaian.update.etape');
         Route::get('/update-ulang/{id_pendaftar}/{jml_pos}', [PenilaianController::class, 'update_ulang'])->name('penilaian.update.ulang');
         Route::post('/update-diskualifikasi', [PenilaianController::class, 'update_diskualifikasi'])->name('penilaian.update.diskualifikasi');
         Route::delete('/destroy/{id}', [PenilaianController::class, 'destroy'])->name('penilaian.destroy');

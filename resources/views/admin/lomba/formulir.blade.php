@@ -33,6 +33,12 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Jumlah Pos Etape</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control form-control-sm" id="jml_etape" name="jml_etape" value="{{isset($data) ? $data->jml_etape : old('jml_etape')}}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="gridCheck1" name="aktif" value="1" {{isset($data) && $data->aktif == 1 ? 'checked' : ''}}>

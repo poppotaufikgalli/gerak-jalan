@@ -25,7 +25,7 @@
                         Data Pendaftar
                     </a>
                 @endif
-                @if(Auth::user()->gid == 2 || Auth::user()->gid == 3 || Auth::user()->gid == 4)
+                @if(in_array(Auth::user()->gid, [2,3,4,6]))
                     <div class="sb-sidenav-menu-heading">Juri {{Auth::user()->gid == 2 ? 'Pos' : 'Waktu'}}</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
@@ -131,7 +131,7 @@
                         Rekapitulasi Pos
                     </a>
                 @endif
-                @if(Auth::user()->gid == 2 || Auth::user()->gid == 6)
+                @if(Auth::user()->gid == 2 || Auth::user()->gid == 9)
                     <div class="sb-sidenav-menu-heading">Laporan</div>
                     <a class="nav-link" href="{{route('rekapPos')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-building"></i></div>
@@ -148,6 +148,17 @@
                         <div class="sb-nav-link-icon"><i class="bx bx-chart"></i></div>
                         Pengguna
                     </a>
+                @endif
+                @if(Auth::user()->gid == 1)
+                    <div class="sb-sidenav-menu-heading">Reset Penilaian</div>
+                    @if($katLomba)
+                        @foreach($katLomba as $key => $value)
+                            <a class="nav-link {{request()->routeIs('reset') && (request()->route()->id == $value->id)  ? 'active' : ''}}" href="{{route('reset', ['id_lomba' => $value->id])}}">
+                                <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
+                                {{$value->judul}}
+                            </a>
+                        @endforeach
+                    @endif
                 @endif
                 <!--<a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="bx bx-chart"></i></div>

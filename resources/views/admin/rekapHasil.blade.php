@@ -31,6 +31,7 @@
                                 <th width="8%">Waktu Finish</th>
                                 <th width="8%">Waktu Tempuh</th>
                                 <th width="8%">Nilai Waktu</th>
+                                <th width="8%">Etape</th>
                                 <th width="8%">Keutuhan Barisan</th>
                                 <th width="8%">Kerapian</th>
                                 <th width="8%">Semangat</th>
@@ -56,7 +57,19 @@
                                         @php($d=floatval($penilaian[$value->id][4] ?? 0))
 
                                         <td class="text-center">{{$a}}</td>
-                                        
+                                        <td class="text-center">
+                                            @php($etape = json_decode($value->etape, true))
+                                            @if(isset($etape))
+                                                @foreach($etape as $k => $v)
+                                                    @if($v == 1)
+                                                        Etape {{$k}},
+                                                    @else
+                                                        <span class="text-decoration-line-through">Etape {{$k}}</span>,
+                                                    @endif
+
+                                                @endforeach
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
                                         <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>

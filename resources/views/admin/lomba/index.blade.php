@@ -18,6 +18,7 @@
                                 <th width="10%">Tahun</th>
                                 <th width="40%">Keterangan</th>
                                 <th>Jumlah Pos</th>
+                                <th>Jumlah Etape</th>
                                 <th width="20%">Pos Juri Penilai</th>
                                 <th width="10%">Status</th>
                                 <th>&nbsp;</th>
@@ -31,7 +32,8 @@
                                         <td>{{$value->judul}}</td>
                                         <td class="text-center">{{$value->tahun}}</td>
                                         <td>{{$value->ket}}</td>
-                                        <td>{{$value->jml_pos}}</td>
+                                        <td class="text-center">{{$value->jml_pos}}</td>
+                                        <td class="text-center">{{$value->jml_etape}}</td>
                                         <td class="text-center">
                                             <!--<a href="{{route('pos_juri')}}">{{count($value->juri_kategori)}}</a>-->
                                             <div class="d-flex justify-content-between align-items-start">

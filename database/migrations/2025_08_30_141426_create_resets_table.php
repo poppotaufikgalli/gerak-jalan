@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lombas', function (Blueprint $table) {
+        Schema::create('resets', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun');
-            $table->string('judul');
-            $table->integer('jml_pos');
-            $table->integer('jml_etape');
-            $table->string('ket')->nullable();
-            $table->integer('aktif')->default(0);
-            $table->integer('verif_id');
+            $table->integer('id_pendaftar');
+            $table->integer('nama_regu')->nullable();
+            $table->integer('id_juri')->unsigned();
+            $table->integer('nama_juri')->nullable();
+            $table->string('jns');
+            $table->string('nilai_awal');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lombas');
+        Schema::dropIfExists('resets');
     }
 };

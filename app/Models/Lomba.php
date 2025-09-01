@@ -30,5 +30,6 @@ class Lomba extends Model
         'ket',
         'aktif',
         'jml_pos',
+        'jml_etape',
     ];
 }
