@@ -216,11 +216,11 @@
       <div class="container">
       	<div class="section-title">
           @if(!$buka)
-            @if($data->tgl_buka > now())
+            @if($data?->tgl_buka > now())
               <h3>Pendaftaran Belum dibuka. <span class="text-danger">Bagi yang telah mencoba mendaftar</span> agar mendaftar kembali setelah pendaftaran dibuka</h3>
             @endif
 
-            @if($data->tgl_tutup < now())
+            @if($data?->tgl_tutup < now())
               <h3>Pendaftaran telah ditutup. <span class="text-danger">Selamat berlomba dan Sampai jumpa tahun depan</h3>
             @endif
           @else

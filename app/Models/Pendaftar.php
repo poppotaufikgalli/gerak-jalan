@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use DateTime;
 
-class pendaftar extends Model
+class Pendaftar extends Model
 {
     use HasFactory;
 
