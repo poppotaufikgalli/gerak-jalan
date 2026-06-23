@@ -91,7 +91,7 @@ class MainController extends Controller
                 'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
             ]);
         } else {
-            dd($now, $tgl_buka, $tgl_tutup);
+            //dd($now, $tgl_buka, $tgl_tutup);
             if ($now < $tgl_buka) {
                 return redirect()->route('index')->with('errors', "Pendaftaran Belum Dibuka, Agar mendaftar kembali setelah Pendaftaran dibuka");
             } else if ($now > $tgl_tutup) {
