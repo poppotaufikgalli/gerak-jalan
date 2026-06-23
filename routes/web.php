@@ -39,8 +39,19 @@ Route::middleware('isopen')->group(function () {
     Route::post('/daftar-umum', [MainController::class, 'daftarUmum'])->name('daftar-umum');
 
     Route::get('/pakta/{id?}', [MainController::class, 'pakta'])->name('pakta');
-
 });
+
+//dev
+Route::prefix('dev')->group(function () {
+    Route::get('/', [MainController::class, 'index'])->name('index');
+
+    Route::get('/daftar-peserta/{id?}', [MainController::class, 'daftarPeserta'])->name('daftar-peserta');
+    Route::get('/form-pendaftaran-peserta/{id_lomba?}/{id_peserta?}', [MainController::class, 'formPendaftaranPeserta'])->name('form-pendaftaran-peserta');
+    Route::post('/daftar-umum', [MainController::class, 'daftarUmum'])->name('daftar-umum');
+
+    Route::get('/pakta/{id?}', [MainController::class, 'pakta'])->name('pakta');
+});
+//end dev
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -126,7 +137,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/destroy/{id}', [JuriKategoriController::class, 'destroy'])->name('juri_kategori.destroy');
         });
 
-         //pendaftar
+        //pendaftar
         Route::prefix('pendaftar')->group(function () {
             Route::get('{id_lomba?}/{id_peserta?}', [PendaftarController::class, 'index'])->name('pendaftar');
             Route::get('{id_lomba}/create/{id_peserta?}', [PendaftarController::class, 'create'])->name('pendaftar.create');

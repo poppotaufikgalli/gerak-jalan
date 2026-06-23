@@ -20,6 +20,9 @@ class LombaController extends Controller
     public function index()
     {
         $konfig = $this->GetKonfigurasi();
+        if (!$konfig) {
+            return redirect('/konfig')->with('errors', 'Silahkan lengkapi konfigurasi terlebih dahulu')->withInput();
+        }
         $data = Lomba::where('tahun', $konfig->tahun)->get();
         confirmDelete('Hapus Data Lomba!', "Apakah anda yakin untuk menghapus?");
         return view('admin.lomba.index', [
@@ -49,12 +52,12 @@ class LombaController extends Controller
     {
         //
         $reqData = $request->only('judul', 'ket', 'tahun', 'aktif', 'jml_pos', 'jml_etape', 'aktif');
-        
+
         // dd($reqData);
         $validator = Validator::make($reqData, [
             'judul' => 'required|min:3|unique:lombas,tahun,judul',
             'ket' => 'sometimes|nullable|min:3',
-        ],[
+        ], [
             'judul.required' => 'Judul Lomba tidak boleh kosong',
             'judul.min' => 'Judul Lomba minimal 3 Karakter',
             'judul.unique' => 'Judul Lomba telah terdaftar',
@@ -62,11 +65,10 @@ class LombaController extends Controller
             'ket.min' => 'Keterangan Lomba minimal 3 Karakter',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
-        
+
         Lomba::create($reqData);
         return redirect('lomba')->withSuccess('Data Kategori Lomba berhasil ditambahkan');
     }
@@ -92,7 +94,7 @@ class LombaController extends Controller
     {
         //
         return view('admin.lomba.formulir', [
-            'data'=> $lomba->find($id),
+            'data' => $lomba->find($id),
             'next' => 'update',
             'title' => 'Edit Kategori Lomba',
         ]);
@@ -118,9 +120,9 @@ class LombaController extends Controller
         // }
         //dd($reqData);
         $validator = Validator::make($reqData, [
-            'judul' => 'required|min:3|unique:lombas,judul,'.$id,
+            'judul' => 'required|min:3|unique:lombas,judul,' . $id,
             'ket' => 'sometimes|nullable|min:3',
-        ],[
+        ], [
             'judul.required' => 'Judul Lomba tidak boleh kosong',
             'judul.min' => 'Judul Lomba minimal 3 Karakter',
             'judul.unique' => 'Judul Lomba telah terdaftar',
@@ -128,11 +130,10 @@ class LombaController extends Controller
             'ket.min' => 'Keterangan Lomba minimal 3 Karakter',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
-        
+
         $lomba->find($id)->update($reqData);
         return redirect('lomba')->withSuccess('Data Kategori Lomba berhasil diubah');
     }

@@ -17,5 +17,10 @@ class Konfig extends Model
         'aktif',
     ];
 
-    protected $dates = ['tgl_buka','tgl_tutup'];
+    protected $dates = ['tgl_buka', 'tgl_tutup'];
+
+    protected $casts = [
+        'tgl_buka' => 'datetime:Y-m-d H:i:s',
+        'tgl_tutup' => 'datetime:Y-m-d H:i:s',
+    ];
 }
