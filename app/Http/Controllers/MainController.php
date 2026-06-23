@@ -25,7 +25,8 @@ use File;
 
 class MainController extends Controller
 {
-    public function pakta($id=null){
+    public function pakta($id = null)
+    {
         $data = [
             'data' => Pendaftar::find($id)
         ];
@@ -42,47 +43,47 @@ class MainController extends Controller
         $buka = false;
         $data = Konfig::where('aktif', 1)->first();
 
-        if(isset($data)){
+        if (isset($data)) {
             $tgl_buka = Carbon::parse($data->tgl_buka);
             $tgl_tutup = Carbon::parse($data->tgl_tutup);
-            
-            if($now >= $tgl_buka && $now <= $tgl_tutup) {
+
+            if ($now >= $tgl_buka && $now <= $tgl_tutup) {
                 $buka = true;
             }
         }
         $banner = [];
         $filesInFolder = File::allFiles(public_path('img/banner'));
-        foreach($filesInFolder as $path) { 
+        foreach ($filesInFolder as $path) {
             $banner[] = pathinfo($path);
             //$file['filename'] ;
-        } 
+        }
         //dd($banner);
         return view("main", compact('buka', 'data', 'banner'));
     }
 
-    public function daftarPeserta($id=0)
+    public function daftarPeserta($id = 0)
     {
         return view("daftarPeserta", [
             "selPeserta" => KatPeserta::find($id),
             "selid" => $id,
-            "katPeserta" => KatPeserta::whereHas('lomba.konfig', function($query){
+            "katPeserta" => KatPeserta::whereHas('lomba.konfig', function ($query) {
                 $query->where('aktif', 1);
             })->get(),
             'data' => Pendaftar::where('id_peserta', $id)->orderByRaw('CONVERT(no_peserta, SIGNED) desc')->get(),
         ]);
     }
 
-    public function formPendaftaranPeserta($id_lomba, $id_peserta=null)
+    public function formPendaftaranPeserta($id_lomba, $id_peserta = null)
     {
         $data = Konfig::where('aktif', 1)->first();
         //if($data){
         // buka hanya 45 km
-        if($data && $id_lomba == 19){
+        if ($data && $id_lomba == 19) {
             $now = strtotime(date("Y-m-d H:i:s"));
             $tgl_buka = strtotime($data->tgl_buka);
             $tgl_tutup = strtotime($data->tgl_tutup);
 
-            if($now >= $tgl_buka && $now <= $tgl_tutup) {
+            if ($now >= $tgl_buka && $now <= $tgl_tutup) {
                 return view("formPendaftaranPeserta", [
                     'id_lomba' => $id_lomba,
                     'id_peserta' => $id_peserta,
@@ -90,23 +91,24 @@ class MainController extends Controller
                     'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
                 ]);
             } else {
-                if($now < $tgl_buka) {
-                    return redirect()->route('index')->with('errors', "Pendaftaran Belum Dibuka, Agar mendaftar kembali setelah Pendaftaran dibuka"); 
-                }else if($now > $tgl_tutup){
-                    return redirect()->route('index')->with('errors', "Pendaftaran Telah Ditutup"); 
-                }else{
-                    return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia"); 
+                dd($now, $tgl_buka, $tgl_tutup);
+                if ($now < $tgl_buka) {
+                    return redirect()->route('index')->with('errors', "Pendaftaran Belum Dibuka, Agar mendaftar kembali setelah Pendaftaran dibuka");
+                } else if ($now > $tgl_tutup) {
+                    return redirect()->route('index')->with('errors', "Pendaftaran Telah Ditutup");
+                } else {
+                    return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia");
                 }
-            }        
-        }else{
-            return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia"); 
+            }
+        } else {
+            return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia");
         }
     }
 
     public function daftarUmum(Request $request)
     {
         //dd($request);
-        $reqData = $request->only('id_lomba', 'id_peserta', 'nama', 'alamat', 'pic', 'telp', 'ketua', 'telp_ketua','jns_instansi', 'g-recaptcha-response');
+        $reqData = $request->only('id_lomba', 'id_peserta', 'nama', 'alamat', 'pic', 'telp', 'ketua', 'telp_ketua', 'jns_instansi', 'g-recaptcha-response');
         //dd($reqData);
 
         $reqData['aktif'] = 1;
@@ -117,9 +119,9 @@ class MainController extends Controller
             'nama' => [
                 'required',
                 'min:3',
-                Rule::unique('pendaftars')->where(function ($query) use($reqData) {
+                Rule::unique('pendaftars')->where(function ($query) use ($reqData) {
                     return $query->where('id_lomba', $reqData['id_lomba'])
-                    ->where('nama', $reqData['nama']);
+                        ->where('nama', $reqData['nama']);
                 }),
             ],
             'alamat' => 'required|min:3',
@@ -128,12 +130,12 @@ class MainController extends Controller
             'ketua' => 'required|min:3',
             'telp_ketua' => 'required|numeric|min:3',
             'g-recaptcha-response' => ['required', new ReCaptcha],
-        ],[
+        ], [
             'id_lomba.required' => 'Kategori Lomba tidak boleh kosong',
             'id_peserta.required' => 'Kategori Peserta tidak boleh kosong',
 
             'no_peserta.unique' => 'Nomor Peserta telah terdaftar',
-            
+
             'nama.required' => 'Nama Regu / Instansi tidak boleh kosong',
             'nama.min' => 'Nama Regu / Instansi minimal 3 Karakter',
             'nama.unique' => 'Nama Regu / Instansi telah terdaftar',
@@ -157,8 +159,7 @@ class MainController extends Controller
             'g-recaptcha-response.required' => 'Google ReCaptcha tidak boleh kosong',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
 
@@ -167,22 +168,23 @@ class MainController extends Controller
         //dd($reqData['no_peserta']);
 
         Pendaftar::create($reqData);
-        return redirect('daftar-peserta/'.$reqData['id_peserta'])->withSuccess('Pendaftar telah berhasil dilakukan');
+        return redirect('daftar-peserta/' . $reqData['id_peserta'])->withSuccess('Pendaftar telah berhasil dilakukan');
     }
 
-    public function main(){
+    public function main()
+    {
         $jmlPendaftar = Pendaftar::select('id_lomba', DB::raw('count(*) as total'))->groupBy('id_lomba')->pluck('total', 'id_lomba');
         //dd($jmlPendaftar);
         $jmlPendaftar = [];
         $jmlPeserta = [];
         $pendaftar = Pendaftar::all();
 
-        if($pendaftar){
+        if ($pendaftar) {
             foreach ($pendaftar as $key => $value) {
                 $idx = $value->id_lomba;
                 $idz = $value->id_peserta;
-                $jmlPendaftar[$idx] = isset($jmlPendaftar[$idx]) ? $jmlPendaftar[$idx] +1 : 1;
-                $jmlPeserta[$idx][$idz] = isset($jmlPeserta[$idx][$idz]) ? $jmlPeserta[$idx][$idz] +1 : 1;
+                $jmlPendaftar[$idx] = isset($jmlPendaftar[$idx]) ? $jmlPendaftar[$idx] + 1 : 1;
+                $jmlPeserta[$idx][$idz] = isset($jmlPeserta[$idx][$idz]) ? $jmlPeserta[$idx][$idz] + 1 : 1;
             }
         }
 
@@ -194,16 +196,16 @@ class MainController extends Controller
         ]);
     }
 
-    public function rekapHasil($id_peserta=null)
+    public function rekapHasil($id_peserta = null)
     {
-        $data = Pendaftar::where(function($query) use ($id_peserta){
-            if($id_peserta != null){
+        $data = Pendaftar::where(function ($query) use ($id_peserta) {
+            if ($id_peserta != null) {
                 $query->where('id_peserta', $id_peserta);
             }
         })->orderBy('total', 'desc')->get();
-        $katPeserta = KatPeserta::whereHas('lomba.konfig', function($query){
-                $query->where('aktif', 1);
-            })->get();
+        $katPeserta = KatPeserta::whereHas('lomba.konfig', function ($query) {
+            $query->where('aktif', 1);
+        })->get();
 
         $a = Penilaian::select(
             'id_pendaftar',
@@ -215,18 +217,18 @@ class MainController extends Controller
         $dataPenilaian = [];
 
         foreach ($a as $key => $value) {
-            if($value->id_nilai == 1){
+            if ($value->id_nilai == 1) {
                 $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai;
-            }else{
+            } else {
                 /*if($value->count_nilai == $lomba->jml_pos){
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos;
                 }else{
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos ." [".$value->count_nilai."/".$lomba->jml_pos."]";
                 } */
-                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / 10;   
+                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / 10;
             }
         }
-        
+
         return view('admin.rekapHasil', [
             'data' => $data,
             'katPeserta' => $katPeserta,
@@ -235,26 +237,26 @@ class MainController extends Controller
         ]);
     }
 
-    public function rekapPos($id_lomba=null, $id_juri=null)
+    public function rekapPos($id_lomba = null, $id_juri = null)
     {
-        $posJuri = User::whereHas('juri_kategori', function($query) use($id_lomba){
+        $posJuri = User::whereHas('juri_kategori', function ($query) use ($id_lomba) {
             $query->where('juri_kategoris.id_lomba', $id_lomba);
         })->where('gid', 2)->where('aktif', 1)->get();
 
         $data = KatPeserta::with('pendaftar')->with('pendaftar.penilaian')->where('id_lomba', $id_lomba)->get();
 
-        if($data && $id_juri != null){
+        if ($data && $id_juri != null) {
             foreach ($data as $key => $value) {
-                if($value->pendaftar){
+                if ($value->pendaftar) {
                     $sudah = [];
                     $belum = [];
                     $pendaftar = $value->pendaftar;
                     foreach ($pendaftar as $k => $v) {
                         $arr_id_juri = $v->penilaian->pluck('id_juri');
 
-                        if(in_array($id_juri, $arr_id_juri->toArray())){
+                        if (in_array($id_juri, $arr_id_juri->toArray())) {
                             $sudah[] = $v->no_peserta;
-                        }else{
+                        } else {
                             $belum[] = $v->no_peserta;
                         }
                     }
@@ -264,7 +266,7 @@ class MainController extends Controller
                 }
             }
         }
-        
+
         return view('admin.rekapPos', [
             'data' => $data,
             'posJuri' => $posJuri,
@@ -273,32 +275,33 @@ class MainController extends Controller
         ]);
     }
 
-    private function getNomorPeserta($data){
+    private function getNomorPeserta($data)
+    {
         //dd($data);
-        if(isset($data['jns_instansi']) && $data['jns_instansi'] != ""){
-            $no_peserta = "100".$data['jns_instansi'];
+        if (isset($data['jns_instansi']) && $data['jns_instansi'] != "") {
+            $no_peserta = "100" . $data['jns_instansi'];
             $a = Pendaftar::where('no_peserta', $no_peserta)->where('id_lomba', $data['id_lomba'])->where('id_peserta', $data['id_peserta'])->get();
-            
-            if(count($a) == 0){
+
+            if (count($a) == 0) {
                 return $no_peserta;
-            }else{
-                if($no_peserta == "1001"){
+            } else {
+                if ($no_peserta == "1001") {
                     $polri = Pendaftar::where('no_peserta', "1005")->where('id_lomba', $data['id_lomba'])->where('id_peserta', $data['id_peserta'])->get();
                     //return "1005";
                     //dd($polri);
 
-                    if(count($polri) == 0){
+                    if (count($polri) == 0) {
                         return "1005";
                     }
                 }
 
                 $b = Pendaftar::select('no_peserta')->where('id_lomba', $data['id_lomba'])->where('id_peserta', $data['id_peserta'])->orderByRaw('CONVERT(no_peserta, SIGNED) asc')->get();
 
-                foreach($b as $key => $value){
-                    $no_peserta = $value->no_peserta +1;    
+                foreach ($b as $key => $value) {
+                    $no_peserta = $value->no_peserta + 1;
                 }
 
-                if($no_peserta < 1006){
+                if ($no_peserta < 1006) {
                     $no_peserta = 1006;
                 }
 
@@ -309,15 +312,15 @@ class MainController extends Controller
         $peserta = Pendaftar::select('no_peserta')->where('id_lomba', $data['id_lomba'])->where('id_peserta', $data['id_peserta'])->orderByRaw('CONVERT(no_peserta, SIGNED) asc')->get();
         //dd($peserta);
 
-        if(count($peserta) > 0){
-            foreach($peserta as $key => $value){
-                $no_peserta = $value->no_peserta +1;    
+        if (count($peserta) > 0) {
+            foreach ($peserta as $key => $value) {
+                $no_peserta = $value->no_peserta + 1;
             }
             return $no_peserta;
-        }else{
-            $c = KatPeserta::find($data['id_peserta']);    
+        } else {
+            $c = KatPeserta::find($data['id_peserta']);
 
-            $no_peserta = $c->no_peserta_prefix .(sprintf('%03d', $c->no_peserta_mulai));
+            $no_peserta = $c->no_peserta_prefix . (sprintf('%03d', $c->no_peserta_mulai));
             return $no_peserta;
         }
     }
@@ -326,7 +329,7 @@ class MainController extends Controller
     {
         $validated = $request->validate([
             'password' => ['required', 'confirmed'],
-        ],[
+        ], [
             'password.required' => "Password tidak boleh kosong",
             'password.confirmed' => "Password tidak sama"
         ]);
@@ -342,18 +345,18 @@ class MainController extends Controller
     {
         $validated = $request->validate([
             'password' => ['required', 'confirmed'],
-        ],[
+        ], [
             'password.required' => "Password tidak boleh kosong",
             'password.confirmed' => "Password tidak sama"
         ]);
 
         $findUser = User::find($request->uid);
 
-        if($findUser){
+        if ($findUser) {
             $findUser->update([
                 'password' => Hash::make($validated['password']),
             ]);
-        }else{
+        } else {
             return back()->withError('Terjadi Kesalahan. Silahkan Ulangi Proses');
         }
 
