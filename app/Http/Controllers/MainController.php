@@ -78,31 +78,31 @@ class MainController extends Controller
         $data = Konfig::where('aktif', 1)->first();
         //if($data){
         // buka hanya 45 km
-        if ($data && $id_lomba == 19) {
-            $now = strtotime(date("Y-m-d H:i:s"));
-            $tgl_buka = strtotime($data->tgl_buka);
-            $tgl_tutup = strtotime($data->tgl_tutup);
+        // if ($data && $id_lomba == 19) {
+        $now = strtotime(date("Y-m-d H:i:s"));
+        $tgl_buka = strtotime($data->tgl_buka);
+        $tgl_tutup = strtotime($data->tgl_tutup);
 
-            if ($now >= $tgl_buka && $now <= $tgl_tutup) {
-                return view("formPendaftaranPeserta", [
-                    'id_lomba' => $id_lomba,
-                    'id_peserta' => $id_peserta,
-                    'lomba' => Lomba::find($id_lomba),
-                    'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
-                ]);
-            } else {
-                dd($now, $tgl_buka, $tgl_tutup);
-                if ($now < $tgl_buka) {
-                    return redirect()->route('index')->with('errors', "Pendaftaran Belum Dibuka, Agar mendaftar kembali setelah Pendaftaran dibuka");
-                } else if ($now > $tgl_tutup) {
-                    return redirect()->route('index')->with('errors', "Pendaftaran Telah Ditutup");
-                } else {
-                    return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia");
-                }
-            }
+        if ($now >= $tgl_buka && $now <= $tgl_tutup) {
+            return view("formPendaftaranPeserta", [
+                'id_lomba' => $id_lomba,
+                'id_peserta' => $id_peserta,
+                'lomba' => Lomba::find($id_lomba),
+                'katPeserta' => KatPeserta::where('id_lomba', $id_lomba)->get(),
+            ]);
         } else {
-            return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia");
+            dd($now, $tgl_buka, $tgl_tutup);
+            if ($now < $tgl_buka) {
+                return redirect()->route('index')->with('errors', "Pendaftaran Belum Dibuka, Agar mendaftar kembali setelah Pendaftaran dibuka");
+            } else if ($now > $tgl_tutup) {
+                return redirect()->route('index')->with('errors', "Pendaftaran Telah Ditutup");
+            } else {
+                return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia 1");
+            }
         }
+        // } else {
+        // return redirect()->route('index')->with('errors', "Pendaftaran Tidak Tersedia 2");
+        // }
     }
 
     public function daftarUmum(Request $request)
