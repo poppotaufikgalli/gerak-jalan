@@ -27,9 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/commingSoon', function () {
-    return view('commingSoon');
-})->name('commingSoon');
+Route::get('/comingSoon', function () {
+    return view('comingSoon');
+})->name('comingSoon');
 
 Route::middleware('isopen')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('index');

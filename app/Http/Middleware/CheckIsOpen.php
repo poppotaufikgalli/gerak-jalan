@@ -16,10 +16,10 @@ class CheckIsOpen
      */
     public function handle(Request $request, Closure $next)
     {
-        $commingSoon = env('COMMING_SOON');
-        if(!$commingSoon){
+        $comingSoon = env('COMMING_SOON');
+        if (!$comingSoon) {
             return $next($request);
         }
-        return redirect('/commingSoon');
+        return redirect('/comingSoon');
     }
 }

@@ -3,25 +3,25 @@
 @section('content')
   <!-- ======= Hero Section ======= -->
   <div class="position-relative">
-    <!-- <section id="hero">
-            <div class="hero-container">
-              <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2026</h1>
-                              <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a>
-            </div>
-          </section>
-          <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="d-flex align-items-center">
-              <img src="{{asset('img/top-banner-2026.png')}}" class="img-fluid" />
-            </div>
-          </div> -->
-    <img src="{{asset('img/top-banner-2026.png')}}" class="img-fluid" />
+    <section id="hero">
+      <div class="hero-container">
+        <!-- <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2026</h1>
+                          <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
+      </div>
+    </section>
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+      <div class="d-flex align-items-center">
+        <img src="{{asset('img/top-banner-2026-2.jpeg')}}" style="height: 90vh;" />
+      </div>
+    </div>
+    <!-- <img src="{{asset('img/top-banner-2026.png')}}" class="img-fluid" /> -->
   </div>
   @include('partials.menu')
 
   <main id="main">
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="about">
+    <section id="cta" class="about" style="display: none;">
       <div class="container">
         <div class="section-title">
           <h2>Rute</h2>
@@ -41,8 +41,42 @@
       </div>
     </section><!-- End Cta Section -->
 
-    <!-- ======= About Section ======= -->
     <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Tentang Gerak Jalan Proklamasi Tahun 2026</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+            <p class="fw-bold">A. Kategori Perlombaan</p>
+            <p>Kategori perlombaan gerak jalan proklamasi Tahun 2026 dibagi menjadi 3 kategori diantaranya </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
+              <li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
+              <li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 45 KM</li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <p class="fw-bold">B. Kategori Peserta</p>
+            <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Kategori 1 : TNI / POLRI / SATPOL PP / Damkar / Basarnas / Polsus /
+                Security / KPLP / BNPB / Beacukai / Navigasi / Dishub <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
+              <li><i class="ri-check-double-line"></i> Kategori 2 : OPD / Instansi Vertikal / PKK / GOW / Darmawanita /
+                BUMN / BUMD/ Guru <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
+              <li><i class="ri-check-double-line"></i> Kategori 3 : Umum / Ormas / Mahasiswa / RT / RW <b>(Jarak 17 Km, 8
+                  Km, 45 Km)</b></li>
+              <li><i class="ri-check-double-line"></i> Kategori 4 : Pelajar <b>(Jarak 17 Km, 8 Km)</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about" style="display: none;">
       <div class="container">
 
         <div class="section-title">
@@ -216,7 +250,7 @@
       </div>
     </section><!-- End About Section -->
 
-    <section id="services" class="about our-values section-bg">
+    <section id="services" class="about our-values section-bg" style="display: none;">
       <div class="container">
         <div class="section-title">
           <h2>Pakta Integritas</h2>
@@ -235,7 +269,7 @@
     </section><!-- End Our Values Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="cta">
+    <section id="faq" class="cta" style="display: none;">
       <div class="container">
         <div class="section-title">
           @if(!$buka)
@@ -290,17 +324,17 @@
             <img src="{{asset('/img/logo-kormi.png')}}" class="img-fluid" alt="">
           </div>
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
-                                                              </div> -->
+                                                                                                        <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
+                                                                                                      </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
-                                                              </div> -->
+                                                                                                        <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
+                                                                                                      </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
-                                                              </div> -->
+                                                                                                        <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
+                                                                                                      </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
-                                                              </div> -->
+                                                                                                        <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
+                                                                                                      </div> -->
         </div>
       </div>
     </section><!-- End Clients Section -->
