@@ -46,15 +46,15 @@ Route::middleware('isopen')->group(function () {
 });
 
 //dev
-Route::prefix('dev')->group(function () {
-    Route::get('/', [MainController::class, 'index'])->name('index');
+// Route::prefix('dev')->group(function () {
+//     Route::get('/', [MainController::class, 'index'])->name('index');
 
-    Route::get('/daftar-peserta/{id?}', [MainController::class, 'daftarPeserta'])->name('daftar-peserta');
-    Route::get('/form-pendaftaran-peserta/{id_lomba?}/{id_peserta?}', [MainController::class, 'formPendaftaranPeserta'])->name('form-pendaftaran-peserta');
-    Route::post('/daftar-umum', [MainController::class, 'daftarUmum'])->name('daftar-umum');
+//     Route::get('/daftar-peserta/{id?}', [MainController::class, 'daftarPeserta'])->name('daftar-peserta');
+//     Route::get('/form-pendaftaran-peserta/{id_lomba?}/{id_peserta?}', [MainController::class, 'formPendaftaranPeserta'])->name('form-pendaftaran-peserta');
+//     Route::post('/daftar-umum', [MainController::class, 'daftarUmum'])->name('daftar-umum');
 
-    Route::get('/pakta/{id?}', [MainController::class, 'pakta'])->name('pakta');
-});
+//     Route::get('/pakta/{id?}', [MainController::class, 'pakta'])->name('pakta');
+// });
 //end dev
 
 Route::middleware('guest')->group(function () {
