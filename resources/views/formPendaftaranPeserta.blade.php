@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title',"judul")
+@section('title', "judul")
 @section('content')
 	@include('partials.menu')
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -7,11 +7,11 @@
 		<!-- ======= Frequently Asked Questions Section ======= -->
 		<section id="" class="contact section">
 			<div class="container">
-				<div class="mt-4"/>
+				<div class="mt-4" />
 				<div class="section-title">
-						<h2>Form Pendaftaran Peserta</h2>
-						<h3>{{$lomba?->judul}}</h3>
-						<p>Isilah form berikut sesuai dengan data kepesertaan</p>
+					<h2>Form Pendaftaran Peserta</h2>
+					<h3>{{$lomba?->judul}}</h3>
+					<p>Isilah form berikut sesuai dengan data kepesertaan</p>
 				</div>
 
 				<form action="{{route('daftar-umum')}}" method="post" role="form" class="php-email-form">
@@ -21,7 +21,8 @@
 							<option value="" disabled selected>Pilihan Kategori Lomba</option>
 							@if($katLomba)
 								@foreach($katLomba as $key => $value)
-									<option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected' : ''}}>{{$value->judul}}</option>
+									<option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected' : ''}}>{{$value->judul}}
+									</option>
 								@endforeach
 							@endif
 						</select>
@@ -31,50 +32,59 @@
 							<option value="" disabled selected>Pilihan Kategori Peserta</option>
 							@if($katPeserta)
 								@foreach($katPeserta as $key => $value)
-									<option value="{{$value->id}}" {{$id_peserta == $value->id ? 'selected' : ''}}>{{$value->judul}}</option>
+									<option value="{{$value->id}}" {{$id_peserta == $value->id ? 'selected' : ''}}>{{$value->judul}}
+									</option>
 								@endforeach
 							@endif
 						</select>
 					</div>
-					@if($id_peserta == 14 || $id_peserta == 18 || $id_peserta == 22)
-					<div class="form-group">
-						<select class="form-select" name="jns_instansi" id="jns_instansi" required>
-							<option value="" disabled selected>Pilihan Jenis Instansi</option>
-							<option value="2">TNI AD</option>
-							<option value="3">TNI AL</option>
-							<option value="4">TNI AU</option>
-							<option value="1">POLRI</option>
-							<option value="6">LAINNYA</option>
-						</select>
-					</div>
+					@if($id_peserta == 25 || $id_peserta == 29 || $id_peserta == 33)
+						<div class="form-group">
+							<select class="form-select" name="jns_instansi" id="jns_instansi" required>
+								<option value="" disabled selected>Pilihan Jenis Instansi</option>
+								<option value="2">TNI AD</option>
+								<option value="3">TNI AL</option>
+								<option value="4">TNI AU</option>
+								<option value="1">POLRI</option>
+								<option value="6">LAINNYA</option>
+							</select>
+						</div>
 					@endif
 					<div class="form-group">
-						<input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Regu/Instansi" value="{{old('nama')}}" required>
+						<input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Regu/Instansi"
+							value="{{old('nama')}}" required>
 					</div>
 					<div class="form-group">
-						<textarea class="form-control" name="alamat" rows="5" placeholder="Alamat" required>{{old('alamat')}}</textarea>
+						<textarea class="form-control" name="alamat" rows="5" placeholder="Alamat"
+							required>{{old('alamat')}}</textarea>
 					</div>
 					<div class="row">
 						<div class="col-md-6 form-group">
-							<input type="text" name="pic" class="form-control" id="pic" placeholder="Nama Penanggung Jawab" value="{{old('pic')}}" required>
+							<input type="text" name="pic" class="form-control" id="pic" placeholder="Nama Penanggung Jawab"
+								value="{{old('pic')}}" required>
 						</div>
 						<div class="col-md-6 form-group mt-md-0">
-							<input type="text" class="form-control" name="telp" id="telp" placeholder="Nomor Telepon/Wa Penanggung Jawab" value="{{old('telp')}}" required>
+							<input type="text" class="form-control" name="telp" id="telp"
+								placeholder="Nomor Telepon/Wa Penanggung Jawab" value="{{old('telp')}}" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 form-group">
-							<input type="text" name="ketua" class="form-control" id="ketua" placeholder="Nama Ketua Regu" value="{{old('ketua')}}" required>
+							<input type="text" name="ketua" class="form-control" id="ketua" placeholder="Nama Ketua Regu"
+								value="{{old('ketua')}}" required>
 						</div>
 						<div class="col-md-6 form-group mt-md-0">
-							<input type="text" class="form-control" name="telp_ketua" id="telp_ketua" placeholder="Nomor Telepon/Wa Ketua Regu" value="{{old('telp_ketua')}}" required>
+							<input type="text" class="form-control" name="telp_ketua" id="telp_ketua"
+								placeholder="Nomor Telepon/Wa Ketua Regu" value="{{old('telp_ketua')}}" required>
 
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 form-group form-check">
 							<input type="checkbox" name="pakta" class="" id="pakta" required>
-							<label class="form-check-label fw-semibold" for="pakta">Saya Bersedia mengisi <a href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2025.pdf')}}" target="_blank" class="text-decoration-underline">Pakta Integritas</a></label>
+							<label class="form-check-label fw-semibold" for="pakta">Saya Bersedia mengisi <a
+									href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2025.pdf')}}" target="_blank"
+									class="text-decoration-underline">Pakta Integritas</a></label>
 						</div>
 					</div>
 					<div class="d-flex justify-content-center align-items-center mb-2">
@@ -91,29 +101,29 @@
 @section('js-content')
 	<script>
 		window.addEventListener('DOMContentLoaded', event => {
-			
-			const $recaptcha = document.querySelector('#g-recaptcha-response');
-		  	if ($recaptcha) {
-		    	$recaptcha.setAttribute('required', 'required');
-		  	}
 
-		  	document.getElementById('telp').addEventListener('input', function (evt) {
-			    this.value = this.value.replace(/\D+/g, '');
+			const $recaptcha = document.querySelector('#g-recaptcha-response');
+			if ($recaptcha) {
+				$recaptcha.setAttribute('required', 'required');
+			}
+
+			document.getElementById('telp').addEventListener('input', function (evt) {
+				this.value = this.value.replace(/\D+/g, '');
 			});
 
 			document.getElementById('telp_ketua').addEventListener('input', function (evt) {
-			    this.value = this.value.replace(/\D+/g, '');
+				this.value = this.value.replace(/\D+/g, '');
 			});
 
-			document.getElementById("id_lomba").addEventListener('change', function(){
+			document.getElementById("id_lomba").addEventListener('change', function () {
 				var id = this.value
-				window.location.href = "/form-pendaftaran-peserta/"+id;
+				window.location.href = "/form-pendaftaran-peserta/" + id;
 			})
 
-			document.getElementById("id_peserta").addEventListener('change', function(){
+			document.getElementById("id_peserta").addEventListener('change', function () {
 				var id_lomba = document.getElementById("id_lomba").value;
 				var id = this.value
-				window.location.href = "/form-pendaftaran-peserta/"+id_lomba+"/"+id;
+				window.location.href = "/form-pendaftaran-peserta/" + id_lomba + "/" + id;
 			})
 		})
 	</script>
