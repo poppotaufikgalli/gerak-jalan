@@ -6,7 +6,7 @@
     <section id="hero">
       <div class="hero-container">
         <!-- <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2026</h1>
-                                                                  <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
+                                                                    <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
       </div>
     </section>
     <div class="position-absolute top-0 start-50 translate-middle-x">
@@ -21,7 +21,7 @@
   <main id="main">
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="about">
+    <section id="cta" class="about" style="display: none;">
       <div class="container">
         <div class="section-title">
           <h2>Rute</h2>
@@ -207,10 +207,10 @@
               <li><i class="ri-check-double-line"></i> Dilarang menggunakan pakaian dengan model menyerupai hantu</li>
             </ul>
             <!-- <a href="{{asset('REGULASI.GERAK.JALAN.2026.pdf')}}" target="_blank" class="btn-learn-more position-relative">
-                      Download Pengumuman <span
-                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
-                          class="visually-hidden">Pengumuman Baru</span></span>
-                    </a> -->
+                        Download Pengumuman <span
+                          class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
+                            class="visually-hidden">Pengumuman Baru</span></span>
+                      </a> -->
           </div>
         </div>
       </div>
@@ -293,17 +293,17 @@
             <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
           </div>
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
-                                                                                                                                              </div> -->
+                                                                                                                                                  <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
+                                                                                                                                                </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
-                                                                                                                                              </div> -->
+                                                                                                                                                  <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
+                                                                                                                                                </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
-                                                                                                                                              </div> -->
+                                                                                                                                                  <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
+                                                                                                                                                </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
-                                                                                                                                              </div> -->
+                                                                                                                                                  <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
+                                                                                                                                                </div> -->
         </div>
       </div>
     </section><!-- End Clients Section -->
