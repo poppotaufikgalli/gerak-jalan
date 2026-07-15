@@ -42,10 +42,10 @@
 						<div class="form-group">
 							<select class="form-select" name="jns_instansi" id="jns_instansi" required>
 								<option value="" disabled selected>Pilihan Jenis Instansi</option>
-								<option value="2">TNI AD</option>
-								<option value="3">TNI AL</option>
-								<option value="4">TNI AU</option>
-								<option value="1">POLRI</option>
+								<option value="1">TNI AD</option>
+								<option value="2">TNI AL</option>
+								<option value="3">TNI AU</option>
+								<option value="4">POLRI</option>
 								<option value="6">LAINNYA</option>
 							</select>
 						</div>
