@@ -10,7 +10,7 @@
 		<nav id="navbar" class="navbar order-last order-lg-0">
 			<ul>
 				<li><a class="nav-link scrollto active" href="/#hero">Beranda</a></li>
-				<li class="d-none"><a class="nav-link scrollto" href="/#cta">Rute</a></li>
+				<li><a class="nav-link scrollto" href="/#cta">Rute</a></li>
 				<li>
 					<a class="nav-link scrollto position-relative" href="/#about">
 						Tentang Gerak Jalan Proklamasi <span
@@ -25,12 +25,11 @@
 							<span class="visually-hidden">Pengumuman Baru</span></span>
 					</a>
 				</li>
-				<!--<li><a class="nav-link scrollto" href="/#team">Persyaratan</a></li>-->
-				<li class="d-none"><a class="nav-link scrollto text-warning"
-						href="{{route('form-pendaftaran-peserta')}}">Ayo
+				<li><a class="nav-link scrollto" href="/#team">Persyaratan</a></li>
+				<li><a class="nav-link scrollto text-warning" href="{{route('form-pendaftaran-peserta')}}">Ayo
 						Mendaftar</a>
 				</li>
-				<li class="d-none"><a class="nav-link scrollto" href="{{route('daftar-peserta')}}">Daftar Peserta</a>
+				<li><a class="nav-link scrollto" href="{{route('daftar-peserta')}}">Daftar Peserta</a>
 				</li>
 			</ul>
 			<i class="bi bi-list mobile-nav-toggle"></i>

@@ -6,7 +6,7 @@
     <section id="hero">
       <div class="hero-container">
         <!-- <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2026</h1>
-                          <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
+                                                                  <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
       </div>
     </section>
     <div class="position-absolute top-0 start-50 translate-middle-x">
@@ -21,7 +21,7 @@
   <main id="main">
 
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="about" style="display: none;">
+    <section id="cta" class="about">
       <div class="container">
         <div class="section-title">
           <h2>Rute</h2>
@@ -41,6 +41,7 @@
       </div>
     </section><!-- End Cta Section -->
 
+    <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container">
 
@@ -57,8 +58,6 @@
               <li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
               <li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 45 KM</li>
             </ul>
-          </div>
-          <div class="col-lg-6">
             <p class="fw-bold">B. Kategori Peserta</p>
             <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
             <ul>
@@ -70,44 +69,11 @@
                   Km, 45 Km)</b></li>
               <li><i class="ri-check-double-line"></i> Kategori 4 : Pelajar <b>(Jarak 17 Km, 8 Km)</b></li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about" style="display: none;">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Tentang Gerak Jalan Proklamasi Tahun 2026</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6">
-            <p class="fw-bold">A. Kategori Perlombaan</p>
-            <p>Kategori perlombaan gerak jalan proklamasi Tahun 2026 dibagi menjadi 3 kategori diantaranya </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 17 KM</li>
-              <li><i class="ri-check-double-line"></i> Kategori Putri jarak tempuh 8 KM</li>
-              <li><i class="ri-check-double-line"></i> Kategori Putra jarak tempuh 45 KM</li>
-            </ul>
-            <p class="fw-bold">B. Kategori Peserta</p>
-            <p>Kategori Peserta dibagi menjadi 4 diantaranya :</p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Kategori 1 : TNI / POLRI / SATPOL PP / Damkar / Basarnas / Polsus /
-                Security / KPLP / BNPB / Beacukai / Navigasi <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
-              <li><i class="ri-check-double-line"></i> Kategori 2 : OPD / Instansi Vertikal / PKK / GOW / Darmawanita /
-                BUMN / BUMD/ Guru <b>(Jarak 17 Km, 8 Km, 45 Km)</b></li>
-              <li><i class="ri-check-double-line"></i> Kategori 3 : Umum / Ormas / Mahasiswa / RT / RW <b>(Jarak 17 Km, 8
-                  Km, 45 Km)</b></li>
-              <li><i class="ri-check-double-line"></i> Kategori 4 : Pelajar <b>(Jarak 17 Km, 8 Km)</b></li>
-            </ul>
             <p class="fw-bold">C. Jadwal Pendaftaran Gerak Jalan Proklamasi Tahun 2026</p>
             <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2026 dilaksanakan secara online yang akan dilakukan sebagai
               berikut:</p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Tanggal : 08 Juli s/d 15 Agustus 2026</li>
+              <li><i class="ri-check-double-line"></i> Tanggal : 15 Juli s/d 14 Agustus 2026</li>
             </ul>
             <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2026 dilaksanakan secara online yang akan dilakukan sebagai
               berikut:</p>
@@ -120,13 +86,13 @@
                     href="https://wa.me/6281266097649" target="_blank">0812-6609-7649</a>; <a
                     href="https://wa.me/628122770400" target="_blank">0812-2770-400</a>)</li>
               </ul>
-              <img src="{{asset('/img/group-wh.jpeg')}}" class="img-fluid" alt="" style="width: 200px">
+              <!-- <img src="{{asset('/img/group-wh.jpeg')}}" class="img-fluid" alt="" style="width: 200px"> -->
             </div>
             <p class="fw-bold">D. Nomor Peserta</p>
             <p>Nomor peserta akan diberikan pada:</p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Hari : Selasa s.d Jum`at</li>
-              <li><i class="ri-check-double-line"></i> Tanggal : 19 s.d 22 Agustus 2026</li>
+              <li><i class="ri-check-double-line"></i> Hari : Senin s.d Jum`at</li>
+              <li><i class="ri-check-double-line"></i> Tanggal : 17 s.d 21 Agustus 2026</li>
               <li><i class="ri-check-double-line"></i> Jam : 09.00 s.d 16.00</li>
               <li><i class="ri-check-double-line"></i> Tempat : Kantor KONI Tanjungpinang (Lapangan Pamedan)</li>
             </ul>
@@ -147,7 +113,7 @@
                   <tr>
                     <td>Hari/Tanggal</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>Sabtu / 23 Agustus 2026</td>
+                    <td>Sabtu / 22 Agustus 2026</td>
                   </tr>
                   <tr>
                     <td>Jam</td>
@@ -172,7 +138,7 @@
                   <tr>
                     <td>Hari/Tanggal</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>Minggu / 24 Agustus 2026</td>
+                    <td>Selasa / 25 Agustus 2026</td>
                   </tr>
                   <tr>
                     <td>Jam</td>
@@ -197,17 +163,17 @@
                   <tr>
                     <td>Hari/Tanggal</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>Sabtu s.d Minggu / 30 s.d 31 Agustus 2026</td>
+                    <td>Sabtu s.d Minggu / 29 s.d 30 Agustus 2026</td>
                   </tr>
                   <tr>
                     <td>Jam</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>20.00 s.d Selesai</td>
+                    <td>21.00 s.d Selesai</td>
                   </tr>
                   <tr>
                     <td>Tempat</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>Start → Kantor Walikota Senggaran</td>
+                    <td>Start → Tugu Monumen Provinsi Kepri, Dompak</td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
@@ -240,17 +206,17 @@
                 keamanan dan nomor peserta ditarik oleh panitia</li>
               <li><i class="ri-check-double-line"></i> Dilarang menggunakan pakaian dengan model menyerupai hantu</li>
             </ul>
-            <a href="{{asset('REGULASI.GERAK.JALAN.2026.pdf')}}" target="_blank" class="btn-learn-more position-relative">
-              Download Pengumuman <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
-                  class="visually-hidden">Pengumuman Baru</span></span>
-            </a>
+            <!-- <a href="{{asset('REGULASI.GERAK.JALAN.2026.pdf')}}" target="_blank" class="btn-learn-more position-relative">
+                      Download Pengumuman <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
+                          class="visually-hidden">Pengumuman Baru</span></span>
+                    </a> -->
           </div>
         </div>
       </div>
     </section><!-- End About Section -->
 
-    <section id="services" class="about our-values section-bg" style="display: none;">
+    <section id="services" class="about our-values section-bg">
       <div class="container">
         <div class="section-title">
           <h2>Pakta Integritas</h2>
@@ -258,7 +224,7 @@
             ditentukan</p>
         </div>
         <div class="d-flex justify-content-center content">
-          <a href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2026.pdf')}}" target="_blank"
+          <a href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2026.ok.pdf')}}" target="_blank"
             class="btn-learn-more position-relative">
             Download Pakta Integritas <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
@@ -269,7 +235,7 @@
     </section><!-- End Our Values Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="cta" style="display: none;">
+    <section id="faq" class="cta">
       <div class="container">
         <div class="section-title">
           @if(!$buka)
@@ -323,18 +289,21 @@
           <div class="col d-flex align-items-center justify-content-center">
             <img src="{{asset('/img/logo-kormi.png')}}" class="img-fluid" alt="">
           </div>
+          <div class="col d-flex align-items-center justify-content-center">
+            <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
+          </div>
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                        <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
-                                                                                                      </div> -->
+                                                                                                                                                <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
+                                                                                                                                              </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                        <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
-                                                                                                      </div> -->
+                                                                                                                                                <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
+                                                                                                                                              </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                        <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
-                                                                                                      </div> -->
+                                                                                                                                                <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
+                                                                                                                                              </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                        <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
-                                                                                                      </div> -->
+                                                                                                                                                <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
+                                                                                                                                              </div> -->
         </div>
       </div>
     </section><!-- End Clients Section -->

@@ -16,21 +16,24 @@
                         <div class="sb-nav-link-icon"><i class="bx bx-layer"></i></div>
                         Kategori Lomba
                     </a>
-                    <a class="nav-link {{request()->routeIs('kat_peserta') ? 'active' : ''}}" href="{{route('kat_peserta')}}">
+                    <a class="nav-link {{request()->routeIs('kat_peserta') ? 'active' : ''}}"
+                        href="{{route('kat_peserta')}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-cube"></i></div>
                         Kategori Peserta
                     </a>
-                    <a class="nav-link {{request()->routeIs('pendaftar') ? 'active' : ''}}" href="{{route('pendaftar', ['id' => 0])}}">
+                    <a class="nav-link {{request()->routeIs('pendaftar') ? 'active' : ''}}"
+                        href="{{route('pendaftar', ['id' => 0])}}">
                         <div class="sb-nav-link-icon"><i class="bx bx-user"></i></div>
                         Data Pendaftar
                     </a>
                 @endif
-                @if(in_array(Auth::user()->gid, [2,3,4,6]))
+                @if(in_array(Auth::user()->gid, [2, 3, 4, 6]))
                     <div class="sb-sidenav-menu-heading">Juri {{Auth::user()->gid == 2 ? 'Pos' : 'Waktu'}}</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
-                                <a class="nav-link {{request()->routeIs('penilaian') && (request()->route()->id == $value->id) ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
+                                <a class="nav-link {{request()->routeIs('penilaian') && (request()->route()->id == $value->id) ? 'active' : ''}}"
+                                    href="{{route('penilaian', ['id' => $value->id])}}">
                                     <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                     {{$value->judul}}
                                 </a>
@@ -42,7 +45,8 @@
                     <div class="sb-sidenav-menu-heading">Juri Pos</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link {{request()->routeIs('penilaian') && (request()->route()->id == $value->id)  ? 'active' : ''}}" href="{{route('penilaian', ['id' => $value->id])}}">
+                            <a class="nav-link {{request()->routeIs('penilaian') && (request()->route()->id == $value->id) ? 'active' : ''}}"
+                                href="{{route('penilaian', ['id' => $value->id])}}">
                                 <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                 {{$value->judul}}
                             </a>
@@ -54,7 +58,8 @@
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
                             @if(in_array($value->id, session()->get('JuriKategori')->toArray()))
-                                <a class="nav-link {{request()->routeIs('diskualifikasi') && (request()->route()->id == $value->id)  ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                                <a class="nav-link {{request()->routeIs('diskualifikasi') && (request()->route()->id == $value->id) ? 'active' : ''}}"
+                                    href="{{route('diskualifikasi', ['id' => $value->id])}}">
                                     <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
                                     {{$value->judul}}
                                 </a>
@@ -66,7 +71,8 @@
                     <div class="sb-sidenav-menu-heading">Juri Keliling</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link {{request()->routeIs('diskualifikasi') && (request()->route()->id == $value->id) ? 'active' : ''}}" href="{{route('diskualifikasi', ['id' => $value->id])}}">
+                            <a class="nav-link {{request()->routeIs('diskualifikasi') && (request()->route()->id == $value->id) ? 'active' : ''}}"
+                                href="{{route('diskualifikasi', ['id' => $value->id])}}">
                                 <div class="sb-nav-link-icon"><i class="bx bx-x-circle"></i></div>
                                 {{$value->judul}}
                             </a>
@@ -153,7 +159,8 @@
                     <div class="sb-sidenav-menu-heading">Reset Penilaian</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
-                            <a class="nav-link {{request()->routeIs('reset') && (request()->route()->id == $value->id)  ? 'active' : ''}}" href="{{route('reset', ['id_lomba' => $value->id])}}">
+                            <a class="nav-link {{request()->routeIs('reset') && (request()->route()->id == $value->id) ? 'active' : ''}}"
+                                href="{{route('reset', ['id_lomba' => $value->id])}}">
                                 <div class="sb-nav-link-icon"><i class="bx bx-edit"></i></div>
                                 {{$value->judul}}
                             </a>
