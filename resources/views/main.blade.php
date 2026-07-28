@@ -6,7 +6,7 @@
     <section id="hero">
       <div class="hero-container">
         <!-- <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2026</h1>
-                                                                                  <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
+                                                                                                                      <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
       </div>
     </section>
     <div class="position-absolute top-0 start-50 translate-middle-x">
@@ -29,13 +29,19 @@
         </div>
         <div class="row row-cols-md-3 row-cols-1 g-3">
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute-8-2026.jpeg')}}" class="img-fluid" alt="">
+            <a href="{{ asset('img/rute-8-2026-1.jpeg')}}" target="_blank">
+              <img src="{{asset('/img/rute-8-2026-1.jpeg')}}" class="img-fluid" alt="">
+            </a>
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute-17-2026.jpeg')}}" class="img-fluid" alt="">
+            <a href="{{ asset('img/rute-17-2026-1.jpeg')}}" target="_blank">
+              <img src="{{asset('/img/rute-17-2026-1.jpeg')}}" class="img-fluid" alt="">
+            </a>
           </div>
           <div class="col d-flex align-items-center justify-content-center">
-            <img src="{{asset('/img/rute-45-2026-1.jpeg')}}" class="img-fluid" alt="">
+            <a href="{{ asset('img/rute-45-2026-2.jpeg')}}" target="_blank">
+              <img src="{{asset('/img/rute-45-2026-2.jpeg')}}" class="img-fluid" alt="">
+            </a>
           </div>
         </div>
       </div>
@@ -73,7 +79,7 @@
             <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2026 dilaksanakan secara online yang akan dilakukan sebagai
               berikut:</p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Tanggal : 15 Juli s/d 14 Agustus 2026</li>
+              <li><i class="ri-check-double-line"></i> Tanggal : 08 Juli s/d 15 Agustus 2026</li>
             </ul>
             <p>Pendaftaran Gerak Jalan Proklamasi Tahun 2026 dilaksanakan secara online yang akan dilakukan sebagai
               berikut:</p>
@@ -85,15 +91,16 @@
                 <li><i class="ri-check-double-line"></i> Group Whatsapp : melalui nomor WA (<a
                     href="https://wa.me/6281266097649" target="_blank">0812-6609-7649</a>; <a
                     href="https://wa.me/628122770400" target="_blank">0812-2770-400</a>)</li>
+                <li><img src="{{asset('/img/group-wh-2026.jpeg')}}" class="img-fluid" alt="" style="width: 200px"></li>
               </ul>
-              <img src="{{asset('/img/group-wh-2026.jpeg')}}" class="img-fluid" alt="" style="width: 200px">
+
             </div>
             <p class="fw-bold">D. Nomor Peserta</p>
             <p>Nomor peserta akan diberikan pada:</p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Hari : Senin s.d Jum`at</li>
-              <li><i class="ri-check-double-line"></i> Tanggal : 17 s.d 21 Agustus 2026</li>
-              <li><i class="ri-check-double-line"></i> Jam : 09.00 s.d 16.00</li>
+              <li><i class="ri-check-double-line"></i> Hari : Selasa s.d Jum`at</li>
+              <li><i class="ri-check-double-line"></i> Tanggal : 14 s.d 21 Agustus 2026</li>
+              <li><i class="ri-check-double-line"></i> Jam : 08.00 s.d 16.00</li>
               <li><i class="ri-check-double-line"></i> Tempat : Kantor KONI Tanjungpinang (Lapangan Pamedan)</li>
             </ul>
             <p>Setiap Regu akan diberikan nomor peserta, dengan ketentuan pemasangan yaitu:</p>
@@ -168,12 +175,12 @@
                   <tr>
                     <td>Jam</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>21.00 s.d Selesai</td>
+                    <td>20.00 s.d Selesai</td>
                   </tr>
                   <tr>
                     <td>Tempat</td>
                     <td>&nbsp;&nbsp; : &nbsp;&nbsp;</td>
-                    <td>Start → Tugu Monumen Provinsi Kepri, Dompak</td>
+                    <td>Start → Bundaran Tugu Monumen Provinsi, Dompak</td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
@@ -193,7 +200,6 @@
               <li><i class="ri-check-double-line"></i> Komandan barisan berada disamping kanan barisan</li>
             </ul>
             <p class="fw-bold">G. Pakaian dan Kelengkapan</p>
-            <p>Formasi barisan dalam perlombaan Gerak Jalan Proklamasi {{"Tahun " . $data?->tahun}} sebagai berikut :</p>
             <ul>
               <li><i class="ri-check-double-line"></i> Pakaian olahraga lengkap dengan sepatu serta kelengkapan lainnya
                 yang memenuhi etika kesopanan, kepatutan dan tidak mengandung unsur sara</li>
@@ -206,11 +212,23 @@
                 keamanan dan nomor peserta ditarik oleh panitia</li>
               <li><i class="ri-check-double-line"></i> Dilarang menggunakan pakaian dengan model menyerupai hantu</li>
             </ul>
-            <!-- <a href="{{asset('REGULASI.GERAK.JALAN.2026.pdf')}}" target="_blank" class="btn-learn-more position-relative">
-                                      Download Pengumuman <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
-                                          class="visually-hidden">Pengumuman Baru</span></span>
-                                    </a> -->
+            <p class="fw-bold">H. Lagu</p>
+            <p>Lagu yang diperbolehkan untuk dinyanyikan adalah sebagai berikut:</p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Menyanyikan lagu-lagu wajib Nasional / Perjuangan</li>
+              <li><i class="ri-check-double-line"></i> Menyanyikan lagu daerah</li>
+              <li><i class="ri-check-double-line"></i> Menyanyikan lagu / Mars / yel-yel dari peserta yang sopan dan tidak
+                mengandung unsur SARA</li>
+              <li><i class="ri-check-double-line"></i> Hanya diperkenankan menggunakan alat bantu berupa pluit</li>
+            </ul>
+            <div class="d-flex justify-content-center p-2">
+              <a href="{{asset('REGULASI.GERAK.JALAN.2026.pdf')}}" target="_blank"
+                class="btn-learn-more position-relative">
+                Download Pengumuman <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
+                    class="visually-hidden">Pengumuman Baru</span></span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -224,7 +242,7 @@
             ditentukan</p>
         </div>
         <div class="d-flex justify-content-center content">
-          <a href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2026.ok.pdf')}}" target="_blank"
+          <a href="{{asset('FAKTA.INTEGRITAS.gerak.jalan.2026.ok.baru.pdf')}}" target="_blank"
             class="btn-learn-more position-relative">
             Download Pakta Integritas <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">Baru!!<span
@@ -293,17 +311,17 @@
             <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
           </div>
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
-                                                                                                                                                              </div> -->
+                                                                                                                                                                                                    <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                  </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
-                                                                                                                                                              </div> -->
+                                                                                                                                                                                                    <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                  </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
-                                                                                                                                                              </div> -->
+                                                                                                                                                                                                    <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                  </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
-                                                                                                                                                              </div> -->
+                                                                                                                                                                                                    <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                  </div> -->
         </div>
       </div>
     </section><!-- End Clients Section -->
