@@ -120,7 +120,11 @@ class LombaController extends Controller
         // }
         //dd($reqData);
         $validator = Validator::make($reqData, [
-            'judul' => 'required|min:3|unique:lombas,judul,' . $id,
+            'judul' => [
+                'required',
+                'min:3',
+                Rule::unique('lombas', 'judul')->ignore($id)
+            ],
             'ket' => 'sometimes|nullable|min:3',
         ], [
             'judul.required' => 'Judul Lomba tidak boleh kosong',

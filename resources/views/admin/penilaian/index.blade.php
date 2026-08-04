@@ -1,111 +1,137 @@
 @extends('layouts.master1')
-@section('title',"Data Penjurian")
-@section('subtitle',$subtitle->ket ?? 'Semua')
+@section('title', "Data Penjurian")
+@section('subtitle', $subtitle->ket ?? 'Semua')
 @section('content')
-	<div class="container-fluid px-4">
-        <div class="card mb-4">
-            <div class="card-body">
-                <a class="btn btn-sm btn-primary" href="{{route('penilaian.create',['id' => $id])}}">Tambah</a>
-                <hr>
-                <div class="table-responsive">
-                    <table class="table small table-stiped table-sm" id="datatablesSimple">
-                        <thead class="table-dark text-center">
-                            <tr>
-                                <th width="3%">No</th>
-                                <th width="8%">No Peserta</th>
-                                <th width="15%">Nama Regu/Instansi</th>
-                                <th width="10%">Waktu Start</th>
-                                <th width="10%">Waktu Finish</th>
+<div class="container-fluid px-4">
+    <div class="card mb-4">
+        <div class="card-body">
+            <a class="btn btn-sm btn-primary" href="{{route('penilaian.create', ['id' => $id])}}">Tambah</a>
+            <hr>
+            <div class="table-responsive">
+                <table class="table small table-stiped table-sm" id="datatablesSimple">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th width="3%">No</th>
+                            <th width="8%">No Peserta</th>
+                            <th width="15%">Nama Regu/Instansi</th>
+                            <th width="10%">Waktu Start</th>
+                            <th width="10%">Waktu Finish</th>
+                            @if(in_array(Auth::user()->gid, [1]))
                                 <th width="10%">Waktu Tempuh</th>
-                                @if(in_array(Auth::user()->gid, [1, 3, 4]))
                                 <th width="10%">Nilai Waktu</th>
-                                @endif
-                                @if($subtitle->jml_etape > 0)
-                                    <!-- @for($i = 1; $i <= $subtitle->jml_etape; $i++)
-                                    <th width="10%">Etape {{$i}}</th>
-                                    @endfor -->
-                                    <th width="15%">Etape</th>
-                                @endif
-                                <th width="10%">Keutuhan Barisan</th>
-                                <th width="10%">Kerapian</th>
-                                <th width="10%">Semangat</th>
-                                @if(in_array(Auth::user()->gid, [1, 3, 4]))
+                            @endif
+                            @if($subtitle->jml_etape > 0)
+                                <!-- @for($i = 1; $i <= $subtitle->jml_etape; $i++)
+                                                            <th width="10%">Etape {{$i}}</th>
+                                                            @endfor -->
+                                <th width="15%">Etape</th>
+                            @endif
+                            <th width="10%">Keutuhan Barisan</th>
+                            <th width="10%">Kerapian</th>
+                            <th width="10%">Semangat</th>
+                            @if(in_array(Auth::user()->gid, [1]))
                                 <th width="10%">Total</th>
                                 <th width="5%"></th>
-                                @endif
-                                <!--<th rowspan="2" width="10%">Diskualifikasi</th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                        	@if(isset($data))
-    							@foreach($data as $key => $value)
-    		                        <tr>
-    		                            <td>{{ ($key+1) }}</td>
-                                        <td class="text-center">
-                                            <a href="{{route('penilaian.show', ['id' => $value->id])}}" class="text-decoration-none">{{$value->no_peserta}}</a>
-                                        </td>
-    		                            <td>{{$value->nama}}</td>
-                                        <td class="text-center">{{$value->waktu_start ? $value->waktu_start->format('H:i:s') : ''}}</td>
-                                        <td class="text-center">{{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}</td>
-    		                            <td class="text-center">{{$value->waktu_tempuh ? gmdate('H:i:s',$value->waktu_tempuh) : ''}}</td>
+                            @endif
+                            <!--<th rowspan="2" width="10%">Diskualifikasi</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(isset($data))
+                        @foreach($data as $key => $value)
+                        <tr>
+                            <td>{{ ($key + 1) }}</td>
+                            <td class="text-center">
+                                <a href="{{route('penilaian.show', ['id' => $value->id])}}"
+                                    class="text-decoration-none">{{$value->no_peserta}}</a>
+                            </td>
+                            <td>{{$value->nama}}</td>
+                            @if(in_array(Auth::user()->gid, [1]))
+                                <td class="text-center">{{$value->waktu_start ? $value->waktu_start->format('H:i:s') : ''}}
+                                </td>
+                                <td class="text-center">
+                                    {{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}
+                                </td>
+                            @else
+                                <td class="text-center"><i
+                                        class="bx {{$value->waktu_start ? 'bx-check-circle text-success' : ''}}"></i></td>
+                                <td class="text-center"><i
+                                        class="bx {{$value->waktu_finish ? 'bx-check-circle text-success' : ''}}"></i></td>
+                            @endif
 
-                                        @php($a=$penilaian[$value->id][1] ?? 0)
-                                        @php($b=floatval($penilaian[$value->id][2] ?? 0))
-                                        @php($c=floatval($penilaian[$value->id][3] ?? 0))
-                                        @php($d=floatval($penilaian[$value->id][4] ?? 0))
+                            @php($a = $penilaian[$value->id][1] ?? 0)
+                            @php($b = floatval($penilaian[$value->id][2] ?? 0))
+                            @php($c = floatval($penilaian[$value->id][3] ?? 0))
+                            @php($d = floatval($penilaian[$value->id][4] ?? 0))
 
-                                        @if(in_array(Auth::user()->gid, [1, 3, 4]))
-                                        <td class="text-center">{{$a}}</td>
-                                        @endif
+                            @if(in_array(Auth::user()->gid, [1]))
+                                <td class="text-center">
+                                    {{$value->waktu_tempuh ? gmdate('H:i:s', $value->waktu_tempuh) : ''}}
+                                </td>
+                                <td class="text-center">{{$a}}</td>
+                            @endif
 
-                                        <!-- @if($subtitle->jml_etape > 0)
+                            <!-- @if($subtitle->jml_etape > 0)
                                             @php($etape = json_decode($value->etape, true))
                                             @for($i = 1; $i <= $subtitle->jml_etape; $i++)
                                                 @php($aetape = $etape[$i] ?? 0)
                                                 <td class="text-center {{$aetape == 1 ? 'text-success' : ($aetape == -1 ? 'text-danger' : '')}}">{{ $aetape == 1 ? 'Lewat' : ($aetape == -1 ? 'Tidak Lewat' : "") }}</td>
                                             @endfor
                                         @endif -->
-                                        @if($subtitle->jml_etape > 0)
-                                            <td class="text-center">
-                                            @php($etape = json_decode($value->etape, true))
-                                            @if(isset($etape))
-                                                @foreach($etape as $k => $v)
-                                                    @if($v == 1)
-                                                        Etape {{$k}},
-                                                    @else
-                                                        <span class="text-decoration-line-through">Etape {{$k}}</span>,
-                                                    @endif
-
-                                                @endforeach
-                                            @endif
-                                            </td>
+                            @if($subtitle->jml_etape > 0)
+                            <td class="text-center">
+                                @php($etape = json_decode($value->etape, true))
+                                @if(isset($etape))
+                                    @foreach($etape as $k => $v)
+                                        @if($v == 1)
+                                            Etape {{$k}},
+                                        @else
+                                            <span class="text-decoration-line-through">Etape {{$k}}</span>,
                                         @endif
 
-                                        <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
-                                        <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
-                                        <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
-                                        
-                                        @php($total= $a + $b + $c + $d ?? 0)
-                                        
-                                        @if(in_array(Auth::user()->gid, [1, 3, 4]))
-                                        <td class="text-center">{{$value->total}}</td>
-                                        <td>
-                                            @if($total != $value->total)
-                                                <a href="{{route('penilaian.update.ulang', ['id_pendaftar' => $value->id, 'jml_pos' => $value->lomba->jml_pos] )}}" class="bg-info px-2 py-1 text-white bg-opacity-75 text-decoration-none">
-                                                    <i class="bx bx-refresh"></i>
-                                                </a>
-                                            @endif
-                                        </td>
-                                        @endif
-    		                        </tr>
-    		                    @endforeach
-    		                @endif
-                        </tbody>
-                    </table>
-                </div>
+                                    @endforeach
+                                @endif
+                            </td>
+                            @endif
+
+                            @if(in_array(Auth::user()->gid, [1]))
+                                <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
+                                <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
+                                <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
+                            @else
+                                <td class="text-center"><i
+                                        class="bx {{isset($penilaian[$value->id][2]) ? 'bx-check-circle text-success' : ''}}"></i>
+                                </td>
+                                <td class="text-center"><i
+                                        class="bx {{isset($penilaian[$value->id][3]) ? 'bx-check-circle text-success' : ''}}"></i>
+                                </td>
+                                <td class="text-center"><i
+                                        class="bx {{isset($penilaian[$value->id][4]) ? 'bx-check-circle text-success' : ''}}"></i>
+                                </td>
+                            @endif
+
+                            @php($total = $a + $b + $c + $d ?? 0)
+
+                            @if(in_array(Auth::user()->gid, [1]))
+                                <td class="text-center">{{$value->total}}</td>
+                                <td>
+                                    @if($total != $value->total)
+                                        <a href="{{route('penilaian.update.ulang', ['id_pendaftar' => $value->id, 'jml_pos' => $value->lomba->jml_pos])}}"
+                                            class="bg-info px-2 py-1 text-white bg-opacity-75 text-decoration-none">
+                                            <i class="bx bx-refresh"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                            @endif
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 @endsection
 @section('js-content')
     <script type="text/javascript">

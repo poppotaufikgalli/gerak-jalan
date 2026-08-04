@@ -127,15 +127,21 @@ class PenilaianController extends Controller
         $waktu_referensi = 0;
         //dd($data->id_lomba);
         if ($data->id_lomba == 20) {
-            $waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
+            //$waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
 
             /* 2025-08-22 jarak pengukuran 7 km 950 m */
             //$waktu_referensi = (7.95 / $katPeserta->ref_kecepatan) * 3600;
+
+            /* 2026 jarak pengukuran 8 km 100 m */
+            $waktu_referensi = (7.1 / $katPeserta->ref_kecepatan) * 3600;
         } else if ($data->id_lomba == 21) {
-            $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
+            // $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
 
             /* 2025-08-22 jarak pengukuran 17 km 100 m */
             // $waktu_referensi = (17.1 / $katPeserta->ref_kecepatan) * 3600;
+
+            /* 2026 jarak pengukuran 17 km 100 m */
+            $waktu_referensi = (17.1 / $katPeserta->ref_kecepatan) * 3600;
         } else if ($data->id_lomba == 22) {
             $waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
 
