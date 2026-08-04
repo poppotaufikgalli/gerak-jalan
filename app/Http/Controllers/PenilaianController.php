@@ -30,8 +30,8 @@ class PenilaianController extends Controller
     public function index(Request $request, $id)
     {
         //
-        $data = Pendaftar::where(function($query) use($id){
-            if($id > 0){
+        $data = Pendaftar::where(function ($query) use ($id) {
+            if ($id > 0) {
                 $query->where('id_lomba', $id);
             }
         })->orderByRaw('cast(no_peserta as unsigned)')->get();
@@ -46,20 +46,20 @@ class PenilaianController extends Controller
             DB::raw('sum(nilai) as sum_nilai'),
             DB::raw('count(nilai) as count_nilai'),
             //DB::raw('group_concat(id_juri, ":", nilai) as pos_nilai'),
-            DB::raw('sum(case id_juri when '.$id_juri.' then nilai else 0 end) as pos_nilai'),
+            DB::raw('sum(case id_juri when ' . $id_juri . ' then nilai else 0 end) as pos_nilai'),
         )->groupBy(['id_pendaftar', 'id_nilai'])->get();
 
         $dataPenilaian = [];
 
         foreach ($a as $key => $value) {
-            if($value->id_nilai == 1){
+            if ($value->id_nilai == 1) {
                 $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai;
-            }else{
-                if($value->count_nilai == $lomba->jml_pos){
+            } else {
+                if ($value->count_nilai == $lomba->jml_pos) {
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos;
-                }else{
-                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos ." [".$value->count_nilai."/".$lomba->jml_pos."]";
-                }    
+                } else {
+                    $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos . " [" . $value->count_nilai . "/" . $lomba->jml_pos . "]";
+                }
             }
         }
 
@@ -93,10 +93,10 @@ class PenilaianController extends Controller
         $pendaftar = Pendaftar::where('id_lomba', $reqData['id_lomba'])->where('no_peserta', $reqData['no_peserta'])->first();
         //dd($data);
 
-        if($pendaftar){
+        if ($pendaftar) {
             $id = $pendaftar->id;
-            return redirect()->route('penilaian.show', ['id'=> $id]);
-        }else{
+            return redirect()->route('penilaian.show', ['id' => $id]);
+        } else {
             return redirect()->back()->with('errors', "Data Tidak ditemukan");
         }
     }
@@ -123,27 +123,30 @@ class PenilaianController extends Controller
         //
         $data = Pendaftar::find($id);
         $katPeserta = KatPeserta::select('ref_kecepatan')->find($data->id_peserta);
-        
+
         $waktu_referensi = 0;
         //dd($data->id_lomba);
-        if($data->id_lomba == 17){
-            //$waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
+        if ($data->id_lomba == 20) {
+            $waktu_referensi = (8 / $katPeserta->ref_kecepatan) * 3600;
 
             /* 2025-08-22 jarak pengukuran 7 km 950 m */
-            $waktu_referensi = (7.95 / $katPeserta->ref_kecepatan) * 3600;
-        }else if($data->id_lomba == 18){
-            //$waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
+            //$waktu_referensi = (7.95 / $katPeserta->ref_kecepatan) * 3600;
+        } else if ($data->id_lomba == 21) {
+            $waktu_referensi = (17 / $katPeserta->ref_kecepatan) * 3600;
 
             /* 2025-08-22 jarak pengukuran 17 km 100 m */
-            $waktu_referensi = (17.1 / $katPeserta->ref_kecepatan) * 3600;
-        }else if($data->id_lomba == 19){
-            //$waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
+            // $waktu_referensi = (17.1 / $katPeserta->ref_kecepatan) * 3600;
+        } else if ($data->id_lomba == 22) {
+            $waktu_referensi = (45 / $katPeserta->ref_kecepatan) * 3600;
 
             /* 2025-08-22 jarak pengukuran 45 km 100 m */
-            $waktu_referensi = (45.1 / $katPeserta->ref_kecepatan) * 3600;
+            // $waktu_referensi = (45.1 / $katPeserta->ref_kecepatan) * 3600;
+
             // tambahan 30 menit untuk 45 Km
             $waktu_referensi = $waktu_referensi + 1800;
         }
+
+        //dd($data->id_lomba, $waktu_referensi);
 
         $a = $penilaian->where('id_pendaftar', $id)->get();
 
@@ -153,19 +156,19 @@ class PenilaianController extends Controller
             $dataPenilaian[$value->id_nilai][$value->id_juri] = $value->nilai;
         }
 
-        if($data->waktu_tempuh > 0){
+        if ($data->waktu_tempuh > 0) {
             $selisih = $data->waktu_tempuh - $waktu_referensi;
-            $menit = intVal($selisih/60);
+            $menit = intVal($selisih / 60);
             $detik = $selisih % 60;
-            $selisih = $detik > 5 ? $menit +1 : $menit;    
-        }else{
+            $selisih = $detik > 5 ? $menit + 1 : $menit;
+        } else {
             $selisih = 0;
         }
 
         $domWaktu = [
-            17 => ['hidden', '2025-08-24', '2025-08-24'],
-            18 => ['hidden', '2025-08-23', '2025-08-23'],
-            19 => ['date', '2025-08-30', '2025-08-31'],
+            20 => ['hidden', '2026-08-24', '2026-08-24'],
+            21 => ['hidden', '2026-08-23', '2026-08-23'],
+            22 => ['date', '2026-08-29', '2026-08-30'],
         ];
 
         return view('admin.penilaian.formulir', [
@@ -173,8 +176,8 @@ class PenilaianController extends Controller
             'ref_kecepatan' => $katPeserta->ref_kecepatan,
             'waktu_referensi_1' => gmdate("H:i:s", $waktu_referensi),
             'waktu_referensi' => $waktu_referensi,
-            'posJuri' => JuriKategori::whereHas('juri', function($query){
-                $query->where('gid', 2)->where('aktif',1);
+            'posJuri' => JuriKategori::whereHas('juri', function ($query) {
+                $query->where('gid', 2)->where('aktif', 1);
             })->where('id_lomba', $data->id_lomba)->get(),
             'penilaian' => $dataPenilaian,
             'selisih' => $selisih,
@@ -223,7 +226,7 @@ class PenilaianController extends Controller
             {
                 return back()->with('errors', $validator->messages()->all()[0])->withInput();
             }
-            
+
             Pendaftar::find($id)->update($reqData);
             return redirect('penilaian/'.$id_lomba)->withSuccess('Pencatatan Waktu berhasil ditambahkan');
         }*/
@@ -246,48 +249,48 @@ class PenilaianController extends Controller
         $waktu_referensi = $request->waktu_referensi;
 
         $request->merge([
-            'waktu_start' => $request->tanggal_start." ".$request->waktu_start,
-            'waktu_finish' => $request->filled('waktu_finish') ? $request->tanggal_finish." ".$request->waktu_finish : null,
+            'waktu_start' => $request->tanggal_start . " " . $request->waktu_start,
+            'waktu_finish' => $request->filled('waktu_finish') ? $request->tanggal_finish . " " . $request->waktu_finish : null,
         ]);
 
         $reqData = $request->only('waktu_start', 'waktu_finish');
+        //dd($reqData);
 
         $validator = Validator::make($reqData, [
             'waktu_start' => 'required',
             'waktu_finish' => 'sometimes|nullable|after:waktu_start',
-        ],[
+        ], [
             'waktu_start.required' => 'Waktu start tidak boleh kosong',
             'waktu_finish.after' => 'Waktu finish tidak boleh sebelum waktu start',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
-        
+
         Pendaftar::find($id)->update($reqData);
 
         //hitung waktu
-        if($reqData['waktu_start'] != null && isset($reqData['waktu_finish']) && $reqData['waktu_finish'] != null){
+        if ($reqData['waktu_start'] != null && isset($reqData['waktu_finish']) && $reqData['waktu_finish'] != null) {
             $pendaftar = Pendaftar::find($id);
             $selisih = $pendaftar->waktu_tempuh - $waktu_referensi;
 
             $nilai = 100;
             $menit = intVal($selisih / 60);
             $detik = $selisih % 60;
-            $menit = $detik > 5 ? $menit+1 : $menit;
+            $menit = $detik > 5 ? $menit + 1 : $menit;
             //dd($selisih, $menit, $detik);
-            if($selisih > 0){
-                $nilai = $nilai - ($menit *2);
-            }else{
-                $nilai = $nilai + $menit ;
+            if ($selisih > 0) {
+                $nilai = $nilai - ($menit * 2);
+            } else {
+                $nilai = $nilai + $menit;
             }
 
             $nilai = $nilai < 0 ? 0 : $nilai;
 
             Penilaian::upsert([
                 [
-                    'id_pendaftar' => $id, 
+                    'id_pendaftar' => $id,
                     'id_juri' => $id_juri,
                     'id_nilai' => $id_nilai,
                     'nilai' => $nilai,
@@ -317,7 +320,7 @@ class PenilaianController extends Controller
             'nilai_2' => 'required|numeric',
             'nilai_3' => 'required|numeric',
             'nilai_4' => 'required|numeric',
-        ],[
+        ], [
             'nilai_2.required' => 'Nilai Keutuhan Barisan tidak boleh kosong',
             'nilai_2.numeric' => 'Nilai Keutuhan Barisan tidak valid',
 
@@ -328,37 +331,36 @@ class PenilaianController extends Controller
             'nilai_4.numeric' => 'Nilai Keutuhan Barisan tidak valid',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
-        
+
         //Pendaftar::find($id)->update($reqData);
 
         //hitung nilai
         Penilaian::upsert([
-                [
-                    'id_pendaftar' => $id, 
-                    'id_juri' => $id_juri,
-                    'id_nilai' => 2,
-                    'nilai' => $reqData['nilai_2'],
-                    'uid' => Auth::id(),
-                ],
-                [
-                    'id_pendaftar' => $id, 
-                    'id_juri' => $id_juri,
-                    'id_nilai' => 3,
-                    'nilai' => $reqData['nilai_3'],
-                    'uid' => Auth::id(),
-                ],
-                [
-                    'id_pendaftar' => $id, 
-                    'id_juri' => $id_juri,
-                    'id_nilai' => 4,
-                    'nilai' => $reqData['nilai_4'],
-                    'uid' => Auth::id(),
-                ],
-            ], uniqueBy: ['id_pendaftar', 'id_nilai'], update: ['nilai', 'uid']);
+            [
+                'id_pendaftar' => $id,
+                'id_juri' => $id_juri,
+                'id_nilai' => 2,
+                'nilai' => $reqData['nilai_2'],
+                'uid' => Auth::id(),
+            ],
+            [
+                'id_pendaftar' => $id,
+                'id_juri' => $id_juri,
+                'id_nilai' => 3,
+                'nilai' => $reqData['nilai_3'],
+                'uid' => Auth::id(),
+            ],
+            [
+                'id_pendaftar' => $id,
+                'id_juri' => $id_juri,
+                'id_nilai' => 4,
+                'nilai' => $reqData['nilai_4'],
+                'uid' => Auth::id(),
+            ],
+        ], uniqueBy: ['id_pendaftar', 'id_nilai'], update: ['nilai', 'uid']);
 
         $this->hitungTotal($id, $request->jml_pos);
 
@@ -372,23 +374,23 @@ class PenilaianController extends Controller
         $reqData = $request->only('etape');
 
         foreach ($reqData['etape'] as $key => $value) {
-            if($value == 1){
+            if ($value == 1) {
                 //$reqData['diskualifikasi'] = 0;
-                $a = Diskualifikasi::where(['id_pendaftar' => $id, 'alasan' => 'Peserta tidak melewati Etape '.$key])->get();
-                
-                if($a){
-                    foreach($a as $k => $v){
-                        $v->delete();        
+                $a = Diskualifikasi::where(['id_pendaftar' => $id, 'alasan' => 'Peserta tidak melewati Etape ' . $key])->get();
+
+                if ($a) {
+                    foreach ($a as $k => $v) {
+                        $v->delete();
                     }
-                    
+
                 }
             }
-            if($value == -1){
+            if ($value == -1) {
                 Diskualifikasi::upsert([
                     [
-                        'id_pendaftar' => $id, 
-                        'alasan' => 'Peserta tidak melewati Etape '.$key, 
-                        'uid' => Auth::id() 
+                        'id_pendaftar' => $id,
+                        'alasan' => 'Peserta tidak melewati Etape ' . $key,
+                        'uid' => Auth::id()
                     ]
                 ], uniqueBy: ['id_pendaftar', 'alasan'], update: ['uid']);
             }
@@ -396,11 +398,11 @@ class PenilaianController extends Controller
 
         $pendaftar = Pendaftar::find($id);
 
-        if(($pendaftar->diskualifikasi()->count() > 0) && ($pendaftar->diskualifikasi == 0)){
+        if (($pendaftar->diskualifikasi()->count() > 0) && ($pendaftar->diskualifikasi == 0)) {
             $reqData['diskualifikasi'] = 1;
         }
 
-        if(($pendaftar->diskualifikasi()->count() == 0) && ($pendaftar->diskualifikasi == 1)){
+        if (($pendaftar->diskualifikasi()->count() == 0) && ($pendaftar->diskualifikasi == 1)) {
             $reqData['diskualifikasi'] = 0;
         }
 
@@ -416,7 +418,7 @@ class PenilaianController extends Controller
             DB::raw('sum(nilai) as sum_nilai'),
         )->where('id_pendaftar', $id_pendaftar)->groupBy(['id_pendaftar', 'id_nilai'])->pluck('sum_nilai', 'id_nilai');
 
-        $total = (isset($a[1]) ? $a[1] : 0) + (isset($a[2]) ? $a[2]/$jml_pos : 0) + (isset($a[3]) ? $a[3]/$jml_pos : 0) + (isset($a[4]) ? $a[4]/$jml_pos : 0);
+        $total = (isset($a[1]) ? $a[1] : 0) + (isset($a[2]) ? $a[2] / $jml_pos : 0) + (isset($a[3]) ? $a[3] / $jml_pos : 0) + (isset($a[4]) ? $a[4] / $jml_pos : 0);
 
         Pendaftar::where('id', $id_pendaftar)->update(['total' => $total]);
     }

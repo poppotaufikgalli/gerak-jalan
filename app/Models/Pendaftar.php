@@ -50,21 +50,26 @@ class Pendaftar extends Model
         'waktu_finish',
     ];
 
-    protected $dates = ['waktu_start', 'waktu_finish'];
+    //protected $dates = ['waktu_start', 'waktu_finish'];
+    protected $casts = [
+        'waktu_start' => 'datetime',
+        'waktu_finish' => 'datetime',
+    ];
 
     protected $appends = ['waktu_tempuh'];
 
-    public function getWaktuTempuhAttribute(){
+    public function getWaktuTempuhAttribute()
+    {
         $waktu_start = \Carbon\Carbon::parse($this->waktu_start);
         $waktu_finish = \Carbon\Carbon::parse($this->waktu_finish);
 
-        if($waktu_start && $waktu_finish && ($this->waktu_finish != null && $this->waktu_start != null)){
+        if ($waktu_start && $waktu_finish && ($this->waktu_finish != null && $this->waktu_start != null)) {
             $interval = $waktu_start->diffInSeconds($waktu_finish);
             //$spent_time = gmdate('H:i:s', $interval);
             return $interval;
-        }else{
+        } else {
             return null;
         }
-        
+
     }
 }
