@@ -7,6 +7,7 @@
         <div class="card-body">
             <a class="btn btn-sm btn-primary" href="{{route('penilaian.create', ['id' => $id])}}">Tambah</a>
             <hr>
+            {{ Auth::user()->gid }}
             <div class="table-responsive">
                 <table class="table small table-stiped table-sm" id="datatablesSimple">
                     <thead class="table-dark text-center">
@@ -14,21 +15,27 @@
                             <th width="3%">No</th>
                             <th width="8%">No Peserta</th>
                             <th width="15%">Nama Regu/Instansi</th>
-                            <th width="10%">Waktu Start</th>
-                            <th width="10%">Waktu Finish</th>
+                            @if(in_array(Auth::user()->gid, [1, 3]))
+                                <th width="10%">Waktu Start</th>
+                            @endif
+                            @if(in_array(Auth::user()->gid, [1, 4]))
+                                <th width="10%">Waktu Finish</th>
+                            @endif
                             @if(in_array(Auth::user()->gid, [1]))
                                 <th width="10%">Waktu Tempuh</th>
                                 <th width="10%">Nilai Waktu</th>
                             @endif
                             @if($subtitle->jml_etape > 0)
                                 <!-- @for($i = 1; $i <= $subtitle->jml_etape; $i++)
-                                                            <th width="10%">Etape {{$i}}</th>
-                                                            @endfor -->
+                                                                    <th width="10%">Etape {{$i}}</th>
+                                                                    @endfor -->
                                 <th width="15%">Etape</th>
                             @endif
-                            <th width="10%">Keutuhan Barisan</th>
-                            <th width="10%">Kerapian</th>
-                            <th width="10%">Semangat</th>
+                            @if(in_array(Auth::user()->gid, [1, 2]))
+                                <th width="10%">Keutuhan Barisan</th>
+                                <th width="10%">Kerapian</th>
+                                <th width="10%">Semangat</th>
+                            @endif
                             @if(in_array(Auth::user()->gid, [1]))
                                 <th width="10%">Total</th>
                                 <th width="5%"></th>
@@ -52,9 +59,10 @@
                                 <td class="text-center">
                                     {{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}
                                 </td>
-                            @else
+                            @elseif(in_array(Auth::user()->gid, [3]))
                                 <td class="text-center"><i
                                         class="bx {{$value->waktu_start ? 'bx-check-circle text-success' : ''}}"></i></td>
+                            @elseif(in_array(Auth::user()->gid, [4]))
                                 <td class="text-center"><i
                                         class="bx {{$value->waktu_finish ? 'bx-check-circle text-success' : ''}}"></i></td>
                             @endif
@@ -98,7 +106,7 @@
                                 <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                 <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
                                 <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
-                            @else
+                            @elseif(in_array(Auth::user()->gid, [2]))
                                 <td class="text-center"><i
                                         class="bx {{isset($penilaian[$value->id][2]) ? 'bx-check-circle text-success' : ''}}"></i>
                                 </td>

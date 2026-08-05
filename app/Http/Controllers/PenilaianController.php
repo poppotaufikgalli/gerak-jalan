@@ -248,7 +248,7 @@ class PenilaianController extends Controller
     public function update_waktu(Request $request)
     {
         //
-        //dd($request->all());
+        // dd($request->all());
         $id = $request->id;
         $id_nilai = $request->id_nilai;
         $id_juri = $request->id_juri;

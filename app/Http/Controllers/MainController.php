@@ -244,9 +244,11 @@ class MainController extends Controller
         })->where('gid', 2)->where('aktif', 1)->get();
 
         $data = KatPeserta::with('pendaftar')->with('pendaftar.penilaian')->where('id_lomba', $id_lomba)->get();
+        // dd($data, $id_lomba, $id_juri);
 
         if ($data && $id_juri != null) {
             foreach ($data as $key => $value) {
+                // dd($value->pendaftar);
                 if ($value->pendaftar) {
                     $sudah = [];
                     $belum = [];
