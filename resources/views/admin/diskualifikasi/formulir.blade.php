@@ -64,14 +64,21 @@
                                             berlaku</option>
                                         <option>Jalan ditempat saat memasuki garis finish</option>
                                     </select>
+                                    <input type="hidden" class="form-control" id="doc" name="doc" required>
                                 </div>
                                 <div class="mb-3 col-md-6 col-sm-12">
-                                    <label for="waktu_finish" class="form-label">Upload Foto</label>
-                                    <input type="file" class="form-control" id="file" name="file" accept="image/png,image/jpg">
-                                </div>
-                                <div class="mb-3 col-md-6 col-sm-12">
-                                    <label for="waktu_finish" class="form-label">Upload Video</label>
-                                    <input type="file" class="form-control" id="video" name="video" accept="video/*">
+                                    <div id="upload-container" class="p-5 border border-dashed text-center bg-light rounded"
+                                        style="cursor: pointer;">
+                                        <a id="browseButton" class="btn btn-primary">Upload Foto atau Video</a>
+                                    </div>
+                                    <div id="progress-container" class="d-none">
+                                        <div class="progress">
+                                            <div id="progress-bar" class="progress-bar bg-success" role="progressbar"
+                                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
+                                            </div>
+                                        </div>
+                                        <p id="upload-status" class="mt-3 text-center fw-bold"></p>
+                                    </div>
                                 </div>
                                 <div class="mb-3 col-md-12 col-sm-12">
                                     <label for="waktu_finish" class="form-label">Keterangan Lokasi/Waktu Kejadian</label>
@@ -111,15 +118,62 @@
     </div>
 @endsection
 @section('js-content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/resumable.js/1.0.3/resumable.min.js"
+        integrity="sha512-OmtdY/NUD+0FF4ebU+B5sszC7gAomj26TfyUUq6191kbbtBZx0RJNqcpGg5mouTvUh7NI0cbU9PStfRl8uE/rw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
-        window.addEventListener('DOMContentLoaded', event => {
-            // Simple-DataTables
-            // https://github.com/fiduswriter/Simple-DataTables/wiki
-
-            const datatablesSimple = document.getElementById('datatablesSimple');
-            if (datatablesSimple) {
-                new DataTable(datatablesSimple);
+        const r = new Resumable({
+            target: "{{ route('upload.post') }}",
+            chunkSize: 2 * 1024 * 1024, // 2MB Chunk chunks
+            forceChunkSize: true,
+            simultaneousUploads: 1,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() ?? csrf_token() }}' // Laravel Security Token
+            },
+            query: { _token: '{{ csrf_token() }}' },
+            fileParameterName: 'file',
+            testChunks: false,
+            fileType: ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'webp', 'mp4', 'mkv', 'avi', 'mov', 'wmv', 'flv', 'webm'],
+            fileTypeErrorCallback: function (file, errorCount) {
+                alert(file.name + ' is not a valid image or video file.');
             }
+        });
+
+        // Assign drop area and browse button elements
+        r.assignBrowse(document.getElementById('browseButton'));
+        r.assignDrop(document.getElementById('upload-container'));
+
+        // Fire upload trigger once a file is chosen
+        r.on('fileAdded', function (file) {
+            document.getElementById('progress-container').classList.remove('d-none');
+            document.getElementById('upload-status').innerText = "Uploading...";
+            r.upload();
+        });
+
+        // Track progressive percentage complete
+        r.on('fileProgress', function (file) {
+            const progress = Math.floor(file.progress() * 100);
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progress + '%';
+            progressBar.innerHTML = progress + '%';
+        });
+
+        // Success Callback
+        r.on('fileSuccess', function (file, message) {
+            const response = JSON.parse(message);
+            console.log(response)
+            if (response.name != undefined) {
+                document.getElementById("doc").value = response.path + "" + response.name;
+            }
+
+            document.getElementById('upload-status').className = "mt-3 text-center fw-bold text-success";
+            document.getElementById('upload-status').innerText = "Upload Complete!";
+        });
+
+        // Error Callback
+        r.on('fileError', function (file, message) {
+            document.getElementById('upload-status').className = "mt-3 text-center fw-bold text-danger";
+            document.getElementById('upload-status').innerText = "Upload failed. Please retry.";
         });
     </script>
 @endsection

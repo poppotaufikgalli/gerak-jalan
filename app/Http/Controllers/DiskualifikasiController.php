@@ -26,8 +26,8 @@ class DiskualifikasiController extends Controller
      */
     public function index(Request $request, $id)
     {
-        $data = Pendaftar::where(function($query) use($id){
-            if($id > 0){
+        $data = Pendaftar::where(function ($query) use ($id) {
+            if ($id > 0) {
                 $query->where('id_lomba', $id);
             }
         })->get();
@@ -37,7 +37,7 @@ class DiskualifikasiController extends Controller
         $diskualifikasi = Diskualifikasi::select(
             'id_pendaftar',
             DB::raw('count(alasan) as count_alasan'),
-        )->groupBy(['id_pendaftar'])->pluck('count_alasan','id_pendaftar');
+        )->groupBy(['id_pendaftar'])->pluck('count_alasan', 'id_pendaftar');
 
         //dd($dataPenilaian);
 
@@ -70,10 +70,10 @@ class DiskualifikasiController extends Controller
         $pendaftar = Pendaftar::where('id_lomba', $reqData['id_lomba'])->where('no_peserta', $reqData['no_peserta'])->first();
         //dd($data);
 
-        if($pendaftar){
+        if ($pendaftar) {
             $id = $pendaftar->id;
-            return redirect()->route('diskualifikasi.show', ['id'=> $id]);
-        }else{
+            return redirect()->route('diskualifikasi.show', ['id' => $id]);
+        } else {
             return redirect()->back()->with('errors', "Data Tidak ditemukan");
         }
     }
@@ -101,7 +101,7 @@ class DiskualifikasiController extends Controller
         //dd(asset('storage/public'));
         $data = Pendaftar::find($id);
         $diskualifikasi = Diskualifikasi::where('id_pendaftar', $id)->get();
-        
+
         return view('admin.diskualifikasi.formulir', [
             'data' => $data,
             'diskualifikasi' => $diskualifikasi,
@@ -131,23 +131,24 @@ class DiskualifikasiController extends Controller
     {
         //
         $id = $request->id;
-        $reqData = $request->only('alasan', 'ket');
+        $reqData = $request->only('alasan', 'doc', 'ket');
 
         $validator = Validator::make($reqData, [
             'alasan' => 'required',
-        ],[
+            'doc' => 'required',
+        ], [
             'alasan.required' => 'Alasan tidak boleh kosong',
+            'uid.required' => 'File bukti tidak boleh kosong',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
 
         $reqData['id_pendaftar'] = $id;
         $reqData['uid'] = Auth::id();
-        $reqData['doc'] = $this->doUpload($request);
-        
+        //$reqData['doc'] = $this->doUpload($request);
+
         Diskualifikasi::create($reqData);
         Pendaftar::where('id', $id)->update(['diskualifikasi' => 1]);
         return redirect()->back()->withSuccess('Pencatatan Diskualifikasi berhasil ditambahkan');
@@ -157,19 +158,19 @@ class DiskualifikasiController extends Controller
     {
         $request->validate([
             'file' => 'sometimes|nullable|mimes:png,jpg,jpeg|max:2048'
-        ],[
+        ], [
             'file.mimes' => 'File gambar tidak valid',
             'file.max' => 'Ukuran melebihi batas. Maksimal 2mb'
         ]);
 
         $file = $request->file('file');
-        
-        if($file){
+
+        if ($file) {
             $fileName = $file->hashName();
-            $file->storeAs('public', $fileName);  
-            return $fileName;  
+            $file->storeAs('public', $fileName);
+            return $fileName;
         }
-        
+
 
         /*File::create([
             'original_name' => $file->getClientOriginalName(),

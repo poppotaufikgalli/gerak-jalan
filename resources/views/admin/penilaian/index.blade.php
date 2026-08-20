@@ -27,8 +27,8 @@
                             @endif
                             @if($subtitle->jml_etape > 0)
                                 <!-- @for($i = 1; $i <= $subtitle->jml_etape; $i++)
-                                                                    <th width="10%">Etape {{$i}}</th>
-                                                                    @endfor -->
+                                                                                                                <th width="10%">Etape {{$i}}</th>
+                                                                                                                @endfor -->
                                 <th width="15%">Etape</th>
                             @endif
                             @if(in_array(Auth::user()->gid, [1, 2]))
@@ -60,11 +60,21 @@
                                     {{$value->waktu_finish ? $value->waktu_finish->format('H:i:s') : ''}}
                                 </td>
                             @elseif(in_array(Auth::user()->gid, [3]))
-                                <td class="text-center"><i
-                                        class="bx {{$value->waktu_start ? 'bx-check-circle text-success' : ''}}"></i></td>
+                                <td class="text-center">
+                                    @if($value->waktu_start)
+                                        {{$value->waktu_start->format('H:i:s')}}
+                                    @else
+                                        <i class="bx bx-check-circle text-success"></i>
+                                    @endif
+                                </td>
                             @elseif(in_array(Auth::user()->gid, [4]))
-                                <td class="text-center"><i
-                                        class="bx {{$value->waktu_finish ? 'bx-check-circle text-success' : ''}}"></i></td>
+                                <td class="text-center">
+                                    @if($value->waktu_finish)
+                                        {{$value->waktu_finish->format('H:i:s')}}
+                                    @else
+                                        <i class="bx bx-check-circle text-success"></i>
+                                    @endif
+                                </td>
                             @endif
 
                             @php($a = $penilaian[$value->id][1] ?? 0)
@@ -102,20 +112,10 @@
                             </td>
                             @endif
 
-                            @if(in_array(Auth::user()->gid, [1]))
+                            @if(in_array(Auth::user()->gid, [1, 2]))
                                 <td class="text-center">{{$penilaian[$value->id][2] ?? ''}}</td>
                                 <td class="text-center">{{$penilaian[$value->id][3] ?? ''}}</td>
                                 <td class="text-center">{{$penilaian[$value->id][4] ?? ''}}</td>
-                            @elseif(in_array(Auth::user()->gid, [2]))
-                                <td class="text-center"><i
-                                        class="bx {{isset($penilaian[$value->id][2]) ? 'bx-check-circle text-success' : ''}}"></i>
-                                </td>
-                                <td class="text-center"><i
-                                        class="bx {{isset($penilaian[$value->id][3]) ? 'bx-check-circle text-success' : ''}}"></i>
-                                </td>
-                                <td class="text-center"><i
-                                        class="bx {{isset($penilaian[$value->id][4]) ? 'bx-check-circle text-success' : ''}}"></i>
-                                </td>
                             @endif
 
                             @php($total = $a + $b + $c + $d ?? 0)

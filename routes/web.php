@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\DiskualifikasiController;
 use App\Http\Controllers\ResetController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -199,6 +200,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('rekapHasil/{id_peserta?}', [MainController::class, 'rekapHasil'])->name('rekapHasil');
     Route::get('rekapPos/{id_lomba?}/{id_juri?}', [MainController::class, 'rekapPos'])->name('rekapPos');
+
+    Route::post('/upload', [UploadController::class, 'upload'])->name('upload.post');
 });
 
 //require __DIR__.'/auth.php';

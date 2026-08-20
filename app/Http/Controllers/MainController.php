@@ -198,21 +198,24 @@ class MainController extends Controller
 
     public function rekapHasil($id_peserta = null)
     {
-        $data = Pendaftar::where(function ($query) use ($id_peserta) {
+        $data = Pendaftar::with(['lomba'])->where(function ($query) use ($id_peserta) {
             if ($id_peserta != null) {
                 $query->where('id_peserta', $id_peserta);
             }
         })->orderBy('total', 'desc')->get();
+
         $katPeserta = KatPeserta::whereHas('lomba.konfig', function ($query) {
             $query->where('aktif', 1);
         })->get();
 
-        $a = Penilaian::select(
+        $a = Penilaian::with(['pendaftar.lomba'])->select(
             'id_pendaftar',
             'id_nilai',
             DB::raw('sum(nilai) as sum_nilai'),
             DB::raw('count(nilai) as count_nilai'),
         )->groupBy(['id_pendaftar', 'id_nilai'])->get();
+
+        //dd($data);
 
         $dataPenilaian = [];
 
@@ -225,7 +228,8 @@ class MainController extends Controller
                 }else{
                     $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $lomba->jml_pos ." [".$value->count_nilai."/".$lomba->jml_pos."]";
                 } */
-                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / 10;
+                $jmlPos = $value->pendaftar->lomba->jml_pos;
+                $dataPenilaian[$value->id_pendaftar][$value->id_nilai] = $value->sum_nilai / $jmlPos;
             }
         }
 
