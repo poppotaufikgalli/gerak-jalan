@@ -155,7 +155,7 @@
                         Pengguna
                     </a>
                 @endif
-                @if(Auth::user()->gid == 1)
+                @if(Auth::user()->gid == 0)
                     <div class="sb-sidenav-menu-heading">Reset Penilaian</div>
                     @if($katLomba)
                         @foreach($katLomba as $key => $value)
