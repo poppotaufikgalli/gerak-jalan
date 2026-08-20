@@ -27,8 +27,8 @@
                             @endif
                             @if($subtitle->jml_etape > 0)
                                 <!-- @for($i = 1; $i <= $subtitle->jml_etape; $i++)
-                                                                                                                <th width="10%">Etape {{$i}}</th>
-                                                                                                                @endfor -->
+                                                                                                                        <th width="10%">Etape {{$i}}</th>
+                                                                                                                        @endfor -->
                                 <th width="15%">Etape</th>
                             @endif
                             @if(in_array(Auth::user()->gid, [1, 2]))
@@ -63,16 +63,12 @@
                                 <td class="text-center">
                                     @if($value->waktu_start)
                                         {{$value->waktu_start->format('H:i:s')}}
-                                    @else
-                                        <i class="bx bx-check-circle text-success"></i>
                                     @endif
                                 </td>
                             @elseif(in_array(Auth::user()->gid, [4]))
                                 <td class="text-center">
                                     @if($value->waktu_finish)
                                         {{$value->waktu_finish->format('H:i:s')}}
-                                    @else
-                                        <i class="bx bx-check-circle text-success"></i>
                                     @endif
                                 </td>
                             @endif
