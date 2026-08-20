@@ -91,15 +91,19 @@
                             <label for="waktu_finish" class="form-label">Waktu Finish</label>
                             <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_finish"
                                 name="tanggal_finish" value="{{$domWaktu[$data->id_lomba][2]}}" {{isset($data) && $data->waktu_finish != "" ? 'disabled' : ''}}>
-                            <input type="time" class="form-control" id="waktu_finish" name="waktu_finish"
-                                value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}"
-                                step="1" {{isset($data) && $data->waktu_finish != "" ? 'disabled' : ''}}>
+                            @if($data->waktu_start != "")
+                                <input type="time" class="form-control" id="waktu_finish" name="waktu_finish"
+                                    value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}"
+                                    step="1" {{isset($data) && $data->waktu_finish != "" ? 'disabled' : ''}}>
+                            @else
+                                <p class="text-danger fst-italic">Silahkan mengisi waktu start terlebih dahulu</p>
+                            @endif
                         @else
                             <!-- <input type="{{$domWaktu[$data->id_lomba][0]}}" class="form-control" id="tanggal_finish"
-                                                name="tanggal_finish" value="{{$domWaktu[$data->id_lomba][2]}}" disabled>
-                                            <input type="time" class="form-control" id="waktu_finish" name="waktu_finish"
-                                                value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}"
-                                                step="1" disabled> -->
+                                                            name="tanggal_finish" value="{{$domWaktu[$data->id_lomba][2]}}" disabled>
+                                                        <input type="time" class="form-control" id="waktu_finish" name="waktu_finish"
+                                                            value="{{isset($data) ? $data->waktu_finish?->format('H:i:s') : old('waktu_finish')}}"
+                                                            step="1" disabled> -->
                         @endif
                     </div>
                     <input type="hidden" class="form-control" id="waktu_tempuh" name="waktu_tempuh"
