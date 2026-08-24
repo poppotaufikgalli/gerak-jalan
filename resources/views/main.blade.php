@@ -6,7 +6,7 @@
     <section id="hero">
       <div class="hero-container">
         <!-- <h1>Lomba Gerak Jalan Proklamasi<br>Tahun 2026</h1>
-                                                                                                                      <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
+                                                                                                                          <a href="{{route('daftar-peserta')}}" class="btn-get-started scrollto">Daftar Peserta</a> -->
       </div>
     </section>
     <div class="position-absolute top-0 start-50 translate-middle-x">
@@ -277,17 +277,19 @@
           <p>Pilih kategori sesuai dengan data kepesertaan anda</p>
           <div class="row">
             @foreach($katLomba as $item)
-              <div class="col-lg-4 col-md-12 mb-4">
-                <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
-                  <div class="icon-box card card-body text-center">
+              @if($item->id == 22)
+                <div class="col-lg-4 col-md-12 mb-4">
+                  <a href="{{route('form-pendaftaran-peserta', ['id_lomba' => $item->id])}}">
+                    <div class="icon-box card card-body text-center">
 
-                    <div class="icon"><i class="bi bi-star-half" style="color: #ff689b;"></i></div>
-                    <h4 class="title">{{$item->judul}}</h4>
-                    <p class="description">{{$item->ket}}</p>
+                      <div class="icon"><i class="bi bi-star-half" style="color: #ff689b;"></i></div>
+                      <h4 class="title">{{$item->judul}}</h4>
+                      <p class="description">{{$item->ket}}</p>
 
-                  </div>
-                </a>
-              </div>
+                    </div>
+                  </a>
+                </div>
+              @endif
             @endforeach
           </div>
         @endif
@@ -311,17 +313,17 @@
             <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
           </div>
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                                                    <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
-                                                                                                                                                                                                  </div> -->
+                                                                                                                                                                                                        <img src="{{asset('/img/ppi.png')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                      </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                                                    <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
-                                                                                                                                                                                                  </div> -->
+                                                                                                                                                                                                        <img src="{{asset('/img/logo-igornas.png')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                      </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                                                    <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
-                                                                                                                                                                                                  </div> -->
+                                                                                                                                                                                                        <img src="{{asset('/img/koni.svg')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                      </div> -->
           <!-- <div class="col d-flex align-items-center justify-content-center">
-                                                                                                                                                                                                    <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
-                                                                                                                                                                                                  </div> -->
+                                                                                                                                                                                                        <img src="{{asset('/img/logo-hut-ri-79.png')}}" class="img-fluid" alt="">
+                                                                                                                                                                                                      </div> -->
         </div>
       </div>
     </section><!-- End Clients Section -->
