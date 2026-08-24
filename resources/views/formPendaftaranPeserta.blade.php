@@ -21,8 +21,10 @@
 							<option value="" disabled selected>Pilihan Kategori Lomba</option>
 							@if($katLomba)
 								@foreach($katLomba as $key => $value)
-									<option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected' : ''}}>{{$value->judul}}
-									</option>
+									@if($value->id == 22)
+										<option value="{{$value->id}}" {{$id_lomba == $value->id ? 'selected' : ''}}>{{$value->judul}}
+										</option>
+									@endif
 								@endforeach
 							@endif
 						</select>
